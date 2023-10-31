@@ -1,0 +1,5 @@
+Symlinking /home/sebastien/ProjetVA50/VA50-navigation-main/devel/share/direction/cmake/directionConfig-version.cmake
+Symlinking /home/sebastien/ProjetVA50/VA50-navigation-main/devel/share/direction/cmake/directionConfig.cmake
+Symlinking /home/sebastien/ProjetVA50/VA50-navigation-main/devel/lib/direction/signTransmit.py
+Symlinking /home/sebastien/ProjetVA50/VA50-navigation-main/devel/lib/direction/cmake.lock
+Symlinking /home/sebastien/ProjetVA50/VA50-navigation-main/devel/lib/pkgconfig/direction.pc

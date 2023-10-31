@@ -1,0 +1,8 @@
+prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/install
+
+Name: visualization
+Description: Description of visualization
+Version: 0.0.1
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: 

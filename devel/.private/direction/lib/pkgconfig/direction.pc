@@ -1,0 +1,8 @@
+prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/direction
+
+Name: direction
+Description: Description of direction
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

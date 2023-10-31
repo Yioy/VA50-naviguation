@@ -1,0 +1,8 @@
+prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/install
+
+Name: control
+Description: Description of control
+Version: 1.1.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

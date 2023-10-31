@@ -1,0 +1,6 @@
+devel_space: /home/sebastien/ProjetVA50/VA50-navigation-main/devel
+install: false
+install_space: /home/sebastien/ProjetVA50/VA50-navigation-main/install
+profile: default
+source_space: /home/sebastien/ProjetVA50/VA50-navigation-main/src
+workspace: /home/sebastien/ProjetVA50/VA50-navigation-main

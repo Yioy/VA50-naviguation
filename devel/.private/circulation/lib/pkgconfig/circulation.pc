@@ -1,0 +1,8 @@
+prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation
+
+Name: circulation
+Description: Description of circulation
+Version: 0.4.219
+Cflags: -I/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/include
+Libs: -L${prefix}/lib 
+Requires: 

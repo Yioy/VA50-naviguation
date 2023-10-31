@@ -1,0 +1,1 @@
+/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/lib/python3/dist-packages/circulation/msg/__init__.py
