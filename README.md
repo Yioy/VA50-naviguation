@@ -1,6 +1,6 @@
 # Système de navigation sans carte de véhicule autonome
 
-Dans le cadre de notre projet de VA50 à l’UTBM, nous avons amélioré un système de navigation pour un véhicule autonome développé par le groupe de l'année précédente (https://github.com/Tyulis/VA50-navigation/tree/main).
+Dans le cadre de notre projet de VA50 à l’UTBM, nous avons amélioré un système de navigation pour un véhicule autonome développé par le groupe qui à participé à ce projet durant l'année 2022-2023 (https://github.com/Tyulis/VA50-navigation/tree/main).
 Ce système permet de s’affranchir d’une carte à haute résolution, et cherchant à être le plus autonome possible. Actuellement, certaines opérations nécessitent encore une cartographie et un positionnement grand public (haute résolution non nécessaire).
 
 ## Dépendances
