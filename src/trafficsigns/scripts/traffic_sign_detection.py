@@ -189,6 +189,7 @@ class TrafficSignDetector(object):
                     traffic_signs.append(TrafficSign(category=GLOBAL_LABELS[class_ids[i]], type=SIGN_TYPES_IDS[selected_type], label=label_specific,
                                                      x=x, y=y, width=w, height=h, confidence=confidences[i]))
                     
+                    #put text on image
                     img = cv.putText(img, label_specific, (x, y-10), self.font, 0.5, (0,0,255), 2)
 
                 #draw on image  
