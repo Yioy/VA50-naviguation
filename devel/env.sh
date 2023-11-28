@@ -1,1 +1,0 @@
-/home/arusso/dev/VA50-naviguation/devel/.private/catkin_tools_prebuild/env.sh

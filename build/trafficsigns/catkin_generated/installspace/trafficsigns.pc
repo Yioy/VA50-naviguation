@@ -1,8 +1,0 @@
-prefix=/home/arusso/dev/VA50-naviguation/install
-
-Name: trafficsigns
-Description: Description of trafficsigns
-Version: 1.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: 

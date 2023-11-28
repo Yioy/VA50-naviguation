@@ -1,1 +1,0 @@
-/home/arusso/dev/VA50-naviguation/devel/.private/transformtrack/share/gennodejs/ros/transformtrack/_index.js

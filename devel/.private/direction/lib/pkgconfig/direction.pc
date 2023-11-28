@@ -1,8 +1,0 @@
-prefix=/home/arusso/dev/VA50-naviguation/devel/.private/direction
-
-Name: direction
-Description: Description of direction
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

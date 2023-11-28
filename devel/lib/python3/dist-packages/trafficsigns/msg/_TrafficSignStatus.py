@@ -1,1 +1,0 @@
-/home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns/lib/python3/dist-packages/trafficsigns/msg/_TrafficSignStatus.py

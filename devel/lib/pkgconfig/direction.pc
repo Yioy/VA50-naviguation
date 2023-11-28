@@ -1,1 +1,0 @@
-/home/arusso/dev/VA50-naviguation/devel/.private/direction/lib/pkgconfig/direction.pc

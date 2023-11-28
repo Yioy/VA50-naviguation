@@ -1,1 +1,0 @@
-/home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns/share/common-lisp/ros/trafficsigns/msg/_package_TrafficSign.lisp

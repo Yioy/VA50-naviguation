@@ -1,8 +1,0 @@
-prefix=/home/arusso/dev/VA50-naviguation/install
-
-Name: circulation
-Description: Description of circulation
-Version: 0.4.219
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: 

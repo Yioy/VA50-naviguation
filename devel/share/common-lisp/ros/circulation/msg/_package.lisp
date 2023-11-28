@@ -1,1 +1,0 @@
-/home/arusso/dev/VA50-naviguation/devel/.private/circulation/share/common-lisp/ros/circulation/msg/_package.lisp
