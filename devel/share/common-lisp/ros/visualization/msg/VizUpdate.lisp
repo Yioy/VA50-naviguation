@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/visualization/share/common-lisp/ros/visualization/msg/VizUpdate.lisp
+/home/arusso/dev/VA50-naviguation/devel/.private/visualization/share/common-lisp/ros/visualization/msg/VizUpdate.lisp

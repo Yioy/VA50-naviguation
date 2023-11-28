@@ -1,10 +1,10 @@
 
 "use strict";
 
-let TrafficSignStatus = require('./TrafficSignStatus.js');
 let TrafficSign = require('./TrafficSign.js');
+let TrafficSignStatus = require('./TrafficSignStatus.js');
 
 module.exports = {
-  TrafficSignStatus: TrafficSignStatus,
   TrafficSign: TrafficSign,
+  TrafficSignStatus: TrafficSignStatus,
 };

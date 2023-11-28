@@ -1,2 +1,2 @@
 set(transformtrack_MESSAGE_FILES "")
-set(transformtrack_SERVICE_FILES "/home/sebastien/ProjetVA50/VA50-navigation-main/src/transformtrack/srv/DropVelocity.srv;/home/sebastien/ProjetVA50/VA50-navigation-main/src/transformtrack/srv/TransformBatch.srv")
+set(transformtrack_SERVICE_FILES "/home/arusso/dev/VA50-naviguation/src/transformtrack/srv/DropVelocity.srv;/home/arusso/dev/VA50-naviguation/src/transformtrack/srv/TransformBatch.srv")

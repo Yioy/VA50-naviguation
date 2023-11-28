@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/share/trafficsigns/cmake/trafficsigns-msg-paths.cmake
+/home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns/share/trafficsigns/cmake/trafficsigns-msg-paths.cmake

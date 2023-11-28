@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/share/common-lisp/ros/circulation/msg/Trajectory.lisp"
+  "/home/arusso/dev/VA50-naviguation/devel/.private/circulation/share/common-lisp/ros/circulation/msg/Trajectory.lisp"
   "CMakeFiles/circulation_generate_messages_lisp"
 )
 

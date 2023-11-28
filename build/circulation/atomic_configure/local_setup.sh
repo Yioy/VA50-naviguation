@@ -3,7 +3,7 @@
 
 # since this file is sourced either use the provided _CATKIN_SETUP_DIR
 # or fall back to the destination set at configure time
-: ${_CATKIN_SETUP_DIR:=/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation}
+: ${_CATKIN_SETUP_DIR:=/home/arusso/dev/VA50-naviguation/devel/.private/circulation}
 CATKIN_SETUP_UTIL_ARGS="--extend --local"
 . "$_CATKIN_SETUP_DIR/setup.sh"
 unset CATKIN_SETUP_UTIL_ARGS

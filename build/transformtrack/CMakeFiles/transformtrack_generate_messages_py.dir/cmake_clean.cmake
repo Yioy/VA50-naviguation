@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack/lib/python3/dist-packages/transformtrack/srv/_DropVelocity.py"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack/lib/python3/dist-packages/transformtrack/srv/_TransformBatch.py"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack/lib/python3/dist-packages/transformtrack/srv/__init__.py"
+  "/home/arusso/dev/VA50-naviguation/devel/.private/transformtrack/lib/python3/dist-packages/transformtrack/srv/_DropVelocity.py"
+  "/home/arusso/dev/VA50-naviguation/devel/.private/transformtrack/lib/python3/dist-packages/transformtrack/srv/_TransformBatch.py"
+  "/home/arusso/dev/VA50-naviguation/devel/.private/transformtrack/lib/python3/dist-packages/transformtrack/srv/__init__.py"
   "CMakeFiles/transformtrack_generate_messages_py"
 )
 

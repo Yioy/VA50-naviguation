@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns:$CMAKE_PREFIX_PATH"
-export PWD='/home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns'
-export ROSLISP_PACKAGE_DIRECTORIES="/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns:$CMAKE_PREFIX_PATH"
+export PWD='/home/arusso/dev/VA50-naviguation/build/trafficsigns'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/arusso/dev/VA50-naviguation/src/trafficsigns:$ROS_PACKAGE_PATH"

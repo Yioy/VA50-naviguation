@@ -1,4 +1,4 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/install
+prefix=/home/arusso/dev/VA50-naviguation/install
 
 Name: control
 Description: Description of control

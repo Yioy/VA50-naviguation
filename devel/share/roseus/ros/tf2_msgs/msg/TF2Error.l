@@ -1,1 +1,0 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_msgs/share/roseus/ros/tf2_msgs/msg/TF2Error.l

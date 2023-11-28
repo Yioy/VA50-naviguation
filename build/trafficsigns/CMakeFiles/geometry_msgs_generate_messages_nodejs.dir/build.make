@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns
+CMAKE_SOURCE_DIR = /home/arusso/dev/VA50-naviguation/src/trafficsigns
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns
+CMAKE_BINARY_DIR = /home/arusso/dev/VA50-naviguation/build/trafficsigns
 
 # Utility rule file for geometry_msgs_generate_messages_nodejs.
 
@@ -67,6 +67,6 @@ CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean:
 .PHONY : CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/clean
 
 CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/depend:
-	cd /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/arusso/dev/VA50-naviguation/build/trafficsigns && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arusso/dev/VA50-naviguation/src/trafficsigns /home/arusso/dev/VA50-naviguation/src/trafficsigns /home/arusso/dev/VA50-naviguation/build/trafficsigns /home/arusso/dev/VA50-naviguation/build/trafficsigns /home/arusso/dev/VA50-naviguation/build/trafficsigns/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/depend
 

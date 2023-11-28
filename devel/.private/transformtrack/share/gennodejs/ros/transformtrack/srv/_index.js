@@ -1,10 +1,10 @@
 
 "use strict";
 
-let TransformBatch = require('./TransformBatch.js')
 let DropVelocity = require('./DropVelocity.js')
+let TransformBatch = require('./TransformBatch.js')
 
 module.exports = {
-  TransformBatch: TransformBatch,
   DropVelocity: DropVelocity,
+  TransformBatch: TransformBatch,
 };

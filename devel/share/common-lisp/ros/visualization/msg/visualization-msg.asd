@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/visualization/share/common-lisp/ros/visualization/msg/visualization-msg.asd
+/home/arusso/dev/VA50-naviguation/devel/.private/visualization/share/common-lisp/ros/visualization/msg/visualization-msg.asd

@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/catkin_tools_prebuild/env.sh
+/home/arusso/dev/VA50-naviguation/devel/.private/catkin_tools_prebuild/env.sh

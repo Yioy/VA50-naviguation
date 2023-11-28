@@ -67,14 +67,14 @@ set(trafficsigns_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(trafficsigns_SOURCE_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns)
-  set(trafficsigns_DEVEL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns)
+  set(trafficsigns_SOURCE_PREFIX /home/arusso/dev/VA50-naviguation/src/trafficsigns)
+  set(trafficsigns_DEVEL_PREFIX /home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns)
   set(trafficsigns_INSTALL_PREFIX "")
   set(trafficsigns_PREFIX ${trafficsigns_DEVEL_PREFIX})
 else()
   set(trafficsigns_SOURCE_PREFIX "")
   set(trafficsigns_DEVEL_PREFIX "")
-  set(trafficsigns_INSTALL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/install)
+  set(trafficsigns_INSTALL_PREFIX /home/arusso/dev/VA50-naviguation/install)
   set(trafficsigns_PREFIX ${trafficsigns_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(trafficsigns_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/include " STREQUAL " ")
+if(NOT "/home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns/include " STREQUAL " ")
   set(trafficsigns_INCLUDE_DIRS "")
-  set(_include_dirs "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/include")
+  set(_include_dirs "/home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsi
         message(FATAL_ERROR "Project 'trafficsigns' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'trafficsigns' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'trafficsigns' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/arusso/dev/VA50-naviguation/src/trafficsigns/${idir}'.  ${_report}")
     endif()
     _list_append_unique(trafficsigns_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/lib;/home/sebastien/ProjetVA50/VA50-navigation-main/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns/lib;/home/arusso/dev/VA50-naviguation/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

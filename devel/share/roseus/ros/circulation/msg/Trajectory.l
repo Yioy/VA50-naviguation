@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/share/roseus/ros/circulation/msg/Trajectory.l
+/home/arusso/dev/VA50-naviguation/devel/.private/circulation/share/roseus/ros/circulation/msg/Trajectory.l

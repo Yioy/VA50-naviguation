@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "direction"
-PROJECT_SPACE_DIR = "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/direction"
+PROJECT_SPACE_DIR = "/home/arusso/dev/VA50-naviguation/devel/.private/direction"
 PROJECT_VERSION = "0.0.0"

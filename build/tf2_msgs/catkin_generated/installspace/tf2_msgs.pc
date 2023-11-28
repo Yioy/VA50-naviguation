@@ -1,8 +1,0 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/install
-
-Name: tf2_msgs
-Description: Description of tf2_msgs
-Version: 0.7.6
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: message_generation geometry_msgs actionlib_msgs

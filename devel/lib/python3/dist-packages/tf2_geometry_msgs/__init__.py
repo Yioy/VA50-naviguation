@@ -1,1 +1,0 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_geometry_msgs/lib/python3/dist-packages/tf2_geometry_msgs/__init__.py

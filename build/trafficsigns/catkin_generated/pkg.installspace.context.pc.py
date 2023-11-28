@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "${prefix}/include".split(';') if "${prefix}/i
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "trafficsigns"
-PROJECT_SPACE_DIR = "/home/sebastien/ProjetVA50/VA50-navigation-main/install"
+PROJECT_SPACE_DIR = "/home/arusso/dev/VA50-naviguation/install"
 PROJECT_VERSION = "1.0.0"

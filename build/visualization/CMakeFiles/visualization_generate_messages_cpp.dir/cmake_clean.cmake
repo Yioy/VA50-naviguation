@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/visualization/include/visualization/VizUpdate.h"
+  "/home/arusso/dev/VA50-naviguation/devel/.private/visualization/include/visualization/VizUpdate.h"
   "CMakeFiles/visualization_generate_messages_cpp"
 )
 

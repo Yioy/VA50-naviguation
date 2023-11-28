@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns
+CMAKE_SOURCE_DIR = /home/arusso/dev/VA50-naviguation/src/trafficsigns
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns
+CMAKE_BINARY_DIR = /home/arusso/dev/VA50-naviguation/build/trafficsigns
 
 # Utility rule file for trafficsigns_geneus.
 
@@ -67,6 +67,6 @@ CMakeFiles/trafficsigns_geneus.dir/clean:
 .PHONY : CMakeFiles/trafficsigns_geneus.dir/clean
 
 CMakeFiles/trafficsigns_geneus.dir/depend:
-	cd /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns/CMakeFiles/trafficsigns_geneus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/arusso/dev/VA50-naviguation/build/trafficsigns && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/arusso/dev/VA50-naviguation/src/trafficsigns /home/arusso/dev/VA50-naviguation/src/trafficsigns /home/arusso/dev/VA50-naviguation/build/trafficsigns /home/arusso/dev/VA50-naviguation/build/trafficsigns /home/arusso/dev/VA50-naviguation/build/trafficsigns/CMakeFiles/trafficsigns_geneus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/trafficsigns_geneus.dir/depend
 

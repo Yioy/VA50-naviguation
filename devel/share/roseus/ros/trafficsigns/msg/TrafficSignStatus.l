@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/share/roseus/ros/trafficsigns/msg/TrafficSignStatus.l
+/home/arusso/dev/VA50-naviguation/devel/.private/trafficsigns/share/roseus/ros/trafficsigns/msg/TrafficSignStatus.l

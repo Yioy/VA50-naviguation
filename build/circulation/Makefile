@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/src/circulation
+CMAKE_SOURCE_DIR = /home/arusso/dev/VA50-naviguation/src/circulation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/build/circulation
+CMAKE_BINARY_DIR = /home/arusso/dev/VA50-naviguation/build/circulation
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,9 +137,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/ProjetVA50/VA50-navigation-main/build/circulation/CMakeFiles /home/sebastien/ProjetVA50/VA50-navigation-main/build/circulation/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/arusso/dev/VA50-naviguation/build/circulation/CMakeFiles /home/arusso/dev/VA50-naviguation/build/circulation/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sebastien/ProjetVA50/VA50-navigation-main/build/circulation/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/arusso/dev/VA50-naviguation/build/circulation/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

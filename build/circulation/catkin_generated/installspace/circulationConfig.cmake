@@ -67,14 +67,14 @@ set(circulation_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(circulation_SOURCE_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/src/circulation)
-  set(circulation_DEVEL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation)
+  set(circulation_SOURCE_PREFIX /home/arusso/dev/VA50-naviguation/src/circulation)
+  set(circulation_DEVEL_PREFIX /home/arusso/dev/VA50-naviguation/devel/.private/circulation)
   set(circulation_INSTALL_PREFIX "")
   set(circulation_PREFIX ${circulation_DEVEL_PREFIX})
 else()
   set(circulation_SOURCE_PREFIX "")
   set(circulation_DEVEL_PREFIX "")
-  set(circulation_INSTALL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/install)
+  set(circulation_INSTALL_PREFIX /home/arusso/dev/VA50-naviguation/install)
   set(circulation_PREFIX ${circulation_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/sebastien/ProjetVA50/VA50-navigation-main/install/lib;/home/sebastien/ProjetVA50/VA50-navigation-main/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/arusso/dev/VA50-naviguation/install/lib;/home/arusso/dev/VA50-naviguation/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

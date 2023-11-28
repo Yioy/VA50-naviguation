@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/direction/share/direction/cmake/directionConfig-version.cmake
+/home/arusso/dev/VA50-naviguation/devel/.private/direction/share/direction/cmake/directionConfig-version.cmake

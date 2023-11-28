@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/share/gennodejs/ros/circulation/msg/Trajectory.js
+/home/arusso/dev/VA50-naviguation/devel/.private/circulation/share/gennodejs/ros/circulation/msg/Trajectory.js
