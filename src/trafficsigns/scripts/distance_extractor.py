@@ -278,17 +278,17 @@ class DistanceExtractor (object):
 					result.y = position_estimate[1]
 					result.z = position_estimate[2]
 				
-					#img = cv.putText(img, f'd = {np.linalg.norm(position_estimate)} m', (sign.x, sign.y-25), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 2)
+					img = cv.putText(img, f'd = {np.linalg.norm(position_estimate)} m', (sign.x, sign.y-25), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 2)
 				
 				sign_messages.append(result)
 			message.traffic_signs = sign_messages
 			self.traffic_sign_publisher.publish(message)
 		
-		#image_message = Image(height=img.shape[0], width=img.shape[1], data=tuple(img.flatten()))
-		#self.visualization_publisher.publish(image_message)
-		#img = cv.cvtColor(img, cv.COLOR_RGB2BGR)
-		#cv.imshow('Panneaux', img)
-		#cv.waitKey(5)
+		image_message = Image(height=img.shape[0], width=img.shape[1], data=tuple(img.flatten()))
+		self.visualization_publisher.publish(image_message)
+		img = cv.cvtColor(img, cv.COLOR_RGB2BGR)
+		cv.imshow('Panneaux', img)
+		cv.waitKey(5)
 
 if __name__ == "__main__":
 	if len(sys.argv) < 2:
