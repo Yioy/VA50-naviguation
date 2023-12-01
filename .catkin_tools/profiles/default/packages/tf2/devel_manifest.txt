@@ -1,6 +1,0 @@
-geometry2/tf2
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2/cmake.lock /home/sebastien/ProjetVA50/VA50-navigation/devel/./cmake.lock
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2/share/tf2/cmake/tf2Config.cmake /home/sebastien/ProjetVA50/VA50-navigation/devel/share/tf2/cmake/tf2Config.cmake
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2/share/tf2/cmake/tf2Config-version.cmake /home/sebastien/ProjetVA50/VA50-navigation/devel/share/tf2/cmake/tf2Config-version.cmake
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2/lib/libtf2.so /home/sebastien/ProjetVA50/VA50-navigation/devel/lib/libtf2.so
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2/lib/pkgconfig/tf2.pc /home/sebastien/ProjetVA50/VA50-navigation/devel/lib/pkgconfig/tf2.pc
