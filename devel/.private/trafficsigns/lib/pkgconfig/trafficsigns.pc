@@ -1,8 +1,0 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/trafficsigns
-
-Name: trafficsigns
-Description: Description of trafficsigns
-Version: 1.0.0
-Cflags: -I/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/trafficsigns/include
-Libs: -L${prefix}/lib 
-Requires: 

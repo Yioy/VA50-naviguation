@@ -1,8 +1,0 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2
-
-Name: test_tf2
-Description: Description of test_tf2
-Version: 0.7.6
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

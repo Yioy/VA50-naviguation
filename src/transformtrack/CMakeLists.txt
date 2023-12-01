@@ -18,7 +18,6 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 find_package(Armadillo REQUIRED)
-find_package(OpenBLAS REQUIRED)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -154,7 +153,6 @@ add_executable(${PROJECT_NAME}_node
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
   ${ARMADILLO_LIBRARIES}
-  ${OpenBLAS_LIBRARIES}
 )
 
 #############

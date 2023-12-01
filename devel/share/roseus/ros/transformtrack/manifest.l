@@ -1,1 +1,0 @@
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/transformtrack/share/roseus/ros/transformtrack/manifest.l

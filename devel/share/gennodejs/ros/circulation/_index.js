@@ -1,1 +1,0 @@
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/circulation/share/gennodejs/ros/circulation/_index.js

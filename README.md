@@ -47,3 +47,7 @@ Les changements de visibilité entre les différentes versions impliquent la mod
 
 Si le fichier de configuration est modifié, il est nécessaire de lancer `python3 genconfig <fichier de config> transformtrack` pour regénérer la config des nodes C++,
 puis de les recompiler avec `./build_circulation.sh build`
+
+## Autres
+
+Le topic camera_info étant manquant dans certains rosbags, le script `sim_camera_info.bash` peut être utilisé pour le publier.

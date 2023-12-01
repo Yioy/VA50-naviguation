@@ -1,1 +1,0 @@
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/trafficsigns/lib/python3/dist-packages/trafficsigns/msg/_TrafficSign.py

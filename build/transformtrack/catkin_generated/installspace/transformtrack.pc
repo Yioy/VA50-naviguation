@@ -1,8 +1,0 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation/install
-
-Name: transformtrack
-Description: Description of transformtrack
-Version: 2.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib 
-Requires: 

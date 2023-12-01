@@ -1,8 +1,0 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation/install
-
-Name: tf2_eigen
-Description: Description of tf2_eigen
-Version: 0.7.6
-Cflags: -I${prefix}/include -I/usr/include/eigen3
-Libs: -L${prefix}/lib 
-Requires: tf2

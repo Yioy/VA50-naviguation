@@ -1,1 +1,0 @@
-/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/trafficsigns/include/trafficsigns/TrafficSignStatus.h
