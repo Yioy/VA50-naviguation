@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "${prefix}/include;/usr/include/eigen3;/usr/sh
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "-lorocos-kdl".split(';') if "-lorocos-kdl" != "" else []
 PROJECT_NAME = "tf2_kdl"
-PROJECT_SPACE_DIR = "/home/sebastien/ProjetVA50/VA50-navigation-main/install"
+PROJECT_SPACE_DIR = "/home/sebastien/ProjetVA50/VA50-navigation/install"
 PROJECT_VERSION = "0.7.6"

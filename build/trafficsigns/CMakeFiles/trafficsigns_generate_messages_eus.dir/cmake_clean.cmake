@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/share/roseus/ros/trafficsigns/manifest.l"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/share/roseus/ros/trafficsigns/msg/TrafficSign.l"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/share/roseus/ros/trafficsigns/msg/TrafficSignStatus.l"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/trafficsigns/share/roseus/ros/trafficsigns/manifest.l"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/trafficsigns/share/roseus/ros/trafficsigns/msg/TrafficSign.l"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/trafficsigns/share/roseus/ros/trafficsigns/msg/TrafficSignStatus.l"
   "CMakeFiles/trafficsigns_generate_messages_eus"
 )
 

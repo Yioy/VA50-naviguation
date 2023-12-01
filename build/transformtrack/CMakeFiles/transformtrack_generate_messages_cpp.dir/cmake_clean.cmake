@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack/include/transformtrack/DropVelocity.h"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack/include/transformtrack/TransformBatch.h"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/transformtrack/include/transformtrack/DropVelocity.h"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/transformtrack/include/transformtrack/TransformBatch.h"
   "CMakeFiles/transformtrack_generate_messages_cpp"
 )
 

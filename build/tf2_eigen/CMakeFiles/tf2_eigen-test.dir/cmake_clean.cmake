@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_eigen/lib/tf2_eigen/tf2_eigen-test"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_eigen/lib/tf2_eigen/tf2_eigen-test.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_eigen/lib/tf2_eigen/tf2_eigen-test"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_eigen/lib/tf2_eigen/tf2_eigen-test.pdb"
   "CMakeFiles/tf2_eigen-test.dir/test/tf2_eigen-test.cpp.o"
 )
 

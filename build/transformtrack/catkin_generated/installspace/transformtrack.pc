@@ -1,4 +1,4 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/install
+prefix=/home/sebastien/ProjetVA50/VA50-navigation/install
 
 Name: transformtrack
 Description: Description of transformtrack

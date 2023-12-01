@@ -1,3 +1,3 @@
-Symlinking /home/sebastien/ProjetVA50/VA50-navigation-main/devel/share/test_tf2/cmake/test_tf2Config.cmake
-Symlinking /home/sebastien/ProjetVA50/VA50-navigation-main/devel/share/test_tf2/cmake/test_tf2Config-version.cmake
-Symlinking /home/sebastien/ProjetVA50/VA50-navigation-main/devel/lib/pkgconfig/test_tf2.pc
+Symlinking /home/sebastien/ProjetVA50/VA50-navigation/devel/share/test_tf2/cmake/test_tf2Config.cmake
+Symlinking /home/sebastien/ProjetVA50/VA50-navigation/devel/share/test_tf2/cmake/test_tf2Config-version.cmake
+Symlinking /home/sebastien/ProjetVA50/VA50-navigation/devel/lib/pkgconfig/test_tf2.pc

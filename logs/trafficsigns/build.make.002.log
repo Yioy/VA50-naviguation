@@ -1,13 +1,13 @@
 [  0%] Built target std_msgs_generate_messages_cpp
 [  0%] Built target std_msgs_generate_messages_py
-[  0%] Built target std_msgs_generate_messages_nodejs
 [  0%] Built target _trafficsigns_generate_messages_check_deps_TrafficSign
 [  0%] Built target _trafficsigns_generate_messages_check_deps_TrafficSignStatus
-[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_nodejs
 [  0%] Built target std_msgs_generate_messages_lisp
-[ 41%] Built target trafficsigns_generate_messages_py
-[ 41%] Built target trafficsigns_generate_messages_cpp
-[ 58%] Built target trafficsigns_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_eus
+[ 16%] Built target trafficsigns_generate_messages_cpp
+[ 50%] Built target trafficsigns_generate_messages_nodejs
+[ 58%] Built target trafficsigns_generate_messages_py
 [ 83%] Built target trafficsigns_generate_messages_eus
 [100%] Built target trafficsigns_generate_messages_lisp
 [100%] Built target trafficsigns_generate_messages

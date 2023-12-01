@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns
+CMAKE_SOURCE_DIR = /home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns
+CMAKE_BINARY_DIR = /home/sebastien/ProjetVA50/VA50-navigation/build/trafficsigns
 
 # Utility rule file for transformtrack_generate_messages_lisp.
 
@@ -67,6 +67,6 @@ CMakeFiles/transformtrack_generate_messages_lisp.dir/clean:
 .PHONY : CMakeFiles/transformtrack_generate_messages_lisp.dir/clean
 
 CMakeFiles/transformtrack_generate_messages_lisp.dir/depend:
-	cd /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation-main/build/trafficsigns/CMakeFiles/transformtrack_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sebastien/ProjetVA50/VA50-navigation/build/trafficsigns && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation/build/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation/build/trafficsigns /home/sebastien/ProjetVA50/VA50-navigation/build/trafficsigns/CMakeFiles/transformtrack_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/transformtrack_generate_messages_lisp.dir/depend
 

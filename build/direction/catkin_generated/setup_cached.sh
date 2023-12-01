@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/direction:$CMAKE_PREFIX_PATH"
-export PWD='/home/sebastien/ProjetVA50/VA50-navigation-main/build/direction'
-export ROSLISP_PACKAGE_DIRECTORIES="/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/direction/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/sebastien/ProjetVA50/VA50-navigation-main/src/direction:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/direction:$CMAKE_PREFIX_PATH"
+export PWD='/home/sebastien/ProjetVA50/VA50-navigation/build/direction'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/direction/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/sebastien/ProjetVA50/VA50-navigation/src/direction:$ROS_PACKAGE_PATH"

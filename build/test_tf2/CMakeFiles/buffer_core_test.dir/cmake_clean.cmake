@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/test_tf2/lib/test_tf2/buffer_core_test"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/test_tf2/lib/test_tf2/buffer_core_test.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2/lib/test_tf2/buffer_core_test"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2/lib/test_tf2/buffer_core_test.pdb"
   "CMakeFiles/buffer_core_test.dir/test/buffer_core_test.cpp.o"
 )
 

@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_msgs/setup.sh
+    local-name: /home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_msgs/setup.sh

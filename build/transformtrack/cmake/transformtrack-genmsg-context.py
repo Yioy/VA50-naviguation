@@ -1,7 +1,7 @@
 # generated from genmsg/cmake/pkg-genmsg.context.in
 
 messages_str = ""
-services_str = "/home/sebastien/ProjetVA50/VA50-navigation-main/src/transformtrack/srv/DropVelocity.srv;/home/sebastien/ProjetVA50/VA50-navigation-main/src/transformtrack/srv/TransformBatch.srv"
+services_str = "/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack/srv/DropVelocity.srv;/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack/srv/TransformBatch.srv"
 pkg_name = "transformtrack"
 dependencies_str = "geometry_msgs"
 langs = "gencpp;geneus;genlisp;gennodejs;genpy"

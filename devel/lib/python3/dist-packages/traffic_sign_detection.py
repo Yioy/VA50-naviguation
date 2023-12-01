@@ -24,40 +24,40 @@ GLOBAL_LABELS = ['prohibitory',
                 'other']
 
 SIGN_TYPES_IDS = [
-    'speed-20',
+    'speed-20',         
     'speed-30', 
     'speed-50', 
     'speed-60', 
     'speed-70', 
     'speed-80', 
     'end-speed-80', 
-    'speed-100', 
-    'speed-120', 
-    'no-passing', 
-    'no-passing-3ton5', 
-    'punctual-priority', 
+    'speed-100',            # |
+    'speed-120',            # |
+    'no-passing',           # | 
+    'no-passing-3ton5',     # |-|
+    'punctual-priority',    
     'road-priority', 
     'yield', 
     'stop', 
     'no-vehicles', 
-    'no-vehicles-3ton5', 
+    'no-vehicles-3ton5',    # |-|
     'no-entry', 
     'caution', 
     'dangerous-curve-left', 
     'dangerous-curve-right', 
     'double-curve', 
-    'bumpy-road', 
-    'slippery-road', 
+    'bumpy-road',           # |
+    'slippery-road',        # |
     'road-narrows-right', 
     'road-work', 
     'traffic-signals', 
     'pedestrians', 
-    'children-crossing', 
-    'bicycles-crossing', 
-    'danger-ice-snow',
-    'wild-animals-crossing', 
-    'end-speed-no-passing', 
-    'right-only', 
+    'children-crossing',    # |
+    'bicycles-crossing',    # |
+    'danger-ice-snow',      # |-|
+    'wild-animals-crossing',# |-|
+    'end-speed-no-passing', # |
+    'right-only',           
     'left-only', 
     'ahead-only', 
     'straight-right-only', 
@@ -66,7 +66,7 @@ SIGN_TYPES_IDS = [
     'keep-left', 
     'roundabout', 
     'end-no-passing', 
-    'end-no-passing-3ton5' 
+    'end-no-passing-3ton5'  # |-|
 ]
 
 SPECIFIC_LABELS = [
@@ -189,6 +189,7 @@ class TrafficSignDetector(object):
                     traffic_signs.append(TrafficSign(category=GLOBAL_LABELS[class_ids[i]], type=SIGN_TYPES_IDS[selected_type], label=label_specific,
                                                      x=x, y=y, width=w, height=h, confidence=confidences[i]))
                     
+                    #put text on image
                     img = cv.putText(img, label_specific, (x, y-10), self.font, 0.5, (0,0,255), 2)
 
                 #draw on image  

@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/trafficsigns/share/common-lisp/ros/trafficsigns/msg/trafficsigns-msg.asd
+/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/trafficsigns/share/common-lisp/ros/trafficsigns/msg/trafficsigns-msg.asd

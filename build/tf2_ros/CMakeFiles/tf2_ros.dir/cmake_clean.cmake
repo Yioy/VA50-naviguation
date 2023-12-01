@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_ros/lib/libtf2_ros.pdb"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_ros/lib/libtf2_ros.so"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_ros/lib/libtf2_ros.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_ros/lib/libtf2_ros.so"
   "CMakeFiles/tf2_ros.dir/src/buffer.cpp.o"
   "CMakeFiles/tf2_ros.dir/src/buffer_client.cpp.o"
   "CMakeFiles/tf2_ros.dir/src/buffer_server.cpp.o"

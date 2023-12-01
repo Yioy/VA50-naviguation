@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_geometry_msgs/lib/tf2_geometry_msgs/test_tomsg_frommsg"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_geometry_msgs/lib/tf2_geometry_msgs/test_tomsg_frommsg.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_geometry_msgs/lib/tf2_geometry_msgs/test_tomsg_frommsg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_geometry_msgs/lib/tf2_geometry_msgs/test_tomsg_frommsg.pdb"
   "CMakeFiles/test_tomsg_frommsg.dir/test/test_tomsg_frommsg.cpp.o"
 )
 

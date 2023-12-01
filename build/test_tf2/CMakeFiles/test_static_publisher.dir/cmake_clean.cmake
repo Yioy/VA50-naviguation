@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/test_tf2/lib/test_tf2/test_static_publisher"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/test_tf2/lib/test_tf2/test_static_publisher.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2/lib/test_tf2/test_static_publisher"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2/lib/test_tf2/test_static_publisher.pdb"
   "CMakeFiles/test_static_publisher.dir/test/test_static_publisher.cpp.o"
 )
 

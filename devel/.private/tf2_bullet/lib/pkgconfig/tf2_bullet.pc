@@ -1,8 +1,8 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_bullet
+prefix=/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_bullet
 
 Name: tf2_bullet
 Description: Description of tf2_bullet
 Version: 0.7.6
-Cflags: -I/home/sebastien/ProjetVA50/VA50-navigation-main/src/geometry2/tf2_bullet/include -I/usr/include/bullet
+Cflags: -I/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet/include -I/usr/include/bullet
 Libs: -L${prefix}/lib 
 Requires: 

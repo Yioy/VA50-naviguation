@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/test_tf2/lib/test_tf2/test_convert"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/test_tf2/lib/test_tf2/test_convert.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2/lib/test_tf2/test_convert"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2/lib/test_tf2/test_convert.pdb"
   "CMakeFiles/test_convert.dir/test/test_convert.cpp.o"
 )
 

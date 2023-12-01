@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/test_tf2/lib/test_tf2/test_tf2_message_filter"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/test_tf2/lib/test_tf2/test_tf2_message_filter.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2/lib/test_tf2/test_tf2_message_filter"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/test_tf2/lib/test_tf2/test_tf2_message_filter.pdb"
   "CMakeFiles/test_tf2_message_filter.dir/test/test_message_filter.cpp.o"
 )
 

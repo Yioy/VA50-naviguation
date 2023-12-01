@@ -67,14 +67,14 @@ set(transformtrack_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(transformtrack_SOURCE_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/src/transformtrack)
-  set(transformtrack_DEVEL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack)
+  set(transformtrack_SOURCE_PREFIX /home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack)
+  set(transformtrack_DEVEL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation/devel/.private/transformtrack)
   set(transformtrack_INSTALL_PREFIX "")
   set(transformtrack_PREFIX ${transformtrack_DEVEL_PREFIX})
 else()
   set(transformtrack_SOURCE_PREFIX "")
   set(transformtrack_DEVEL_PREFIX "")
-  set(transformtrack_INSTALL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/install)
+  set(transformtrack_INSTALL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation/install)
   set(transformtrack_PREFIX ${transformtrack_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(transformtrack_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack/include " STREQUAL " ")
+if(NOT "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/transformtrack/include " STREQUAL " ")
   set(transformtrack_INCLUDE_DIRS "")
-  set(_include_dirs "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack/include")
+  set(_include_dirs "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/transformtrack/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transform
         message(FATAL_ERROR "Project 'transformtrack' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'transformtrack' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/sebastien/ProjetVA50/VA50-navigation-main/src/transformtrack/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'transformtrack' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack/${idir}'.  ${_report}")
     endif()
     _list_append_unique(transformtrack_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/transformtrack/lib;/home/sebastien/ProjetVA50/VA50-navigation-main/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/sebastien/ProjetVA50/VA50-navigation/devel/.private/transformtrack/lib;/home/sebastien/ProjetVA50/VA50-navigation/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

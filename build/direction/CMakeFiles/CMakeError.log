@@ -1,21 +1,21 @@
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
-Change Dir: /home/sebastien/ProjetVA50/VA50-navigation-main/build/direction/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/ProjetVA50/VA50-navigation/build/direction/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_39bac/fast && /usr/bin/make -f CMakeFiles/cmTC_39bac.dir/build.make CMakeFiles/cmTC_39bac.dir/build
-make[1] : on entre dans le répertoire « /home/sebastien/ProjetVA50/VA50-navigation-main/build/direction/CMakeFiles/CMakeTmp »
-Building C object CMakeFiles/cmTC_39bac.dir/src.c.o
-/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_39bac.dir/src.c.o   -c /home/sebastien/ProjetVA50/VA50-navigation-main/build/direction/CMakeFiles/CMakeTmp/src.c
-Linking C executable cmTC_39bac
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_39bac.dir/link.txt --verbose=1
-/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_39bac.dir/src.c.o  -o cmTC_39bac 
-/usr/bin/ld : CMakeFiles/cmTC_39bac.dir/src.c.o : dans la fonction « main » :
+Run Build Command(s):/usr/bin/make cmTC_5e81e/fast && /usr/bin/make -f CMakeFiles/cmTC_5e81e.dir/build.make CMakeFiles/cmTC_5e81e.dir/build
+make[1] : on entre dans le répertoire « /home/sebastien/ProjetVA50/VA50-navigation/build/direction/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_5e81e.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_5e81e.dir/src.c.o   -c /home/sebastien/ProjetVA50/VA50-navigation/build/direction/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_5e81e
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5e81e.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_5e81e.dir/src.c.o  -o cmTC_5e81e 
+/usr/bin/ld : CMakeFiles/cmTC_5e81e.dir/src.c.o : dans la fonction « main » :
 src.c:(.text+0x46) : référence indéfinie vers « pthread_create »
 /usr/bin/ld : src.c:(.text+0x52) : référence indéfinie vers « pthread_detach »
 /usr/bin/ld : src.c:(.text+0x63) : référence indéfinie vers « pthread_join »
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_39bac.dir/build.make:87 : cmTC_39bac] Erreur 1
-make[1] : on quitte le répertoire « /home/sebastien/ProjetVA50/VA50-navigation-main/build/direction/CMakeFiles/CMakeTmp »
-make: *** [Makefile:121 : cmTC_39bac/fast] Erreur 2
+make[1]: *** [CMakeFiles/cmTC_5e81e.dir/build.make:87 : cmTC_5e81e] Erreur 1
+make[1] : on quitte le répertoire « /home/sebastien/ProjetVA50/VA50-navigation/build/direction/CMakeFiles/CMakeTmp »
+make: *** [Makefile:121 : cmTC_5e81e/fast] Erreur 2
 
 
 Source file was:
@@ -39,20 +39,20 @@ int main(void)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/sebastien/ProjetVA50/VA50-navigation-main/build/direction/CMakeFiles/CMakeTmp
+Change Dir: /home/sebastien/ProjetVA50/VA50-navigation/build/direction/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_f191b/fast && /usr/bin/make -f CMakeFiles/cmTC_f191b.dir/build.make CMakeFiles/cmTC_f191b.dir/build
-make[1] : on entre dans le répertoire « /home/sebastien/ProjetVA50/VA50-navigation-main/build/direction/CMakeFiles/CMakeTmp »
-Building C object CMakeFiles/cmTC_f191b.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_f191b.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
-Linking C executable cmTC_f191b
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f191b.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_f191b.dir/CheckFunctionExists.c.o  -o cmTC_f191b  -lpthreads 
+Run Build Command(s):/usr/bin/make cmTC_129b8/fast && /usr/bin/make -f CMakeFiles/cmTC_129b8.dir/build.make CMakeFiles/cmTC_129b8.dir/build
+make[1] : on entre dans le répertoire « /home/sebastien/ProjetVA50/VA50-navigation/build/direction/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_129b8.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_129b8.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_129b8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_129b8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_129b8.dir/CheckFunctionExists.c.o  -o cmTC_129b8  -lpthreads 
 /usr/bin/ld : ne peut trouver -lpthreads
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_f191b.dir/build.make:87 : cmTC_f191b] Erreur 1
-make[1] : on quitte le répertoire « /home/sebastien/ProjetVA50/VA50-navigation-main/build/direction/CMakeFiles/CMakeTmp »
-make: *** [Makefile:121 : cmTC_f191b/fast] Erreur 2
+make[1]: *** [CMakeFiles/cmTC_129b8.dir/build.make:87 : cmTC_129b8] Erreur 1
+make[1] : on quitte le répertoire « /home/sebastien/ProjetVA50/VA50-navigation/build/direction/CMakeFiles/CMakeTmp »
+make: *** [Makefile:121 : cmTC_129b8/fast] Erreur 2
 
 
 

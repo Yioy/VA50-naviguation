@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/src/control
+CMAKE_SOURCE_DIR = /home/sebastien/ProjetVA50/VA50-navigation/src/control
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sebastien/ProjetVA50/VA50-navigation-main/build/control
+CMAKE_BINARY_DIR = /home/sebastien/ProjetVA50/VA50-navigation/build/control
 
 # Utility rule file for tests.
 
@@ -67,6 +67,6 @@ CMakeFiles/tests.dir/clean:
 .PHONY : CMakeFiles/tests.dir/clean
 
 CMakeFiles/tests.dir/depend:
-	cd /home/sebastien/ProjetVA50/VA50-navigation-main/build/control && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sebastien/ProjetVA50/VA50-navigation-main/src/control /home/sebastien/ProjetVA50/VA50-navigation-main/src/control /home/sebastien/ProjetVA50/VA50-navigation-main/build/control /home/sebastien/ProjetVA50/VA50-navigation-main/build/control /home/sebastien/ProjetVA50/VA50-navigation-main/build/control/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/sebastien/ProjetVA50/VA50-navigation/build/control && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sebastien/ProjetVA50/VA50-navigation/src/control /home/sebastien/ProjetVA50/VA50-navigation/src/control /home/sebastien/ProjetVA50/VA50-navigation/build/control /home/sebastien/ProjetVA50/VA50-navigation/build/control /home/sebastien/ProjetVA50/VA50-navigation/build/control/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/tests.dir/depend
 

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_ros/lib/tf2_ros/tf2_ros_test_listener"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_ros/lib/tf2_ros/tf2_ros_test_listener.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_ros/lib/tf2_ros/tf2_ros_test_listener"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_ros/lib/tf2_ros/tf2_ros_test_listener.pdb"
   "CMakeFiles/tf2_ros_test_listener.dir/test/listener_unittest.cpp.o"
 )
 

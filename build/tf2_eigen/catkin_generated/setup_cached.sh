@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_eigen:$CMAKE_PREFIX_PATH"
-export PWD='/home/sebastien/ProjetVA50/VA50-navigation-main/build/tf2_eigen'
-export ROSLISP_PACKAGE_DIRECTORIES="/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_eigen/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/sebastien/ProjetVA50/VA50-navigation-main/src/geometry2/tf2_eigen:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_eigen:$CMAKE_PREFIX_PATH"
+export PWD='/home/sebastien/ProjetVA50/VA50-navigation/build/tf2_eigen'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_eigen/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen:$ROS_PACKAGE_PATH"

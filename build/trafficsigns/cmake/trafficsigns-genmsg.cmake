@@ -2,7 +2,7 @@
 
 message(STATUS "trafficsigns: 2 messages, 0 services")
 
-set(MSG_I_FLAGS "-Itrafficsigns:/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Itrafficsigns:/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -17,14 +17,14 @@ add_custom_target(trafficsigns_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
 add_custom_target(_trafficsigns_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "trafficsigns" "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "trafficsigns" "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg" ""
 )
 
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
 add_custom_target(_trafficsigns_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "trafficsigns" "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg" "std_msgs/Header:trafficsigns/TrafficSign"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "trafficsigns" "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg" "std_msgs/Header:trafficsigns/TrafficSign"
 )
 
 #
@@ -34,15 +34,15 @@ add_custom_target(_trafficsigns_generate_messages_check_deps_${_filename}
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/trafficsigns
 )
 _generate_msg_cpp(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/trafficsigns
 )
 
@@ -60,9 +60,9 @@ add_custom_target(trafficsigns_generate_messages_cpp
 add_dependencies(trafficsigns_generate_messages trafficsigns_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_cpp _trafficsigns_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_cpp _trafficsigns_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -75,15 +75,15 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS trafficsigns_generate_messages_cpp)
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/trafficsigns
 )
 _generate_msg_eus(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/trafficsigns
 )
 
@@ -101,9 +101,9 @@ add_custom_target(trafficsigns_generate_messages_eus
 add_dependencies(trafficsigns_generate_messages trafficsigns_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_eus _trafficsigns_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_eus _trafficsigns_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -116,15 +116,15 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS trafficsigns_generate_messages_eus)
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/trafficsigns
 )
 _generate_msg_lisp(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/trafficsigns
 )
 
@@ -142,9 +142,9 @@ add_custom_target(trafficsigns_generate_messages_lisp
 add_dependencies(trafficsigns_generate_messages trafficsigns_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_lisp _trafficsigns_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_lisp _trafficsigns_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -157,15 +157,15 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS trafficsigns_generate_messages_lisp
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/trafficsigns
 )
 _generate_msg_nodejs(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/trafficsigns
 )
 
@@ -183,9 +183,9 @@ add_custom_target(trafficsigns_generate_messages_nodejs
 add_dependencies(trafficsigns_generate_messages trafficsigns_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_nodejs _trafficsigns_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_nodejs _trafficsigns_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -198,15 +198,15 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS trafficsigns_generate_messages_node
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/trafficsigns
 )
 _generate_msg_py(trafficsigns
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg"
+  "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg"
+  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/trafficsigns
 )
 
@@ -224,9 +224,9 @@ add_custom_target(trafficsigns_generate_messages_py
 add_dependencies(trafficsigns_generate_messages trafficsigns_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSign.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_py _trafficsigns_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation-main/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
+get_filename_component(_filename "/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns/msg/TrafficSignStatus.msg" NAME_WE)
 add_dependencies(trafficsigns_generate_messages_py _trafficsigns_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "rospy;tf2".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "tf2_py"
-PROJECT_SPACE_DIR = "/home/sebastien/ProjetVA50/VA50-navigation-main/install"
+PROJECT_SPACE_DIR = "/home/sebastien/ProjetVA50/VA50-navigation/install"
 PROJECT_VERSION = "0.7.6"

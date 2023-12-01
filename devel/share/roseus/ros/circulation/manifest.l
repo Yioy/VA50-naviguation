@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/share/roseus/ros/circulation/manifest.l
+/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/circulation/share/roseus/ros/circulation/manifest.l

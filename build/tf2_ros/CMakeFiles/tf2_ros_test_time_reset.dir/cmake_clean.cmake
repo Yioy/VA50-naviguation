@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_ros/lib/tf2_ros/tf2_ros_test_time_reset"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_ros/lib/tf2_ros/tf2_ros_test_time_reset.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_ros/lib/tf2_ros/tf2_ros_test_time_reset"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_ros/lib/tf2_ros/tf2_ros_test_time_reset.pdb"
   "CMakeFiles/tf2_ros_test_time_reset.dir/test/time_reset_test.cpp.o"
 )
 

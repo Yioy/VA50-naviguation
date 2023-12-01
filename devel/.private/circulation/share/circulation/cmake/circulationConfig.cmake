@@ -67,14 +67,14 @@ set(circulation_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("TRUE" STREQUAL "TRUE")
-  set(circulation_SOURCE_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/src/circulation)
-  set(circulation_DEVEL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation)
+  set(circulation_SOURCE_PREFIX /home/sebastien/ProjetVA50/VA50-navigation/src/circulation)
+  set(circulation_DEVEL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation/devel/.private/circulation)
   set(circulation_INSTALL_PREFIX "")
   set(circulation_PREFIX ${circulation_DEVEL_PREFIX})
 else()
   set(circulation_SOURCE_PREFIX "")
   set(circulation_DEVEL_PREFIX "")
-  set(circulation_INSTALL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation-main/install)
+  set(circulation_INSTALL_PREFIX /home/sebastien/ProjetVA50/VA50-navigation/install)
   set(circulation_PREFIX ${circulation_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(circulation_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/include " STREQUAL " ")
+if(NOT "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/circulation/include " STREQUAL " ")
   set(circulation_INCLUDE_DIRS "")
-  set(_include_dirs "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/include")
+  set(_include_dirs "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/circulation/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -110,7 +110,7 @@ if(NOT "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulati
         message(FATAL_ERROR "Project 'circulation' specifies '${idir}' as an include dir, which is not found.  It does not exist in '${include}'.  ${_report}")
       endif()
     else()
-      message(FATAL_ERROR "Project 'circulation' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/sebastien/ProjetVA50/VA50-navigation-main/src/circulation/${idir}'.  ${_report}")
+      message(FATAL_ERROR "Project 'circulation' specifies '${idir}' as an include dir, which is not found.  It does neither exist as an absolute directory nor in '/home/sebastien/ProjetVA50/VA50-navigation/src/circulation/${idir}'.  ${_report}")
     endif()
     _list_append_unique(circulation_INCLUDE_DIRS ${include})
   endforeach()
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/circulation/lib;/home/sebastien/ProjetVA50/VA50-navigation-main/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/sebastien/ProjetVA50/VA50-navigation/devel/.private/circulation/lib;/home/sebastien/ProjetVA50/VA50-navigation/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

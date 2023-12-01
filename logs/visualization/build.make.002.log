@@ -6,7 +6,7 @@
 [  0%] Built target sensor_msgs_generate_messages_cpp
 [ 28%] Built target visualization_generate_messages_eus
 [ 57%] Built target visualization_generate_messages_py
-[ 71%] Built target visualization_generate_messages_lisp
-[ 85%] Built target visualization_generate_messages_nodejs
+[ 71%] Built target visualization_generate_messages_nodejs
+[ 85%] Built target visualization_generate_messages_lisp
 [100%] Built target visualization_generate_messages_cpp
 [100%] Built target visualization_generate_messages

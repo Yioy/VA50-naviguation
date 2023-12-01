@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "${prefix}/include".split(';') if "${prefix}/i
 PROJECT_CATKIN_DEPENDS = "actionlib;actionlib_msgs;geometry_msgs;message_filters;roscpp;rosgraph;tf2;tf2_msgs;tf2_py".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "-ltf2_ros".split(';') if "-ltf2_ros" != "" else []
 PROJECT_NAME = "tf2_ros"
-PROJECT_SPACE_DIR = "/home/sebastien/ProjetVA50/VA50-navigation-main/install"
+PROJECT_SPACE_DIR = "/home/sebastien/ProjetVA50/VA50-navigation/install"
 PROJECT_VERSION = "0.7.6"

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2/lib/tf2/test_simple"
-  "/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2/lib/tf2/test_simple.pdb"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2/lib/tf2/test_simple"
+  "/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2/lib/tf2/test_simple.pdb"
   "CMakeFiles/test_simple.dir/test/simple_tf2_core.cpp.o"
 )
 

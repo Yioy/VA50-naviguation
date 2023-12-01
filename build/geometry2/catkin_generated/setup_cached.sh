@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/geometry2:$CMAKE_PREFIX_PATH"
-export PWD='/home/sebastien/ProjetVA50/VA50-navigation-main/build/geometry2'
-export ROSLISP_PACKAGE_DIRECTORIES="/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/geometry2/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/sebastien/ProjetVA50/VA50-navigation-main/src/geometry2/geometry2:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/geometry2:$CMAKE_PREFIX_PATH"
+export PWD='/home/sebastien/ProjetVA50/VA50-navigation/build/geometry2'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/geometry2/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2:$ROS_PACKAGE_PATH"

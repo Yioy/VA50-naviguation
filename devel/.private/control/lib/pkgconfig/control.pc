@@ -1,4 +1,4 @@
-prefix=/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/control
+prefix=/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/control
 
 Name: control
 Description: Description of control

@@ -1,1 +1,1 @@
-/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/visualization/lib/python3/dist-packages/visualization/msg/__init__.py
+/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/visualization/lib/python3/dist-packages/visualization/msg/__init__.py

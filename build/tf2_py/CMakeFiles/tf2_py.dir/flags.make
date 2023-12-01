@@ -6,5 +6,5 @@ CXX_FLAGS = -fPIC   -g -Wno-missing-field-initializers
 
 CXX_DEFINES = -DROS_BUILD_SHARED_LIBS=1 -Dtf2_py_EXPORTS
 
-CXX_INCLUDES = -I/usr/include/python3.8 -I/home/sebastien/ProjetVA50/VA50-navigation-main/devel/.private/tf2_msgs/include -I/home/sebastien/ProjetVA50/VA50-navigation-main/src/geometry2/tf2_msgs/include -I/home/sebastien/ProjetVA50/VA50-navigation-main/src/geometry2/tf2/include -I/opt/ros/noetic/include 
+CXX_INCLUDES = -I/usr/include/python3.8 -I/home/sebastien/ProjetVA50/VA50-navigation/devel/.private/tf2_msgs/include -I/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs/include -I/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2/include -I/opt/ros/noetic/include 
 
