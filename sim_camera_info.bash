@@ -1,8 +1,8 @@
 rostopic pub /forwardCamera/camera_info sensor_msgs/CameraInfo "header:
   seq: 0
   stamp: {secs: 0, nsecs: 0}
-  frame_id: "camera_forward_optical_frame"
-height: 771
+  frame_id: "front_top_camera_optical_frame"
+height: 720
 width: 1028
 distortion_model: "Mei"
 D: [0.8803200125694275]
@@ -14,6 +14,6 @@ binning_y: 1
 roi: 
   x_offset: 0
   y_offset: 0
-  height: 771
+  height: 720
   width: 1028
   do_rectify: False"

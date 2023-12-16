@@ -317,13 +317,13 @@ cdef void _to_birdeye(uint8_t[:, ::1] image, uint8_t[:, ::1] birdeye, double[:, 
 				target_y = output_y * scale_factor + y_range_min
 
 			# Matrix product, target_to_camera @ (target_x, target_y, target_z) -> camera frame
-			camera_z = target_x*target_to_camera[2, 0] + target_y*target_to_camera[2, 1] + target_to_camera[2, 3]
+			camera_z = target_y*target_to_camera[2, 0] + target_x*target_to_camera[2, 1] + target_to_camera[2, 3]
 			if camera_z < 0:
 				birdeye[output_y, output_x] = 0
 				continue
 				
-			camera_x = target_x*target_to_camera[0, 0] + target_y*target_to_camera[0, 1] + target_to_camera[0, 3]
-			camera_y = target_x*target_to_camera[1, 0] + target_y*target_to_camera[1, 1] + target_to_camera[1, 3]
+			camera_x = target_y*target_to_camera[0, 0] + target_x*target_to_camera[0, 1] + target_to_camera[0, 3]
+			camera_y = target_y*target_to_camera[1, 0] + target_x*target_to_camera[1, 1] + target_to_camera[1, 3]
 			projection_norm =  1 / (camera_z + xi * sqrt(camera_x*camera_x + camera_y*camera_y + camera_z*camera_z))
 
 			# Project on the sensor plane

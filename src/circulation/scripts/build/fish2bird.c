@@ -23944,7 +23944,7 @@ static void __pyx_f_9fish2bird__to_birdeye(__Pyx_memviewslice __pyx_v_image, __P
                               /* "fish2bird.pyx":320
  * 
  * 			# Matrix product, target_to_camera @ (target_x, target_y, target_z) -> camera frame
- * 			camera_z = target_x*target_to_camera[2, 0] + target_y*target_to_camera[2, 1] + target_to_camera[2, 3]             # <<<<<<<<<<<<<<
+ * 			camera_z = target_y*target_to_camera[2, 0] + target_x*target_to_camera[2, 1] + target_to_camera[2, 3]             # <<<<<<<<<<<<<<
  * 			if camera_z < 0:
  * 				birdeye[output_y, output_x] = 0
  */
@@ -23954,11 +23954,11 @@ static void __pyx_f_9fish2bird__to_birdeye(__Pyx_memviewslice __pyx_v_image, __P
                               __pyx_t_10 = 1;
                               __pyx_t_11 = 2;
                               __pyx_t_12 = 3;
-                              __pyx_v_camera_z = (((__pyx_v_target_x * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_7 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_8 * __pyx_v_target_to_camera.strides[1]) )))) + (__pyx_v_target_y * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_9 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_10 * __pyx_v_target_to_camera.strides[1]) ))))) + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_11 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_12 * __pyx_v_target_to_camera.strides[1]) ))));
+                              __pyx_v_camera_z = (((__pyx_v_target_y * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_7 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_8 * __pyx_v_target_to_camera.strides[1]) )))) + (__pyx_v_target_x * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_9 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_10 * __pyx_v_target_to_camera.strides[1]) ))))) + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_11 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_12 * __pyx_v_target_to_camera.strides[1]) ))));
 
                               /* "fish2bird.pyx":321
  * 			# Matrix product, target_to_camera @ (target_x, target_y, target_z) -> camera frame
- * 			camera_z = target_x*target_to_camera[2, 0] + target_y*target_to_camera[2, 1] + target_to_camera[2, 3]
+ * 			camera_z = target_y*target_to_camera[2, 0] + target_x*target_to_camera[2, 1] + target_to_camera[2, 3]
  * 			if camera_z < 0:             # <<<<<<<<<<<<<<
  * 				birdeye[output_y, output_x] = 0
  * 				continue
@@ -23967,7 +23967,7 @@ static void __pyx_f_9fish2bird__to_birdeye(__Pyx_memviewslice __pyx_v_image, __P
                               if (__pyx_t_13) {
 
                                 /* "fish2bird.pyx":322
- * 			camera_z = target_x*target_to_camera[2, 0] + target_y*target_to_camera[2, 1] + target_to_camera[2, 3]
+ * 			camera_z = target_y*target_to_camera[2, 0] + target_x*target_to_camera[2, 1] + target_to_camera[2, 3]
  * 			if camera_z < 0:
  * 				birdeye[output_y, output_x] = 0             # <<<<<<<<<<<<<<
  * 				continue
@@ -23982,13 +23982,13 @@ static void __pyx_f_9fish2bird__to_birdeye(__Pyx_memviewslice __pyx_v_image, __P
  * 				birdeye[output_y, output_x] = 0
  * 				continue             # <<<<<<<<<<<<<<
  * 
- * 			camera_x = target_x*target_to_camera[0, 0] + target_y*target_to_camera[0, 1] + target_to_camera[0, 3]
+ * 			camera_x = target_y*target_to_camera[0, 0] + target_x*target_to_camera[0, 1] + target_to_camera[0, 3]
  */
                                 goto __pyx_L10_continue;
 
                                 /* "fish2bird.pyx":321
  * 			# Matrix product, target_to_camera @ (target_x, target_y, target_z) -> camera frame
- * 			camera_z = target_x*target_to_camera[2, 0] + target_y*target_to_camera[2, 1] + target_to_camera[2, 3]
+ * 			camera_z = target_y*target_to_camera[2, 0] + target_x*target_to_camera[2, 1] + target_to_camera[2, 3]
  * 			if camera_z < 0:             # <<<<<<<<<<<<<<
  * 				birdeye[output_y, output_x] = 0
  * 				continue
@@ -23998,8 +23998,8 @@ static void __pyx_f_9fish2bird__to_birdeye(__Pyx_memviewslice __pyx_v_image, __P
                               /* "fish2bird.pyx":325
  * 				continue
  * 
- * 			camera_x = target_x*target_to_camera[0, 0] + target_y*target_to_camera[0, 1] + target_to_camera[0, 3]             # <<<<<<<<<<<<<<
- * 			camera_y = target_x*target_to_camera[1, 0] + target_y*target_to_camera[1, 1] + target_to_camera[1, 3]
+ * 			camera_x = target_y*target_to_camera[0, 0] + target_x*target_to_camera[0, 1] + target_to_camera[0, 3]             # <<<<<<<<<<<<<<
+ * 			camera_y = target_y*target_to_camera[1, 0] + target_x*target_to_camera[1, 1] + target_to_camera[1, 3]
  * 			projection_norm =  1 / (camera_z + xi * sqrt(camera_x*camera_x + camera_y*camera_y + camera_z*camera_z))
  */
                               __pyx_t_11 = 0;
@@ -24008,12 +24008,12 @@ static void __pyx_f_9fish2bird__to_birdeye(__Pyx_memviewslice __pyx_v_image, __P
                               __pyx_t_9 = 1;
                               __pyx_t_8 = 0;
                               __pyx_t_7 = 3;
-                              __pyx_v_camera_x = (((__pyx_v_target_x * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_11 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_12 * __pyx_v_target_to_camera.strides[1]) )))) + (__pyx_v_target_y * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_10 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_9 * __pyx_v_target_to_camera.strides[1]) ))))) + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_8 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_7 * __pyx_v_target_to_camera.strides[1]) ))));
+                              __pyx_v_camera_x = (((__pyx_v_target_y * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_11 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_12 * __pyx_v_target_to_camera.strides[1]) )))) + (__pyx_v_target_x * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_10 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_9 * __pyx_v_target_to_camera.strides[1]) ))))) + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_8 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_7 * __pyx_v_target_to_camera.strides[1]) ))));
 
                               /* "fish2bird.pyx":326
  * 
- * 			camera_x = target_x*target_to_camera[0, 0] + target_y*target_to_camera[0, 1] + target_to_camera[0, 3]
- * 			camera_y = target_x*target_to_camera[1, 0] + target_y*target_to_camera[1, 1] + target_to_camera[1, 3]             # <<<<<<<<<<<<<<
+ * 			camera_x = target_y*target_to_camera[0, 0] + target_x*target_to_camera[0, 1] + target_to_camera[0, 3]
+ * 			camera_y = target_y*target_to_camera[1, 0] + target_x*target_to_camera[1, 1] + target_to_camera[1, 3]             # <<<<<<<<<<<<<<
  * 			projection_norm =  1 / (camera_z + xi * sqrt(camera_x*camera_x + camera_y*camera_y + camera_z*camera_z))
  * 
  */
@@ -24023,11 +24023,11 @@ static void __pyx_f_9fish2bird__to_birdeye(__Pyx_memviewslice __pyx_v_image, __P
                               __pyx_t_10 = 1;
                               __pyx_t_12 = 1;
                               __pyx_t_11 = 3;
-                              __pyx_v_camera_y = (((__pyx_v_target_x * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_7 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_8 * __pyx_v_target_to_camera.strides[1]) )))) + (__pyx_v_target_y * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_9 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_10 * __pyx_v_target_to_camera.strides[1]) ))))) + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_12 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_11 * __pyx_v_target_to_camera.strides[1]) ))));
+                              __pyx_v_camera_y = (((__pyx_v_target_y * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_7 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_8 * __pyx_v_target_to_camera.strides[1]) )))) + (__pyx_v_target_x * (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_9 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_10 * __pyx_v_target_to_camera.strides[1]) ))))) + (*((double *) ( /* dim=1 */ (( /* dim=0 */ (__pyx_v_target_to_camera.data + __pyx_t_12 * __pyx_v_target_to_camera.strides[0]) ) + __pyx_t_11 * __pyx_v_target_to_camera.strides[1]) ))));
 
                               /* "fish2bird.pyx":327
- * 			camera_x = target_x*target_to_camera[0, 0] + target_y*target_to_camera[0, 1] + target_to_camera[0, 3]
- * 			camera_y = target_x*target_to_camera[1, 0] + target_y*target_to_camera[1, 1] + target_to_camera[1, 3]
+ * 			camera_x = target_y*target_to_camera[0, 0] + target_x*target_to_camera[0, 1] + target_to_camera[0, 3]
+ * 			camera_y = target_y*target_to_camera[1, 0] + target_x*target_to_camera[1, 1] + target_to_camera[1, 3]
  * 			projection_norm =  1 / (camera_z + xi * sqrt(camera_x*camera_x + camera_y*camera_y + camera_z*camera_z))             # <<<<<<<<<<<<<<
  * 
  * 			# Project on the sensor plane
