@@ -1415,11 +1415,18 @@ if __name__ == "__main__":
 	# I’m fed up with scientific notation
 	np.set_printoptions(threshold=sys.maxsize, suppress=True)
 
-	if len(sys.argv) < 2:
-		print(f"Usage : {sys.argv[0]} <parameter-file>")
-	else:
+	# get filename as ros parameter (if present)
+	paramfile_path = rospy.get_param("config_file", default=None)
+
+	# else, we use the cmd line argument(legacy)
+	if len(sys.argv) < 2 and paramfile_path is None:
+		print(f"Usage : {sys.argv[0]} <parameter-file>. You can also pass the parameter file path as a ROS parameter named config_file")
+	elif paramfile_path is None:
+		paramfile_path = sys.argv[1]
+	
+	if paramfile_path is not None:
 		# Load the parameters and map
-		with open(sys.argv[1], "r") as parameterfile:
+		with open(paramfile_path, "r") as parameterfile:
 			parameters = yaml.load(parameterfile, yaml.Loader)
 
 		# Initialize and start the node
