@@ -32,10 +32,15 @@ Le projet comprend 5 packages ROS :
 Une fois tous les modules nécessaires compilés et installés, le projet contient 5 nœuds ROS :
 
 - Service de transformation (nécessaire pour tout le reste) : `rosrun transformtrack transformtrack_node`
-- Construction de trajectoire : `rosrun circulation circulation4.py circulation4-2.yml road_network.json`
-- Détection des panneaux : `rosrun trafficsigns distance_extractor.py circulation4-2.yml`
-- Contrôle du véhicule : `rosrun control control.py circulation4-2.yml`
+- Construction de trajectoire : `rosrun circulation circulation4.py src/bringup/config/circulation4-2.yml`
+- Détection des panneaux : `rosrun trafficsigns distance_extractor.py src/bringup/config/circulation4-2.yml`
+- Contrôle du véhicule : `rosrun control control.py src/bringup/config/circulation4-2.yml`
 - Interface de test des directions en intersection : `rosrun direction signTransmit.py`
+
+Tous les noeuds peuvent être lancés en même temps avec la commande:
+```bash
+roslaunch bringup utac_in_sim.launch
+```
 
 Le projet utilise un même fichier de paramètres au format YAML :
 
