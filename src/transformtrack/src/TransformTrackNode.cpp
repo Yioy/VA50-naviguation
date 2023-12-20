@@ -36,6 +36,17 @@ void TransformTrackNode::run() {
 	m_drop_velocity_service = m_node.advertiseService(config::node::drop_service_name, &TransformTrackNode::handle_drop_velocity, this);
 
 	m_transform_manager = TransformManager(config::transform::sim_interval);
+
+	bool got_tf = false;
+	while(!got_tf) {
+		try {
+			auto message = m_tf_buffer.lookupTransform(config::node::world_frame, config::node::road_frame, ros::Time(0));
+			got_tf = true;
+		} catch (tf2::TransformException &exc) {
+			ROS_WARN("Failed to retrieve the transform from %s to %s :\n\t%s. Retrying...", config::node::world_frame, config::node::road_frame, exc.what());
+		}
+		ros::Duration(0.5).sleep();
+	}
 	
 	ROS_INFO("Ready");
 	ros::spin();
