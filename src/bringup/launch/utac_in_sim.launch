@@ -1,0 +1,27 @@
+<launch>
+    <!-- Node for transformtrack -->
+    <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />
+  
+    <!-- Node for circulation -->
+    <node pkg="circulation" type="circulation4.py" name="circulation4_node" output="screen">
+      <param name="config_file" value="circulation4-2.yml" />
+      <param name="road_network_file" value="road_network.json" />
+    </node>
+  
+    <!-- Argument to control whether to launch trafficsigns node -->
+    <arg name="launch_trafficsigns" default="false" />
+    <group if="$(arg launch_trafficsigns)">
+      <node pkg="trafficsigns" type="distance_extractor.py" name="distance_extractor_node" output="screen">
+        <param name="config_file" value="circulation4-2.yml" />
+        <param name="no_lights" value="true" />
+      </node>
+    </group>
+  
+    <!-- Argument to control whether to launch control node -->
+    <arg name="launch_control" default="false" />
+    <group if="$(arg launch_control)">
+      <node pkg="control" type="control.py" name="control_node" output="screen">
+        <param name="config_file" value="circulation4-2.yml" />
+      </node>
+    </group>
+  </launch>
