@@ -29,21 +29,23 @@ Le projet comprend 5 packages ROS :
 
 ## Exécution
 
-Une fois tous les modules nécessaires compilés et installés, le projet contient 5 nœuds ROS :
+La méthode la plus pratique pour lancer les nodes est la suivante. Cela peut lancer tous les nodes, en fonction des valeurs par défaut des arguments définies dans le fichier [utac.launch](src/bringup/launch/utac.launch)
+```bash
+roslaunch bringup utac.launch
+```
+Il est aussi possible de spécifier des arguments: pour déscativer certains nodes ou certaines fonctionnalités:
+```bash
+roslaunch bringup utac.launch no_lights:=true no_signs:=false no_directions:=true launch_trafficsigns:=true
+```
+Remarque: pour l'instant, le roslaunch global ne lance pas le contrôle. 
+
+Si vous avez besoin de lancer séparément les nodes, vous pouvez le faire de la façon suivante:
 
 - Service de transformation (nécessaire pour tout le reste) : `rosrun transformtrack transformtrack_node`
-- Construction de trajectoire : `rosrun circulation circulation4.py src/bringup/config/circulation4-2.yml`
-- Détection des panneaux : `rosrun trafficsigns distance_extractor.py src/bringup/config/circulation4-2.yml`
+- Construction de trajectoire : `roslaunch bringup circulation.launch`
+- Détection des panneaux : `roslaunch bringup distance_extractor.launch` (et dans ce cas les paramètres du roslaunch global s'appliquent)
 - Contrôle du véhicule : `rosrun control control.py src/bringup/config/circulation4-2.yml`
 - Interface de test des directions en intersection : `rosrun direction signTransmit.py`
-
-
-roslaunch bringup distance_extractor.launch  no_lights_arg:=false no_signs_arg:=false no_directions_arg:=true
-
-Tous les noeuds peuvent être lancés en même temps avec la commande:
-```bash
-roslaunch bringup utac_in_sim.launch
-```
 
 Le projet utilise un même fichier de paramètres au format YAML :
 
