@@ -11,7 +11,10 @@
     <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />
   
     <!-- Node for circulation -->
-    <node pkg="circulation" type="circulation4.py" name="circulation4_node" output="screen"/>
+    <include file="$(find bringup)/launch/circulation.launch"/>
+
+<!-- 
+    <node pkg="circulation" type="circulation4.py" name="circulation4_node" output="screen"/> -->
   
     <!-- Argument to control whether to launch trafficsigns node -->
     <group if="$(arg launch_trafficsigns)">
