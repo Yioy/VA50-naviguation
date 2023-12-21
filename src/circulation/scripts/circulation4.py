@@ -350,7 +350,7 @@ class TrajectoryExtractorNode (object):
 			return
 		
 		# Extract the image and the timestamp at which it was taken, critical for synchronisation
-		rospy.loginfo("------ Received an image")
+		rospy.logdebug("------ Received an image")
 		image = np.frombuffer(message.data, dtype=np.uint8).reshape((message.height, message.width, 3))
 		self.compute_trajectory(image, message.header.stamp, message.header.frame_id)
 		#cProfile.runctx("self.compute_trajectory(image, message.header.stamp, message.header.frame_id)", globals(), locals())
@@ -380,7 +380,7 @@ class TrajectoryExtractorNode (object):
 			rospy.loginfo("Updated next direction to RIGHT")
 			self.visualisation.print_message("Manually set next direction : RIGHT")
 		elif message.data == Direction.DOUBLE_LANE:
-			rospy.loginfo("Next intersection has a double lane")
+			rospy.logdebug("Next intersection has a double lane")
 			self.next_double_lane = True
 			return
 		elif message.data == Direction.FORCE_INTERSECTION:
@@ -625,7 +625,7 @@ class TrajectoryExtractorNode (object):
 			return
 
 		intersection_distance, intersection_directions = self.next_intersection(image_timestamp)
-		rospy.loginfo(f"Next intersection : distance = {intersection_distance}, directions = {bin(intersection_directions) if intersection_directions is not None else None}")
+		rospy.logdebug(f"Next intersection : distance = {intersection_distance}, directions = {bin(intersection_directions) if intersection_directions is not None else None}")
 
 		# Close enough to the intersection, switch navigation mode
 		if intersection_distance is not None and intersection_distance < self.parameters["intersection"]["mode-switch-distance"]:
@@ -905,7 +905,7 @@ class TrajectoryExtractorNode (object):
 		
 		# Get the best combination and its score with the fuzzy system
 		best_y, best_x, best_score = self.lane_system.fuzzy_best(lane_variables)
-		rospy.loginfo(f"Best lane score {best_score} for combination {[best_y, best_x]}")
+		rospy.logdebug(f"Best lane score {best_score} for combination {[best_y, best_x]}")
 		
 		# No good enough lane detected : fall back to single lines if so parameterized
 		if best_score < self.parameters["fuzzy-lines"]["lane-selection-threshold"]:
@@ -956,7 +956,7 @@ class TrajectoryExtractorNode (object):
 			left_line_score = line_scores[0, 0]
 			right_line_score = line_scores[1, 0]
 
-			rospy.loginfo(f"Respective line scores : {best_score} -> {left_line_score}, {right_line_score}")
+			rospy.logdebug(f"Respective line scores : {best_score} -> {left_line_score}, {right_line_score}")
 
 			# Sometimes the full lane score is just okayish, because one of the curves is spot-on but the other is blatantly wrong
 			# In that case, eliminate the bad one and continue only with the good one
@@ -1338,7 +1338,7 @@ class TrajectoryExtractorNode (object):
 		message.trajectory = trajectory_array
 		self.trajectory_seq += 1
 
-		rospy.loginfo("Publishing a new trajectory")
+		rospy.logdebug("Publishing a new trajectory")
 		self.trajectory_publisher.publish(message)
 
 	def compute_trajectory(self, image, timestamp, image_frame):
@@ -1405,7 +1405,7 @@ class TrajectoryExtractorNode (object):
 
 		endtime = time.time()
 		self.time_buffer.append(endtime - starttime)
-		rospy.loginfo(f"Image handled in {endtime - starttime :.3f} seconds (mean {np.mean(self.time_buffer):.3f}) seconds")
+		rospy.logdebug(f"Image handled in {endtime - starttime :.3f} seconds (mean {np.mean(self.time_buffer):.3f}) seconds")
 
 #                          ╔═════════════════════╗                          #
 # ═════════════════════════╣ NODE INITIALISATION ╠═════════════════════════ #
