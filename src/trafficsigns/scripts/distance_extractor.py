@@ -178,7 +178,7 @@ class DistanceExtractor (object):
 		self.image_frame = data.header.frame_id
 		self.image_stamp = data.header.stamp
 		self.latest_image = np.frombuffer(data.data, dtype=np.uint8).reshape((data.height, data.width, 3))
-		if self.image_stamp >= self.pointcloud_stamp_array[0]:
+		if len(self.pointcloud_stamp_array) != 0 and self.image_stamp >= self.pointcloud_stamp_array[0]:
 			self.convert_pointcloud()
 			#cProfile.runctx("self.convert_pointcloud()", globals(), locals())
 

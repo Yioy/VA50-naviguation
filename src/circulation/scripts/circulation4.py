@@ -403,7 +403,7 @@ class TrajectoryExtractorNode (object):
 		"""
 		for trafficsign in message.traffic_signs:
 			if trafficsign.type in TURN_SIGNS and trafficsign.confidence > 0.6:
-				rospy.loginfo(f"New traffic sign : {trafficsign.type}, position at {message.header.stamp} [{trafficsign.x}, {trafficsign.y}, {trafficsign.z}], confidence {trafficsign.confidence}")
+				rospy.logdebug(f"New traffic sign : {trafficsign.type}, position at {message.header.stamp} [{trafficsign.x}, {trafficsign.y}, {trafficsign.z}], confidence {trafficsign.confidence}")
 				self.add_intersection_hint(IntersectionHint("trafficsign", trafficsign.type, (trafficsign.x, trafficsign.y, trafficsign.z), message.header.stamp, trafficsign.confidence))
 
 	#               ╔═══════════════════════════════════════╗               #
