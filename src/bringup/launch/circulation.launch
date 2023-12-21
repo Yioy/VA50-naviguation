@@ -1,8 +1,8 @@
 <launch>
 
-    <arg name="config_file_arg" default="$(find bringup)/config/circulation4-2.yml"/>
+    <arg name="config_file" default="$(find bringup)/config/circulation4-2.yml"/>
     
-    <param name="config_file" value="$(arg config_file_arg)" />
+    <param name="config_file" value="$(arg config_file)" />
 
     <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
   

@@ -1,0 +1,30 @@
+<launch>
+
+  <arg name="config_version" default="4-2"/>
+  <arg name="no_lights" default="true"/>
+  <arg name="no_signs" default="true"/>
+  <arg name="no_directions" default="true"/>
+
+  <arg name="launch_trafficsigns" default="false" />
+
+  <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
+
+  <!-- Node for transformtrack -->
+  <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />
+
+  <!-- Node for circulation -->
+  <include file="$(find bringup)/launch/circulation.launch">
+      <arg name="config_file" value="$(find bringup)/config/circulation$(arg config_version).yml" />
+  </include>
+
+  <!-- Argument to control whether to launch trafficsigns node -->
+  <group if="$(arg launch_trafficsigns)">
+    <include file="$(find bringup)/launch/distance_extractor.launch">
+      <arg name="config_file" value="$(find bringup)/config/circulation$(arg config_version).yml" />
+      <arg name="no_lights" value="$(arg no_lights)" />
+      <arg name="no_signs" value="$(arg no_signs)" />
+      <arg name="no_directions" value="$(arg no_directions)" />
+    </include>
+  </group>
+
+</launch>
