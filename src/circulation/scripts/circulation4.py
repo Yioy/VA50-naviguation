@@ -1413,18 +1413,15 @@ class TrajectoryExtractorNode (object):
 
 if __name__ == "__main__":
 	# I’m fed up with scientific notation
-	np.set_printoptions(threshold=sys.maxsize, suppress=True)
+	np.set_printoptions(threshold = sys.maxsize, suppress=True)
 
 	# get filename as ros parameter (if present)
 	paramfile_path = rospy.get_param("config_file", default=None)
-
-	# else, we use the cmd line argument(legacy)
-	if len(sys.argv) < 2 and paramfile_path is None:
-		print(f"Usage : {sys.argv[0]} <parameter-file>. You can also pass the parameter file path as a ROS parameter named config_file")
-	elif paramfile_path is None:
-		paramfile_path = sys.argv[1]
 	
 	if paramfile_path is not None:
+
+		rospy.loginfo("Param file path retrieved from ROS param: " + paramfile_path)
+
 		# Load the parameters and map
 		with open(paramfile_path, "r") as parameterfile:
 			parameters = yaml.load(parameterfile, yaml.Loader)
@@ -1433,3 +1430,6 @@ if __name__ == "__main__":
 		rospy.init_node(parameters["node"]["trajectory-node-name"])
 		node = TrajectoryExtractorNode(parameters)
 		rospy.spin()
+	else:
+		rospy.logfatal("Required ROS param config_file not provided.")
+		
