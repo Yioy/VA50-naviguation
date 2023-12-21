@@ -58,6 +58,7 @@ class DistanceExtractor (object):
 		self.pointcloud_topic = self.parameters["node"]["pointcloud-topic"]
 		self.traffic_sign_topic = self.parameters["node"]["traffic-sign-topic"]
 		self.visualization_topic = self.parameters["node"]["trafficsigns-viz-topic"]
+		self.traffic_sign_detector_model = self.parameters["distance_extractor"]["traffic-sign-detector-model"]
 
 		# Initialize the topic publisher
 		self.traffic_sign_publisher = rospy.Publisher(self.traffic_sign_topic, TrafficSignStatus, queue_size=10)
@@ -70,7 +71,7 @@ class DistanceExtractor (object):
 		# Initialize the traffic sign detector
 		self.traffic_sign_detector = None
 		if not self.no_signs:
-			self.traffic_sign_detector = TrafficSignDetector()
+			self.traffic_sign_detector = TrafficSignDetector(self.traffic_sign_detector_model)
 
 		# new line here
 		self.traffic_direction_detector = None
@@ -307,27 +308,24 @@ if __name__ == "__main__":
 
 	# no_lights = "--no-lights" in sys.argv
 
-	no_lights = rospy.get_param("~no_lights", True)
-	no_signs = rospy.get_param("~no_signs", True)
-	no_directions = rospy.get_param("~no_directions", True)
+	no_lights = rospy.get_param("no_lights", False)
+	no_signs = rospy.get_param("no_signs", False)
+	no_directions = rospy.get_param("no_directions", False)
+	paramfile_path = rospy.get_param("config_file", None)
 
-	parameterfile_path = rospy.get_param("~config_file", None)
+	if paramfile_path is not None:
 
-	print("Node started with parameters :")
-	print(f"no_lights : {no_lights}")
-	print(f"no_signs : {no_signs}")
-	print(f"no_directions : {no_directions}")
-	print(f"config_file : {parameterfile_path}")
+		rospy.loginfo("Starting node with the following ROS params: ")
+		print(f"no_lights : {no_lights}")
+		print(f"no_signs : {no_signs}")
+		print(f"no_directions : {no_directions}")
+		print(f"config_file : {paramfile_path}")
 
-
-	if len(sys.argv) < 2:
-		print(f"Usage : {sys.argv[0]} <parameter-file> [--no-lights] [--no-signs] [--no-directions]")
-	else:
-		with open(sys.argv[1], "r") as parameterfile:
+		with open(paramfile_path, "r") as parameterfile:
 			parameters = yaml.load(parameterfile, yaml.Loader)
 		rospy.init_node("traffic_sign_distances")
-		#print(sys.argv[2])
-		# node = DistanceExtractor(parameters, "--no-lights" in sys.argv, "--no-signs" in sys.argv, "--no-directions" in sys.argv)
 		node = DistanceExtractor(parameters, no_lights, no_signs, no_directions)
 		rospy.spin()
 
+	else:
+		rospy.logfatal("Required ROS param config_file or yolo_weights_path not set, exiting")

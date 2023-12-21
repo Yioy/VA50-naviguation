@@ -139,3 +139,6 @@ visualization:
   circulation-lines-id: 0
   circulation-trajectory-id: 1
   trafficsigns-id: 2
+
+distance_extractor:
+  traffic-sign-detector-model: yolo_v4_tiny

@@ -1,30 +1,36 @@
 <launch>
 
-    <param name="config_file" value="$(find bringup)/config/circulation4-2.yml" />
+  <arg name="config_file_arg" default="$(find bringup)/config/circulation4-2.yml"/>
+  <arg name="no_lights_arg" default="true"/>
+  <arg name="no_signs_arg" default="true"/>
+  <arg name="no_directions_arg" default="true"/>
 
-    <arg name="launch_trafficsigns" default="false" />
-    <arg name="launch_control" default="false" />
+  <arg name="launch_trafficsigns" default="false" />
+  <arg name="launch_control" default="false" />
 
-    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
+  <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
 
-    <!-- Node for transformtrack -->
-    <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />
-  
-    <!-- Node for circulation -->
-    <include file="$(find bringup)/launch/circulation.launch"/>
+  <!-- Node for transformtrack -->
+  <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />
 
-<!-- 
-    <node pkg="circulation" type="circulation4.py" name="circulation4_node" output="screen"/> -->
-  
-    <!-- Argument to control whether to launch trafficsigns node -->
-    <group if="$(arg launch_trafficsigns)">
-      <node pkg="trafficsigns" type="distance_extractor.py" name="distance_extractor_node" output="screen">
-        <param name="no_lights" value="true" />
-      </node>
-    </group>
-  
-    <!-- Argument to control whether to launch control node -->
-    <group if="$(arg launch_control)">
-      <node pkg="control" type="control.py" name="control_node" output="screen"/>
-    </group>
-  </launch>
+  <!-- Node for circulation -->
+  <include file="$(find bringup)/launch/circulation.launch">
+      <arg name="config_file_arg" value="$(arg config_file_arg)" />
+  </include>
+
+  <!-- Argument to control whether to launch trafficsigns node -->
+  <group if="$(arg launch_trafficsigns)">
+    <include file="$(find bringup)/launch/distance_extractor.launch">
+      <arg name="config_file_arg" value="$(arg config_file_arg)" />
+      <arg name="no_lights_arg" value="$(arg no_lights_arg)" />
+      <arg name="no_signs_arg" value="$(arg no_signs_arg)" />
+      <arg name="no_directions_arg" value="$(arg no_directions_arg)" />
+    </include>
+  </group>
+
+  <!-- Argument to control whether to launch control node -->
+  <group if="$(arg launch_control)">
+    <node pkg="control" type="control.py" name="control_node" output="screen"/>
+  </group>
+
+</launch>

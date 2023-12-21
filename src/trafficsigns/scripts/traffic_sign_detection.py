@@ -17,6 +17,7 @@ import numpy as np
 from skimage import exposure
 from keras.models import load_model
 from trafficsign import TrafficSign
+import rospkg
 
 GLOBAL_LABELS = ['prohibitory',
                 'danger',
@@ -117,11 +118,19 @@ SPECIFIC_LABELS = [
 
 
 class TrafficSignDetector(object):
-    def __init__(self):
-        self.yolov4_model = cv.dnn.readNet("yolov4-tiny_training_last.weights", "yolov4-tiny_training.cfg") # DETECTION MODEL
+    def __init__(self, model_name):
+
+        rospack = rospkg.RosPack()
+        path_model_config = rospack.get_path('trafficsigns') + '/models/' + model_name + '/config.cfg'
+        path_model_weights = rospack.get_path('trafficsigns') + '/models/' + model_name + '/weights.weights'
+
+        path_recognition_model = rospack.get_path('trafficsigns') + '/models/DeepLeNet-5_CLAHE_AUG(v2).h5'
+
+
+        self.yolov4_model = cv.dnn.readNet(path_model_weights, path_model_config) # DETECTION MODEL
         # self.yolov4_model.setPreferableBackend(cv.dnn.DNN_BACKEND_CUDA)
         # self.yolov4_model.setPreferableTarget(cv.dnn.DNN_TARGET_CUDA)
-        self.recognition_model = load_model('DeepLeNet-5_CLAHE_AUG(v2).h5') # RECOGNITION MODEL
+        self.recognition_model = load_model(path_recognition_model) # RECOGNITION MODEL
 
         #get last layers names
         self.output_layers = self.yolov4_model.getUnconnectedOutLayersNames()

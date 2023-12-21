@@ -37,6 +37,9 @@ Une fois tous les modules nécessaires compilés et installés, le projet contie
 - Contrôle du véhicule : `rosrun control control.py src/bringup/config/circulation4-2.yml`
 - Interface de test des directions en intersection : `rosrun direction signTransmit.py`
 
+
+roslaunch bringup distance_extractor.launch  no_lights_arg:=false no_signs_arg:=false no_directions_arg:=true
+
 Tous les noeuds peuvent être lancés en même temps avec la commande:
 ```bash
 roslaunch bringup utac_in_sim.launch
