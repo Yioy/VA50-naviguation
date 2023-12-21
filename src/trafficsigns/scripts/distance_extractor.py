@@ -304,6 +304,22 @@ class DistanceExtractor (object):
 		cv.waitKey(5)
 
 if __name__ == "__main__":
+
+	# no_lights = "--no-lights" in sys.argv
+
+	no_lights = rospy.get_param("~no_lights", True)
+	no_signs = rospy.get_param("~no_signs", True)
+	no_directions = rospy.get_param("~no_directions", True)
+
+	parameterfile_path = rospy.get_param("~config_file", None)
+
+	print("Node started with parameters :")
+	print(f"no_lights : {no_lights}")
+	print(f"no_signs : {no_signs}")
+	print(f"no_directions : {no_directions}")
+	print(f"config_file : {parameterfile_path}")
+
+
 	if len(sys.argv) < 2:
 		print(f"Usage : {sys.argv[0]} <parameter-file> [--no-lights] [--no-signs] [--no-directions]")
 	else:
@@ -311,6 +327,7 @@ if __name__ == "__main__":
 			parameters = yaml.load(parameterfile, yaml.Loader)
 		rospy.init_node("traffic_sign_distances")
 		#print(sys.argv[2])
-		node = DistanceExtractor(parameters, "--no-lights" in sys.argv, "--no-signs" in sys.argv, "--no-directions" in sys.argv)
+		# node = DistanceExtractor(parameters, "--no-lights" in sys.argv, "--no-signs" in sys.argv, "--no-directions" in sys.argv)
+		node = DistanceExtractor(parameters, no_lights, no_signs, no_directions)
 		rospy.spin()
 
