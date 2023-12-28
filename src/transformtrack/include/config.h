@@ -27,7 +27,7 @@ namespace config {
 		constexpr char trafficsigns_viz_topic[] = "/navigation/viz/trafficsigns";
 		constexpr char transform_service_name[] = "/circulation/TransformBatch";
 		constexpr char drop_service_name[] = "/circulation/DropVelocity";
-		constexpr char road_frame[] = "base_link";
+		constexpr char road_frame[] = "road_frame";
 		constexpr char world_frame[] = "odom";
 		constexpr bool visualize = true;
 		constexpr bool time_discrepancy = false;

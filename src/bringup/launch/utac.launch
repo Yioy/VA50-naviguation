@@ -9,9 +9,12 @@
 
   <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
 
-  <!-- Node for tf_to_twist -->
+  <!-- Nodes for Real version -->
   <node pkg="dev_tools" type="tf_to_twist_node" name="tf_to_twist" output="screen" if="$(eval arg('version') == 'Real')"/>
   <node pkg="dev_tools" type="sim_camera_info.bash" name="sim_camera_info" output="screen" if="$(eval arg('version') == 'Real')"/>
+  <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_pub_road_frame" args="0 0 0 -1.570796 0 0 base_footprint road_frame" />
+
+
 
   <!-- Node for transformtrack -->
   <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />

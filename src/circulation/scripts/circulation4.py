@@ -1016,9 +1016,9 @@ class TrajectoryExtractorNode (object):
 											np.ones((forward_distance.size, 1)) * self.parameters["fuzzy-lines"]["centers"]["parallel-angles"][0]))
 		best_line_index, best_x, best_score = self.lane_system.fuzzy_best(single_line_variables)
 
-		rospy.loginfo(f"Best single line score {best_score}")
+		rospy.logdebug(f"Best single line score {best_score}")
 		if best_score < self.parameters["fuzzy-lines"]["single-line-selection-threshold"]:
-			rospy.logerr("No viable single line detected")
+			rospy.logdebug("No viable single line detected")
 			return None, None
 		else:
 			return best_line_index, best_score

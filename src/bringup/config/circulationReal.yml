@@ -22,7 +22,7 @@ node:
   transform-service-name: /circulation/TransformBatch      # Transform service address
   drop-service-name: /circulation/DropVelocity             # Transform service data drop address. To be used ONLY by circulation
 
-  road-frame: base_link                                    # Reference frame for the vehicle. (X, Y) is the ground / road plane, Z points upward, the origin in right underneath the vehicle
+  road-frame: road_frame                                    # Reference frame for the vehicle. (X, Y) is the ground / road plane, Z points upward, the origin in right underneath the vehicle
   world-frame: odom                                         # Fixed frame of reference
 
   visualize: true                                          # Enable visualizations
