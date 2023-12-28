@@ -11,6 +11,7 @@
 
   <!-- Node for tf_to_twist -->
   <node pkg="dev_tools" type="tf_to_twist_node" name="tf_to_twist" output="screen" if="$(eval arg('version') == 'Real')"/>
+  <node pkg="dev_tools" type="sim_camera_info.bash" name="sim_camera_info" output="screen" if="$(eval arg('version') == 'Real')"/>
 
   <!-- Node for transformtrack -->
   <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 rostopic pub /forwardCamera/camera_info sensor_msgs/CameraInfo "header:
   seq: 0
   stamp: {secs: 0, nsecs: 0}
