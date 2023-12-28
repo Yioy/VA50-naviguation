@@ -12,10 +12,10 @@ namespace config {
 		constexpr char trajectory_node_name[] = "trajectory";
 		constexpr char transform_node_name[] = "transform_batch_server";
 		constexpr char visualization_node_name[] = "visualization";
-		constexpr char image_topic[] = "/forwardCamera/image_raw";
+		constexpr char image_topic[] = "/zoe2/sensors/cameras/front_top/image_raw";
 		constexpr char camerainfo_topic[] = "/forwardCamera/camera_info";
-		constexpr char velocity_topic[] = "/ZOE2UTBM/car/velocity";
-		constexpr char pointcloud_topic[] = "/lidar";
+		constexpr char velocity_topic[] = "/dev_tools/twist_from_tf";
+		constexpr char pointcloud_topic[] = "/zoe2/sensors/lidars/middle";
 		constexpr char trajectory_topic[] = "/navigation/trajectory";
 		constexpr char direction_topic[] = "/navigation/direction";
 		constexpr char traffic_sign_topic[] = "/navigation/traffic_sign";
@@ -28,7 +28,7 @@ namespace config {
 		constexpr char transform_service_name[] = "/circulation/TransformBatch";
 		constexpr char drop_service_name[] = "/circulation/DropVelocity";
 		constexpr char road_frame[] = "base_link";
-		constexpr char world_frame[] = "map";
+		constexpr char world_frame[] = "odom";
 		constexpr bool visualize = true;
 		constexpr bool time_discrepancy = false;
 	}

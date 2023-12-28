@@ -1,6 +1,6 @@
 <launch>
 
-  <arg name="config_version" default="4-2"/>
+  <arg name="version" default="4-2" doc="Version to use (currently supported: 4-2, Real" />
   <arg name="no_lights" default="true"/>
   <arg name="no_signs" default="true"/>
   <arg name="no_directions" default="true"/>
@@ -9,18 +9,21 @@
 
   <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
 
+  <!-- Node for tf_to_twist -->
+  <node pkg="dev_tools" type="tf_to_twist_node" name="tf_to_twist" output="screen" if="$(eval arg('version') == 'Real')"/>
+
   <!-- Node for transformtrack -->
   <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />
 
   <!-- Node for circulation -->
   <include file="$(find bringup)/launch/circulation.launch">
-      <arg name="config_file" value="$(find bringup)/config/circulation$(arg config_version).yml" />
+      <arg name="config_file" value="$(find bringup)/config/circulation$(arg version).yml" />
   </include>
 
   <!-- Argument to control whether to launch trafficsigns node -->
   <group if="$(arg launch_trafficsigns)">
     <include file="$(find bringup)/launch/distance_extractor.launch">
-      <arg name="config_file" value="$(find bringup)/config/circulation$(arg config_version).yml" />
+      <arg name="config_file" value="$(find bringup)/config/circulation$(arg version).yml" />
       <arg name="no_lights" value="$(arg no_lights)" />
       <arg name="no_signs" value="$(arg no_signs)" />
       <arg name="no_directions" value="$(arg no_directions)" />

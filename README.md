@@ -55,7 +55,7 @@ Le projet utilise un même fichier de paramètres au format YAML :
 
 Les changements de visibilité entre les différentes versions impliquent la modification de quelques informations a priori (région d’intérêt, quelques paramètres de logique floue, …)
 
-Si le fichier de configuration est modifié, il est nécessaire de lancer `python3 genconfig <fichier de config> transformtrack` pour regénérer la config des nodes C++,
+Si le fichier de configuration est modifié, il est nécessaire de lancer `python3 genconfig.py <fichier de config> transformtrack` pour regénérer la config des nodes C++,
 puis de les recompiler avec `./build_circulation.sh build`
 
 ## Autres

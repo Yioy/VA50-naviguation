@@ -25,7 +25,7 @@ int main(int argc, char** argv){
   tf2_ros::Buffer tfBuffer;
   tf2_ros::TransformListener tfListener(tfBuffer);
 
-  ros::Publisher twist_pub = node.advertise<geometry_msgs::TwistStamped>("twist", 10);
+  ros::Publisher twist_pub = node.advertise<geometry_msgs::TwistStamped>("/dev_tools/twist_from_tf", 10);
 
   ros::Rate rate(frequency);
 

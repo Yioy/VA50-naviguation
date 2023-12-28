@@ -316,6 +316,10 @@ class TrajectoryExtractorNode (object):
 		self.drop_service = rospy.ServiceProxy(self.parameters["node"]["drop-service-name"], DropVelocity, persistent=True)
 		self.transform_service_lock = Lock()
 
+		# init other attributes
+		self.camera_to_image = None
+		self.distortion_parameters = None
+
 		# Initialize the topic subscribers (last to avoid too early messages while other things are not yet initialized)
 		self.image_subscriber = rospy.Subscriber(self.parameters["node"]["image-topic"], Image, self.callback_image, queue_size=1, buff_size=2**28)
 		self.camerainfo_subscriber = rospy.Subscriber(self.parameters["node"]["camerainfo-topic"], CameraInfo, self.callback_camerainfo, queue_size=1)
@@ -349,6 +353,9 @@ class TrajectoryExtractorNode (object):
 		if self.is_panic():
 			return
 		
+		if self.camera_to_image is None:
+			return
+		
 		# Extract the image and the timestamp at which it was taken, critical for synchronisation
 		rospy.logdebug("------ Received an image")
 		image = np.frombuffer(message.data, dtype=np.uint8).reshape((message.height, message.width, 3))
@@ -359,12 +366,18 @@ class TrajectoryExtractorNode (object):
 		"""Callback called when a new camera info message is published
 		   - message : sensor_msgs.msg.CameraInfo : Message with metadata about the camera
 		"""
+		# disable callback after first call
+		self.camerainfo_subscriber.unregister()
+
 		# fish2bird only supports the camera model defined by Christopher Mei
 		if message.distortion_model.lower() != "mei":
 			rospy.logerr(f"Bad distortion model : {message.distortion_model}")
 			return
+		
 		self.camera_to_image = np.asarray(message.P).reshape((3, 4))[:, :3]
 		self.distortion_parameters = message.D
+		
+		rospy.loginfo("Got camerainfo, ready to process images")
 	
 	def callback_direction(self, message):
 		"""Callback called when a direction is sent from the navigation nodes
