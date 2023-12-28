@@ -871,6 +871,11 @@ class TrajectoryExtractorNode (object):
 		(forward_distance, left_line_distance, right_line_distance, line_lengths, parallel_distance, parallel_angles
 			) = trajectorybuild.line_parameters(target_lines, self.parameters["environment"]["lane-width"], main_angle, (self.parameters["birdeye"]["roi-y"] + self.parameters["fuzzy-lines"]["local-area-y"]) / 2, self.parameters["fuzzy-lines"]["vertical-angle-tolerance"])
 
+		if forward_distance.shape[0] == 0:
+			rospy.logwarn("No full line candidate found")
+			return None, None, None, None
+			
+
 		# Cruise mode : Detect the current lane, and fall back to a single marking if no sufficiently correct full lane is found
 		if self.navigation_mode == NavigationMode.CRUISE:
 			left_line_index, right_line_index, left_line_score, right_line_score = self.detect_full_lane(forward_distance, left_line_distance, right_line_distance, line_lengths, parallel_distance, parallel_angles, fallback=True)
