@@ -29,13 +29,13 @@ Le projet comprend 5 packages ROS :
 
 ## Exécution
 
-La méthode la plus pratique pour lancer les nodes est la suivante. Cela peut lancer tous les nodes, en fonction des valeurs par défaut des arguments définies dans le fichier [utac.launch](src/bringup/launch/utac.launch)
+La méthode la plus pratique pour lancer les nodes est la suivante. Cela lance les nodes désirés. Par défaut, seul transformtrack est lancé, dans le mode simulation, voir [utac.launch](src/bringup/launch/utac.launch).
 ```bash
 roslaunch bringup utac.launch
 ```
-Il est aussi possible de spécifier des arguments: pour déscativer certains nodes ou certaines fonctionnalités:
+Il est aussi possible de spécifier des arguments: pour lancer des nodes supplémentaires ou des fonctionnalités supplémentaires. Exemple:
 ```bash
-roslaunch bringup utac.launch no_lights:=true no_signs:=false no_directions:=true launch_trafficsigns:=true
+roslaunch bringup utac.launch version:=Real launch_circulation:=true launch_trafficsigns:=true signs:=true
 ```
 Remarque: pour l'instant, le roslaunch global ne lance pas le contrôle. 
 

@@ -18,7 +18,7 @@ int main(int argc, char** argv){
   double frequency;
 
   // Get parameters
-  node.param<std::string>("source_frame", source_frame, "base_link");
+  node.param<std::string>("source_frame", source_frame, "road_frame");
   node.param<std::string>("target_frame", target_frame, "odom");
   node.param<double>("frequency", frequency, 5.0);
 
@@ -41,7 +41,7 @@ int main(int argc, char** argv){
     ROS_INFO_ONCE("Succesfully getting transforms from %s to %s...", source_frame.c_str(), target_frame.c_str());
     }
     catch (tf2::TransformException &ex) {
-      ROS_WARN("%s",ex.what());
+      ROS_WARN_THROTTLE(5.0, "%s",ex.what());
       rate.sleep();
       continue;
     }

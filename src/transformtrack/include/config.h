@@ -134,6 +134,9 @@ namespace config {
 		constexpr int circulation_trajectory_id = 1;
 		constexpr int trafficsigns_id = 2;
 	}
+	namespace distance_extractor {
+		constexpr char traffic_sign_detector_model[] = "yolo_v4_tiny";
+	}
 }
 
 #endif

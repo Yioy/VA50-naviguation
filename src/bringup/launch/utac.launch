@@ -1,11 +1,15 @@
 <launch>
 
   <arg name="version" default="4-2" doc="Version to use (currently supported: 4-2, Real" />
-  <arg name="no_lights" default="true"/>
-  <arg name="no_signs" default="true"/>
-  <arg name="no_directions" default="true"/>
 
-  <arg name="launch_trafficsigns" default="false" />
+  <!-- Arguments to control which nodes to launch -->
+  <arg name="launch_circulation" default="false" doc="Wether or not to launch the circulation node" />
+  <arg name="launch_trafficsigns" default="false" doc="Wether or not to launch the trafficsigns node" />
+
+  <!-- Arguments for distance_extractor -->
+  <arg name="lights" default="false"/>
+  <arg name="signs" default="false"/>
+  <arg name="directions" default="false"/>
 
   <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
 
@@ -14,23 +18,23 @@
   <node pkg="dev_tools" type="sim_camera_info.bash" name="sim_camera_info" output="screen" if="$(eval arg('version') == 'Real')"/>
   <node pkg="tf2_ros" type="static_transform_publisher" name="static_tf_pub_road_frame" args="0 0 0 -1.570796 0 0 base_footprint road_frame" />
 
-
-
   <!-- Node for transformtrack -->
   <node pkg="transformtrack" type="transformtrack_node" name="transform_batch_server" output="screen" />
 
   <!-- Node for circulation -->
-  <include file="$(find bringup)/launch/circulation.launch">
-      <arg name="config_file" value="$(find bringup)/config/circulation$(arg version).yml" />
-  </include>
+  <group if="$(arg launch_circulation)">
+    <include file="$(find bringup)/launch/circulation.launch">
+        <arg name="config_file" value="$(find bringup)/config/circulation$(arg version).yml" />
+    </include>
+  </group>
 
   <!-- Argument to control whether to launch trafficsigns node -->
   <group if="$(arg launch_trafficsigns)">
     <include file="$(find bringup)/launch/distance_extractor.launch">
       <arg name="config_file" value="$(find bringup)/config/circulation$(arg version).yml" />
-      <arg name="no_lights" value="$(arg no_lights)" />
-      <arg name="no_signs" value="$(arg no_signs)" />
-      <arg name="no_directions" value="$(arg no_directions)" />
+      <arg name="no_lights" value="$(eval arg('lights') == false)" />
+      <arg name="no_signs" value="$(eval arg('signs') == false)" />
+      <arg name="no_directions" value="$(eval arg('directions') == false)" />
     </include>
   </group>
 

@@ -378,7 +378,7 @@ class TrajectoryExtractorNode (object):
 		self.camera_to_image = np.asarray(message.P).reshape((3, 4))[:, :3]
 		self.distortion_parameters = message.D
 		
-		rospy.loginfo("Got camerainfo, ready to process images")
+		rospy.loginfo("Got camerainfo!")
 	
 	def callback_direction(self, message):
 		"""Callback called when a direction is sent from the navigation nodes

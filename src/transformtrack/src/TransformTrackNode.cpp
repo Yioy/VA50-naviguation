@@ -43,7 +43,7 @@ void TransformTrackNode::run() {
 			auto message = m_tf_buffer.lookupTransform(config::node::world_frame, config::node::road_frame, ros::Time(0));
 			got_tf = true;
 		} catch (tf2::TransformException &exc) {
-			ROS_WARN("Failed to retrieve the transform from %s to %s :\n\t%s. Retrying...", config::node::world_frame, config::node::road_frame, exc.what());
+			ROS_WARN_ONCE("Failed to retrieve the transform from %s to %s :\n\t%s. Retrying...", config::node::world_frame, config::node::road_frame, exc.what());
 		}
 		ros::Duration(0.5).sleep();
 	}
