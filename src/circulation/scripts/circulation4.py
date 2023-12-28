@@ -354,6 +354,7 @@ class TrajectoryExtractorNode (object):
 			return
 		
 		if self.camera_to_image is None:
+			rospy.logwarn_once("No camera info received yet, skipping images until the first one is received")
 			return
 		
 		# Extract the image and the timestamp at which it was taken, critical for synchronisation
