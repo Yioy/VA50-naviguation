@@ -89,7 +89,7 @@ class DistanceExtractor (object):
 		self.image_subscriber = rospy.Subscriber(self.image_topic, Image, self.callback_image, queue_size=1, buff_size=2**28)
 		self.camerainfo_subscriber = rospy.Subscriber(self.camerainfo_topic, CameraInfo, self.callback_camerainfo)
 		self.pointcloud_subscriber = rospy.Subscriber(self.pointcloud_topic, PointCloud2, self.callback_pointcloud)
-		self.visualization_publisher = rospy.Publisher(self.visualization_topic, Image, queue_size=10)
+		#self.visualization_publisher = rospy.Publisher(self.visualization_topic, Image, queue_size=10)
 		
 
 		rospy.loginfo("Everything ready")	
@@ -230,6 +230,7 @@ class DistanceExtractor (object):
 
 		# Get the annotated image and detected traffic signs labels and coordinates
 		traffic_signs = []
+		img = cv.cvtColor(img, cv.COLOR_RGB2BGR)
 		img, signs = self.traffic_sign_detector.get_traffic_sign(img)
 		traffic_signs.extend(signs)
 			
@@ -279,9 +280,9 @@ class DistanceExtractor (object):
 			message.traffic_signs = sign_messages
 			self.traffic_sign_publisher.publish(message)
 		
-		image_message = Image(height=img.shape[0], width=img.shape[1], data=tuple(img.flatten()))
-		self.visualization_publisher.publish(image_message)
-		img = cv.cvtColor(img, cv.COLOR_RGB2BGR)
+		#image_message = Image(height=img.shape[0], width=img.shape[1], data=tuple(img.flatten()))
+		#self.visualization_publisher.publish(image_message)
+		#img = cv.cvtColor(img, cv.COLOR_RGB2BGR)
 		cv.imshow('Panneaux', img)
 		cv.waitKey(5)
 

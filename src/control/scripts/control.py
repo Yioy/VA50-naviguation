@@ -70,6 +70,7 @@ class PurePursuitController (object):
         self.no_right = False
         self.no_left = False
         self.no_straight = False
+        self.trueDirection = None
 
         # Conserve all the states in memory
         # self.states = States()
@@ -161,7 +162,7 @@ class PurePursuitController (object):
     def callback_traffic_sign(self, data):
         """Callback called when a new traffic sign is detected and received in the traffic sign topic"""
         rospy.loginfo("Received a new traffic sign")
-        trueDirection = None
+
         for sign in data.traffic_signs:
             # Filter out traffic signs where a stop is not needed (we chosed to stop the car only for Yields and Stops)
             if sign.type in ('stop', 'yield', 'right-priority', 'intersection-with-priority'):
@@ -182,17 +183,17 @@ class PurePursuitController (object):
             #time to stop and restarts to follow the direction
             elif sign.type == "city-signboard":
 
-                if sign.direction is None or sign.cityName != self.cityName:
+                if sign.direction is None or sign.cityName != self.cityName.upper():
                     continue
-                trueDirection = sign.direction
+                self.trueDirection = sign.direction
             
             # Direction detected according to direction panels
             elif sign.type ==  "direction-turnRight":
-                trueDirection = "right"
+                self.trueDirection = "right"
             elif sign.type == "direction-turnLeft":
-                trueDirection = "left"
+                self.trueDirection = "left"
             elif sign.type == "direction-straight":
-                trueDirection = "straight"
+                self.trueDirection = "straight"
             # Set interdiction with prohibition panel and direction panel
             elif sign.type in ('leftOrRight', 'no-entry', 'no-motor-vehicules', 'no-through-road', 'no-vehicules'):
                 self.no_straight = True
@@ -201,23 +202,24 @@ class PurePursuitController (object):
             elif sign.type in ("no-left-turn", "direction-straightOrRight"):
                 self.no_left = True
 
-
         # Direction according to interdiction. The priority is set to straight ahead
         if self.no_straight:
             if self.no_right:
-                trueDirection = "left"
+                self.trueDirection = "left"
             elif self.no_left:
-                trueDirection = "right"
+                self.trueDirection = "right"
             else:
                 print("no direction sign detected, no information whether left or right")
         elif self.no_right:
-            if trueDirection is None or self.no_left:
-                trueDirection = "straight"
+            if self.trueDirection is None or self.no_left:
+                self.trueDirection = "straight"
         else:
-            if trueDirection is None:
-                trueDirection = "straight"
+            if self.trueDirection is None:
+                self.trueDirection = "straight"
+        
+        print(self.trueDirection)
            
-        self.chooseDirection(trueDirection)
+        self.chooseDirection(self.trueDirection)
 
             # Filter traffic signs where a direction is mandatory and publish on the direction topic
             # elif sign.type in ('right-only', 'keep-right'):
