@@ -48,7 +48,6 @@ if [[ $1 == cython ]] || [[ $2 == cython ]] || [[ $3 == cython ]]; then
 	cp src/circulation/scripts/fuzzylines*.so devel/lib/python3/dist-packages/
 	cp src/circulation/scripts/trajectorybuild*.so devel/lib/python3/dist-packages/
 	cp src/trafficsigns/scripts/traffic_sign_detection.py devel/lib/python3/dist-packages/
-	cp src/trafficsigns/scripts/traffic_direction_detection.py devel/lib/python3/dist-packages/
 fi
 
 if [[ $1 == pack ]] || [[ $2 == pack ]] || [[ $3 == pack ]] || [[ $4 == pack ]]; then

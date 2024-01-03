@@ -36,22 +36,14 @@ from trafficsigns.msg import TrafficSign, TrafficSignStatus
 from transformtrack.srv import TransformBatch, TransformBatchRequest
 
 from traffic_sign_detection import TrafficSignDetector
-from traffic_light_detection import detect_traffic_lights
-# new line here
-from traffic_direction_detection import TrafficDirectionDetector
 
 
 DISTANCE_SCALE_MIN = 0
 DISTANCE_SCALE_MAX = 160
 
 class DistanceExtractor (object):
-	def __init__(self, parameters, no_lights, no_signs, no_directions):
+	def __init__(self, parameters):
 		self.parameters = parameters
-		self.no_lights = no_lights
-		self.no_signs = no_signs
-
-		#new line hre
-		self.no_directions = no_directions
 
 		self.image_topic = self.parameters["node"]["image-topic"]
 		self.camerainfo_topic = self.parameters["node"]["camerainfo-topic"]
@@ -59,6 +51,7 @@ class DistanceExtractor (object):
 		self.traffic_sign_topic = self.parameters["node"]["traffic-sign-topic"]
 		self.visualization_topic = self.parameters["node"]["trafficsigns-viz-topic"]
 		self.traffic_sign_detector_model = self.parameters["distance_extractor"]["traffic-sign-detector-model"]
+		self.traffic_sign_cities_name = self.parameters["distance_extractor"]["traffic-sign-cities-name"]
 
 		# Initialize the topic publisher
 		self.traffic_sign_publisher = rospy.Publisher(self.traffic_sign_topic, TrafficSignStatus, queue_size=10)
@@ -70,13 +63,7 @@ class DistanceExtractor (object):
 
 		# Initialize the traffic sign detector
 		self.traffic_sign_detector = None
-		if not self.no_signs:
-			self.traffic_sign_detector = TrafficSignDetector(self.traffic_sign_detector_model)
-
-		# new line here
-		self.traffic_direction_detector = None
-		if not self.no_directions:
-			self.traffic_direction_detector = TrafficDirectionDetector()
+		self.traffic_sign_detector = TrafficSignDetector(self.traffic_sign_detector_model, self.traffic_sign_cities_name)
 
 		# At first everything is null, no image can be produce if one of those is still null
 		self.image_frame = None
@@ -103,6 +90,7 @@ class DistanceExtractor (object):
 		self.camerainfo_subscriber = rospy.Subscriber(self.camerainfo_topic, CameraInfo, self.callback_camerainfo)
 		self.pointcloud_subscriber = rospy.Subscriber(self.pointcloud_topic, PointCloud2, self.callback_pointcloud)
 		self.visualization_publisher = rospy.Publisher(self.visualization_topic, Image, queue_size=10)
+		
 
 		rospy.loginfo("Everything ready")	
 
@@ -242,15 +230,8 @@ class DistanceExtractor (object):
 
 		# Get the annotated image and detected traffic signs labels and coordinates
 		traffic_signs = []
-		if not self.no_signs:
-			img, signs = self.traffic_sign_detector.get_traffic_signs(img)
-			traffic_signs.extend(signs)
-		if not self.no_lights:
-			img, traffic_lights = detect_traffic_lights(img)
-			traffic_signs.extend(traffic_lights)
-		if not self.no_directions:
-			img, directions = self.traffic_direction_detector.get_traffic_direction(img)
-			traffic_signs.extend(directions)
+		img, signs = self.traffic_sign_detector.get_traffic_sign(img)
+		traffic_signs.extend(signs)
 			
 		# Visualize the lidar data projection onto the image
 		for i, point in enumerate(lidar_coordinates_in_image.T):
@@ -264,11 +245,11 @@ class DistanceExtractor (object):
 			message.header = Header(seq=self.status_seq, stamp=img_stamp, frame_id=self.parameters["node"]["road-frame"])
 			self.status_seq += 1
 			sign_messages = []
-
 			for sign in traffic_signs:
 				result = TrafficSign()
-				result.category = sign.category
 				result.type = sign.type
+				result.cityName = sign.cityName
+				result.direction = sign.direct
 				result.confidence = sign.confidence
 
 				relevant_points_filter = ((sign.x <= lidar_coordinates_in_image[0]) & (lidar_coordinates_in_image[0] <= sign.x + sign.width) &
@@ -307,24 +288,17 @@ class DistanceExtractor (object):
 if __name__ == "__main__":
 
 	# no_lights = "--no-lights" in sys.argv
-
-	no_lights = rospy.get_param("no_lights", False)
-	no_signs = rospy.get_param("no_signs", False)
-	no_directions = rospy.get_param("no_directions", False)
 	paramfile_path = rospy.get_param("config_file", None)
 
 	if paramfile_path is not None:
 
 		rospy.loginfo("Starting node with the following ROS params: ")
-		print(f"no_lights : {no_lights}")
-		print(f"no_signs : {no_signs}")
-		print(f"no_directions : {no_directions}")
 		print(f"config_file : {paramfile_path}")
 
 		with open(paramfile_path, "r") as parameterfile:
 			parameters = yaml.load(parameterfile, yaml.Loader)
 		rospy.init_node("traffic_sign_distances")
-		node = DistanceExtractor(parameters, no_lights, no_signs, no_directions)
+		node = DistanceExtractor(parameters)
 		rospy.spin()
 
 	else:

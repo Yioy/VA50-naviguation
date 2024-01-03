@@ -141,4 +141,5 @@ visualization:
   trafficsigns-id: 2
 
 distance_extractor:
-  traffic-sign-detector-model: yolo_v4_tiny
+  traffic-sign-detector-model: best.pt
+  traffic-sign-cities-name: cities.csv
