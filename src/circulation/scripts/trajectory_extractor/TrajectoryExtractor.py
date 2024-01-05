@@ -86,6 +86,40 @@ class TrajectoryExtractor (object):
 		self.lane_system = fuzzylines.FuzzySystem(line_centers, line_malus, line_output_centers, self.parameters["fuzzy-lines"]["base-score"])
 		
 
+	def set_next_direction(self, direction):
+		"""Set the next direction to follow at the next intersection"""
+
+		if direction == enums.Direction.FORWARD:
+			rospy.loginfo("Updated next direction to FORWARD")
+
+			self.visualisation.print_message("Manually set next direction : FORWARD")
+		elif direction == enums.Direction.LEFT:
+			rospy.loginfo("Updated next direction to LEFT")
+			self.visualisation.print_message("Manually set next direction : LEFT")
+
+		elif direction == enums.Direction.RIGHT:
+			rospy.loginfo("Updated next direction to RIGHT")
+			self.visualisation.print_message("Manually set next direction : RIGHT")
+
+		if direction == enums.Direction.DOUBLE_LANE:
+			self.next_double_lane = True
+		elif direction == enums.Direction.FORCE_INTERSECTION:
+			self.force_intersection()
+		else:
+			self.next_direction = direction
+	
+	def force_intersection(self):
+		"""Force the node to enter intersection mode"""
+		self.visualisation.print_message("Manually force intersection mode")
+
+		if self.next_direction == enums.Direction.LEFT:
+			self.switch_intersection(enums.NavigationMode.INTERSECTION_LEFT, rospy.get_rostime(), 0)
+		elif self.next_direction == enums.Direction.RIGHT:
+			self.switch_intersection(enums.NavigationMode.INTERSECTION_RIGHT, rospy.get_rostime(), 0)
+		elif self.next_direction == enums.Direction.FORWARD:
+			self.switch_intersection(enums.NavigationMode.INTERSECTION_FORWARD, rospy.get_rostime(), 0)
+		
+
 	def preprocess_image(self, image, target_to_camera):
 		"""Preprocess the image receive from the camera
 		   - image            : ndarray[y, x, 3] : RGB image received from the camera
@@ -946,3 +980,21 @@ class TrajectoryExtractor (object):
 		endtime = time.time()
 		self.time_buffer.append(endtime - starttime)
 		rospy.logdebug(f"Image handled in {endtime - starttime :.3f} seconds (mean {np.mean(self.time_buffer):.3f}) seconds")
+	
+	#                           ╔═══════════════╗                           #
+	# ══════════════════════════╣ VISUALISATION ╠══════════════════════════ #
+	#                           ╚═══════════════╝                           #
+
+	def viz_intersection_mode(self, viz, scale_factor, image_timestamp, remaining_distance):
+		"""Visualization in intersection navigation mode
+		   - viz                : ndarray[y, x] : Bird-eye view visualization image
+		   - scale_factor       : float         : Scale factor from pixel to metric lengths
+		   - image_timestamp    : rospy.Time    : Timestamp to visualize at
+		   - remaining_distance : float         : Distance until reaching the rejoin distance
+		"""
+		transforms, distances = self.transform_service_handler.get_map_transforms([self.current_trajectory_timestamp], image_timestamp)
+		local_trajectory = (transforms[0] @ np.vstack((self.current_trajectory, np.zeros((1, self.current_trajectory.shape[1])), np.ones((1, self.current_trajectory.shape[1])))))[:2]
+		viz_trajectory = self.target_to_birdeye(viz, local_trajectory)
+		cv.polylines(viz, [viz_trajectory.transpose().astype(int)], False, (60, 255, 255), 2)
+		if remaining_distance is not None:
+			cv.circle(viz, (viz.shape[1]//2, viz.shape[0]), int(remaining_distance / scale_factor), (0, 255, 255), 1)

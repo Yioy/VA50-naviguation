@@ -89,11 +89,6 @@ class TrajectoryExtractorNode (object):
 			rospy.loginfo_once("Waiting for camerainfo...")
 		rospy.loginfo("Got camerainfo!")
 
-		# get camera_to_image and distortion_parameters
-		camera_to_image = np.asarray(self.camera_info_msg.P).reshape((3, 4))[:, :3]
-		distortion_parameters = self.camera_info_msg.D
-
-
 		# Initialize the transformation listener
 		self.tf_buffer = tf2_ros.Buffer(rospy.Duration(120))
 		self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
@@ -107,17 +102,16 @@ class TrajectoryExtractorNode (object):
 			rospy.loginfo_once("Waiting for transform from the camera to the vehicle frame...")
 
 
+		# get camera_to_image and distortion_parameters
+		camera_to_image = np.asarray(self.camera_info_msg.P).reshape((3, 4))[:, :3]
+		distortion_parameters = self.camera_info_msg.D
+
+		# Initialize the trajectory extractor
 		self.trajectory_extractor = TrajectoryExtractor(
 			self.parameters,
 			camera_to_image,
 			distortion_parameters
 			)
-
-
-
-
-
-
 
 
 		# Initialize the topic subscribers (last to avoid too early messages while other things are not yet initialized)
@@ -167,32 +161,7 @@ class TrajectoryExtractorNode (object):
 		"""Callback called when a direction is sent from the navigation nodes
 		   - message : std_msgs.msg.Uint8 : Message with the direction (same values as enums.Direction.FORWARD, .LEFT and .RIGHT)
 		"""
-		if message.data == enums.Direction.FORWARD:
-			rospy.loginfo("Updated next direction to FORWARD")
-			self.visualisation.print_message("Manually set next direction : FORWARD")
-		elif message.data == enums.Direction.LEFT:
-			rospy.loginfo("Updated next direction to LEFT")
-			self.visualisation.print_message("Manually set next direction : LEFT")
-		elif message.data == enums.Direction.RIGHT:
-			rospy.loginfo("Updated next direction to RIGHT")
-			self.visualisation.print_message("Manually set next direction : RIGHT")
-		elif message.data == enums.Direction.DOUBLE_LANE:
-			rospy.logdebug("Next intersection has a double lane")
-			self.next_double_lane = True
-			return
-		elif message.data == enums.Direction.FORCE_INTERSECTION:
-			self.visualisation.print_message("Manually force intersection mode")
-			if self.next_direction == enums.Direction.LEFT:
-				self.switch_intersection(enums.NavigationMode.INTERSECTION_LEFT, rospy.get_rostime(), 0)
-			elif self.next_direction == enums.Direction.RIGHT:
-				self.switch_intersection(enums.NavigationMode.INTERSECTION_RIGHT, rospy.get_rostime(), 0)
-			elif self.next_direction == enums.Direction.FORWARD:
-				self.switch_intersection(enums.NavigationMode.INTERSECTION_FORWARD, rospy.get_rostime(), 0)
-			return
-		else:
-			rospy.logerr(f"Invalid direction ID received : {message.data}")
-			return
-		self.next_direction = message.data
+		self.trajectory_extractor.set_next_direction(enums.NavigationMode.INTERSECTION_DOUBLE_LANE)
 	
 	def callback_trafficsign(self, message):
 		"""Callback called when traffic signs are detected and received
@@ -239,23 +208,7 @@ class TrajectoryExtractorNode (object):
 	#                         ╚══════════════════╝                          #
 
 
-	#                           ╔═══════════════╗                           #
-	# ══════════════════════════╣ VISUALISATION ╠══════════════════════════ #
-	#                           ╚═══════════════╝                           #
 
-	def viz_intersection_mode(self, viz, scale_factor, image_timestamp, remaining_distance):
-		"""Visualization in intersection navigation mode
-		   - viz                : ndarray[y, x] : Bird-eye view visualization image
-		   - scale_factor       : float         : Scale factor from pixel to metric lengths
-		   - image_timestamp    : rospy.Time    : Timestamp to visualize at
-		   - remaining_distance : float         : Distance until reaching the rejoin distance
-		"""
-		transforms, distances = self.get_map_transforms([self.current_trajectory_timestamp], image_timestamp)
-		local_trajectory = (transforms[0] @ np.vstack((self.current_trajectory, np.zeros((1, self.current_trajectory.shape[1])), np.ones((1, self.current_trajectory.shape[1])))))[:2]
-		viz_trajectory = self.trajectory_extractor.target_to_birdeye(viz, local_trajectory)
-		cv.polylines(viz, [viz_trajectory.transpose().astype(int)], False, (60, 255, 255), 2)
-		if remaining_distance is not None:
-			cv.circle(viz, (viz.shape[1]//2, viz.shape[0]), int(remaining_distance / scale_factor), (0, 255, 255), 1)
 	
 	def publish_trajectory(self, trajectory_points, trajectory_timestamp):
 		"""Publish a trajectory on the output topic
