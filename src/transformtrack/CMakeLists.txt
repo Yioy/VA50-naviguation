@@ -139,6 +139,9 @@ add_executable(${PROJECT_NAME}_node
   src/main.cpp
 )
 
+## To generate the messages BEFORE the executables. It's required when messages and executables are in the same package
+add_dependencies(${PROJECT_NAME}_node ${PROJECT_NAME}_generate_messages_cpp)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
