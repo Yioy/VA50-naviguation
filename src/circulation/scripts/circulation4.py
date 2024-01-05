@@ -30,7 +30,6 @@ TROUBLESHOOTING :
 # ═══════════════════════════ BUILT-IN IMPORTS ════════════════════════════ #
 import sys
 import time
-import enum
 import itertools
 import cProfile
 from threading import Lock
@@ -61,202 +60,18 @@ import fish2bird
 import fuzzylines
 import trajectorybuild
 
+
+# TODO organiser
+import trajectory_extractor.circulation_enums as enums
+from trajectory_extractor.IntersectionHint import IntersectionHint
+from trajectory_extractor.TrajectoryVisualizer import TrajectoryVisualizer
+
 # TODO : More resilient lane detection
 # TODO : Autonomous intersection detection
 # TODO : No direction panic mode
 # TODO : Ensure a better base point continuity in trajectories
 
 
-INTERSECTION_SIGNS = ( 
-    'yield', 
-    'stop', 
-    'right-only', 
-    'left-only', 
-    'ahead-only', 
-    'straight-right-only', 
-    'straight-left-only', 
-    'keep-right', 
-    'keep-left',
-)
-
-TURN_SIGNS = (
-	'right-only', 
-    'left-only', 
-    'ahead-only', 
-    'straight-right-only', 
-    'straight-left-only', 
-    'keep-right', 
-    'keep-left',
-)
-
-
-class NavigationMode (enum.Enum):
-	CRUISE = 0
-	INTERSECTION_FORWARD = 110
-	INTERSECTION_LEFT = 111
-	INTERSECTION_RIGHT = 112
-	TURN_LEFT = 113
-	TURN_RIGHT = 114
-	PANIC_CORE_BREACH = 500
-	PANIC_UNSUPPORTED = 501
-	PANIC_EXCEPTION = 502
-	PANIC_NO_DIRECTION = 510
-
-	def is_intersection(self):
-		return self == NavigationMode.INTERSECTION_LEFT or self == NavigationMode.INTERSECTION_RIGHT or self == NavigationMode.INTERSECTION_FORWARD
-
-class Direction:
-	DEAD_END = 0b0000
-	FORWARD = 0b0001
-	LEFT = 0b0010
-	RIGHT = 0b0100
-	DOUBLE_LANE = 0b1000
-	FORCE_INTERSECTION = 0b10000
-
-# class TrajectoryVisualizer (object):
-# 	"""Quick-and-dirty visualization window management
-# 	   There are 2 visualizations, just merge them into one and call cv.imshow"""
-	
-# 	def __init__(self, parameters):
-# 		self.parameters = parameters
-# 		self.lines_publisher = rospy.Publisher(self.parameters["node"]["lines-viz-topic"], Image, queue_size=10)
-# 		self.trajectory_publisher = rospy.Publisher(self.parameters["node"]["trajectory-viz-topic"], Image, queue_size=10)
-
-# 	def update_line_detection(self, be_binary, lines, left_line_index, right_line_index, markings):
-# 		"""Generate and update the left visualization from the preprocessed image and the detected lines and markings
-# 		   - be_binary        : ndarray[y, x]       : Preprocessed camera image (binary edge-detected bird-eye view)
-# 		   - lines            : list<ndarray[2, N]> : Detected discrete curves in the image
-# 		   - left_line_index  : int                 : Index of the left lane marking in the `lines` list, or None
-# 		   - right_line_index : int                 : Index of the right lane marking in the `lines` list, or None
-# 		   - markings         : dict<str, …>        : Dictionary of detected road markings. Currently only supports `crosswalks`
-# 		"""
-# 		line_viz = cv.merge((be_binary, be_binary, be_binary))
-# 		for line in lines:
-# 			cv.polylines(line_viz, [line.astype(int).transpose()], False, (0, 200, 0), 2)
-# 		if left_line_index is not None:
-# 			cv.polylines(line_viz, [lines[left_line_index].astype(int).transpose()], False, (255, 0, 0), 4)
-# 		if right_line_index is not None:
-# 			cv.polylines(line_viz, [lines[right_line_index].astype(int).transpose()], False, (0, 100, 255), 4)
-
-# 		for i, crosswalk in enumerate(markings["crosswalks"]):
-# 			color = ((int(i * 255 / len(markings["crosswalks"])) + 30) % 255, 255, 255)
-# 			for rectangle in crosswalk:
-# 				cv.fillPoly(line_viz, [rectangle.astype(int).transpose()], color)
-
-# 		message = Image(height=line_viz.shape[0], width=line_viz.shape[1], data=tuple(line_viz.flatten()), encoding="rgb8", step=line_viz.shape[1]*line_viz.shape[2])
-# 		self.lines_publisher.publish(message)
-
-# 	def update_trajectory_construction(self, viz):
-# 		"""Update the right visualization with the given image"""
-# 		message = Image(height=viz.shape[0], width=viz.shape[1], data=tuple(viz.flatten()), encoding="rgb8", step=viz.shape[1]*viz.shape[2])
-# 		self.trajectory_publisher.publish(message)
-	
-
-class TrajectoryVisualizer (object):
-	"""Quick-and-dirty visualization window management
-	   There are 2 visualizations, just merge them into one and call cv.imshow"""
-	
-	def __init__(self, parameters):
-		self.line_viz = None
-		self.trajectory_viz = None
-		self.message = None
-		self.message_time = None
-
-	def update_line_detection(self, be_binary, lines, left_line_index, right_line_index, markings):
-		"""Generate and update the left visualization from the preprocessed image and the detected lines and markings
-		   - be_binary        : ndarray[y, x]       : Preprocessed camera image (binary edge-detected bird-eye view)
-		   - lines            : list<ndarray[2, N]> : Detected discrete curves in the image
-		   - left_line_index  : int                 : Index of the left lane marking in the `lines` list, or None
-		   - right_line_index : int                 : Index of the right lane marking in the `lines` list, or None
-		   - markings         : dict<str, …>        : Dictionary of detected road markings. Currently only supports `crosswalks`
-		"""
-		self.line_viz = cv.merge((be_binary, be_binary, be_binary))
-		for line in lines:
-			cv.polylines(self.line_viz, [line.astype(int).transpose()], False, (0, 200, 0), 2)
-		if left_line_index is not None:
-			cv.polylines(self.line_viz, [lines[left_line_index].astype(int).transpose()], False, (255, 0, 0), 4)
-		if right_line_index is not None:
-			cv.polylines(self.line_viz, [lines[right_line_index].astype(int).transpose()], False, (0, 100, 255), 4)
-
-		for i, crosswalk in enumerate(markings["crosswalks"]):
-			color = ((int(i * 255 / len(markings["crosswalks"])) + 30) % 255, 255, 255)
-			for rectangle in crosswalk:
-				cv.fillPoly(self.line_viz, [rectangle.astype(int).transpose()], color)
-
-		self.update()
-
-	def update_trajectory_construction(self, viz):
-		"""Update the right visualization with the given image"""
-		self.trajectory_viz = viz
-		self.update()
-	
-	def print_message(self, message):
-		self.message = message
-		self.message_time = time.time()
-
-	def update(self):
-		"""Update the visualization window"""
-		if self.line_viz is None or self.trajectory_viz is None:
-			return
-		# Just merge both images
-		# full_viz = cv.cvtColor(np.concatenate((self.line_viz, np.zeros((self.line_viz.shape[0], 30, 3), dtype=np.uint8), self.trajectory_viz), axis=1), cv.COLOR_RGB2BGR)
-		full_viz = cv.cvtColor(np.concatenate((self.line_viz, self.trajectory_viz), axis=1), cv.COLOR_RGB2BGR)
-		if self.message is not None:
-			if time.time() > self.message_time + 5:
-				self.message = None
-				self.message_time = None
-			else:
-				cv.putText(full_viz, self.message, (5, 40), cv.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
-		
-		# Uncomment these if your visualization window often stays tiny
-		## cv.namedWindow("viz", cv.WINDOW_NORMAL)
-		## cv.resizeWindow("viz", full_viz.shape[1], full_viz.shape[0])
-		cv.imshow("Trajectoire", full_viz)
-		cv.waitKey(1)
-
-class IntersectionHint (object):
-	"""Hold the position and informations about anything that may indicate an intersection"""
-
-	def __init__(self, category, type, position, timestamp, confidence):
-		self.category = category
-		self.type = type
-		self.positions = [position]
-		self.position_timestamps = [timestamp]
-		self.confidences = [confidence]
-	
-	def merge(self, hint):
-		self.positions.extend(hint.positions)
-		self.position_timestamps.extend(hint.position_timestamp)
-		self.confidences.extend(hint.confidences)
-	
-	def confidence(self):
-		return 1 - np.sqrt(np.sum((1 - np.asarray(self.confidences))**2)) / len(self.confidences)
-
-	def direction_hint(self):
-		if self.category != "trafficsign":
-			return Direction.FORWARD | Direction.LEFT | Direction.RIGHT
-
-		if self.type in ("right-only", "keep-right"):
-			return Direction.RIGHT
-		elif self.type in ("left-only", "keep-left"):
-			return Direction.LEFT
-		elif self.type == "ahead-only":
-			return Direction.FORWARD
-		elif self.type == "straight-left-only":
-			return Direction.FORWARD | Direction.LEFT
-		elif self.type == "straight-right-only":
-			return Direction.FORWARD | Direction.RIGHT
-		else:
-			return Direction.FORWARD | Direction.LEFT | Direction.RIGHT
-
-	def __hash__(self):
-		return id(self)
-
-	def __str__(self):
-		return f"{self.category} > {self.type} : {self.positions}, {self.confidences}"
-	def __repr__(self):
-		return f"{self.category} > {self.type} : {self.positions}, {self.confidences}"
-		
 
 
 class TrajectoryExtractorNode (object):
@@ -278,7 +93,7 @@ class TrajectoryExtractorNode (object):
 		self.trajectory_timestamps = []               # Timestamp each trajectory in `trajectory_buffer` corresponds to
 		self.current_trajectory = None                # Current trajectory, that has been last published or will be next published
 		self.current_trajectory_timestamp = None      # Timestamp the `current_trajectory` corresponds to
-		self.navigation_mode = NavigationMode.CRUISE  # Current navigation mode (cruise, intersection, …)
+		self.navigation_mode = enums.NavigationMode.CRUISE  # Current navigation mode (cruise, intersection, …)
 
 		# Just stats
 		self.time_buffer = []  # History to make performance statistics
@@ -301,7 +116,7 @@ class TrajectoryExtractorNode (object):
 		self.birdeye_range_y = (self.parameters["birdeye"]["roi-y"], self.parameters["birdeye"]["y-range"])
 
 		# Intersection management
-		self.next_direction = Direction.FORWARD
+		self.next_direction = enums.Direction.FORWARD
 		self.next_double_lane = False
 		self.intersection_hints = []
 		self.last_lane_rejoin = None
@@ -382,29 +197,29 @@ class TrajectoryExtractorNode (object):
 	
 	def callback_direction(self, message):
 		"""Callback called when a direction is sent from the navigation nodes
-		   - message : std_msgs.msg.Uint8 : Message with the direction (same values as Direction.FORWARD, .LEFT and .RIGHT)
+		   - message : std_msgs.msg.Uint8 : Message with the direction (same values as enums.Direction.FORWARD, .LEFT and .RIGHT)
 		"""
-		if message.data == Direction.FORWARD:
+		if message.data == enums.Direction.FORWARD:
 			rospy.loginfo("Updated next direction to FORWARD")
 			self.visualisation.print_message("Manually set next direction : FORWARD")
-		elif message.data == Direction.LEFT:
+		elif message.data == enums.Direction.LEFT:
 			rospy.loginfo("Updated next direction to LEFT")
 			self.visualisation.print_message("Manually set next direction : LEFT")
-		elif message.data == Direction.RIGHT:
+		elif message.data == enums.Direction.RIGHT:
 			rospy.loginfo("Updated next direction to RIGHT")
 			self.visualisation.print_message("Manually set next direction : RIGHT")
-		elif message.data == Direction.DOUBLE_LANE:
+		elif message.data == enums.Direction.DOUBLE_LANE:
 			rospy.logdebug("Next intersection has a double lane")
 			self.next_double_lane = True
 			return
-		elif message.data == Direction.FORCE_INTERSECTION:
+		elif message.data == enums.Direction.FORCE_INTERSECTION:
 			self.visualisation.print_message("Manually force intersection mode")
-			if self.next_direction == Direction.LEFT:
-				self.switch_intersection(NavigationMode.INTERSECTION_LEFT, rospy.get_rostime(), 0)
-			elif self.next_direction == Direction.RIGHT:
-				self.switch_intersection(NavigationMode.INTERSECTION_RIGHT, rospy.get_rostime(), 0)
-			elif self.next_direction == Direction.FORWARD:
-				self.switch_intersection(NavigationMode.INTERSECTION_FORWARD, rospy.get_rostime(), 0)
+			if self.next_direction == enums.Direction.LEFT:
+				self.switch_intersection(enums.NavigationMode.INTERSECTION_LEFT, rospy.get_rostime(), 0)
+			elif self.next_direction == enums.Direction.RIGHT:
+				self.switch_intersection(enums.NavigationMode.INTERSECTION_RIGHT, rospy.get_rostime(), 0)
+			elif self.next_direction == enums.Direction.FORWARD:
+				self.switch_intersection(enums.NavigationMode.INTERSECTION_FORWARD, rospy.get_rostime(), 0)
 			return
 		else:
 			rospy.logerr(f"Invalid direction ID received : {message.data}")
@@ -416,7 +231,7 @@ class TrajectoryExtractorNode (object):
 		   - message : trafficsigns.msg.TrafficSignStatus : Message with the detected traffic signs data
 		"""
 		for trafficsign in message.traffic_signs:
-			if trafficsign.type in TURN_SIGNS and trafficsign.confidence > 0.6:
+			if trafficsign.type in enums.TURN_SIGNS and trafficsign.confidence > 0.6:
 				rospy.logdebug(f"New traffic sign : {trafficsign.type}, position at {message.header.stamp} [{trafficsign.x}, {trafficsign.y}, {trafficsign.z}], confidence {trafficsign.confidence}")
 				self.add_intersection_hint(IntersectionHint("trafficsign", trafficsign.type, (trafficsign.x, trafficsign.y, trafficsign.z), message.header.stamp, trafficsign.confidence))
 
@@ -535,7 +350,7 @@ class TrajectoryExtractorNode (object):
 
 	def add_intersection_hint(self, hint):
 		# Skip hints found too close to the last intersection
-		if self.navigation_mode != NavigationMode.CRUISE:
+		if self.navigation_mode != enums.NavigationMode.CRUISE:
 			return
 		
 		if self.last_lane_rejoin is not None:
@@ -623,7 +438,7 @@ class TrajectoryExtractorNode (object):
 		if confidence < self.parameters["intersection"]["min-confidence"]:
 			return None, None
 			
-		direction_hint = Direction.FORWARD | Direction.LEFT | Direction.RIGHT
+		direction_hint = enums.Direction.FORWARD | enums.Direction.LEFT | enums.Direction.RIGHT
 		for hint in hints:
 			direction_hint &= hint.direction_hint()
 		return cluster_distances[selected_cluster], direction_hint
@@ -635,7 +450,7 @@ class TrajectoryExtractorNode (object):
 		   - image_timestamp : rospy.Time : Timestamp to estimate the informations about
 		"""
 		# Don’t estimate the next intersection if the vehicle is already on an intersection
-		if self.navigation_mode != NavigationMode.CRUISE:
+		if self.navigation_mode != enums.NavigationMode.CRUISE:
 			return
 
 		intersection_distance, intersection_directions = self.next_intersection(image_timestamp)
@@ -648,30 +463,30 @@ class TrajectoryExtractorNode (object):
 				if not (self.next_direction & intersection_directions):
 					possible_directions = bin(intersection_directions).count("1")
 					if possible_directions == 0:
-						return self.switch_panic(NavigationMode.PANIC_CORE_BREACH)
+						return self.switch_panic(enums.NavigationMode.PANIC_CORE_BREACH)
 					elif possible_directions == 1:
 						self.next_direction = intersection_directions
-					elif intersection_directions & Direction.FORWARD:
+					elif intersection_directions & enums.Direction.FORWARD:
 						rospy.logwarn("Multiple possible directions, none correspond to the selected direction : go FORWARD")
-						return self.switch_intersection(NavigationMode.INTERSECTION_FORWARD, image_timestamp, intersection_distance)
+						return self.switch_intersection(enums.NavigationMode.INTERSECTION_FORWARD, image_timestamp, intersection_distance)
 					else:
 						# Only left or right, no direction chosen -> wait for input
-						return self.switch_panic(NavigationMode.PANIC_NO_DIRECTION)
+						return self.switch_panic(enums.NavigationMode.PANIC_NO_DIRECTION)
 				
 				# Switch to the relevant intersection mode
-				if self.next_direction == Direction.LEFT:
-					self.switch_intersection(NavigationMode.INTERSECTION_LEFT, image_timestamp, intersection_distance)
-				elif self.next_direction == Direction.RIGHT:
-					self.switch_intersection(NavigationMode.INTERSECTION_RIGHT, image_timestamp, intersection_distance)
-				elif self.next_direction == Direction.FORWARD:
-					self.switch_intersection(NavigationMode.INTERSECTION_FORWARD, image_timestamp, intersection_distance)
+				if self.next_direction == enums.Direction.LEFT:
+					self.switch_intersection(enums.NavigationMode.INTERSECTION_LEFT, image_timestamp, intersection_distance)
+				elif self.next_direction == enums.Direction.RIGHT:
+					self.switch_intersection(enums.NavigationMode.INTERSECTION_RIGHT, image_timestamp, intersection_distance)
+				elif self.next_direction == enums.Direction.FORWARD:
+					self.switch_intersection(enums.NavigationMode.INTERSECTION_FORWARD, image_timestamp, intersection_distance)
 			except Exception as exc:
-				self.switch_panic(NavigationMode.PANIC_EXCEPTION, exc)
+				self.switch_panic(enums.NavigationMode.PANIC_EXCEPTION, exc)
 	
 	def switch_cruise(self, image_timestamp):
 		"""Switch to cruise navigation mode"""
-		self.navigation_mode = NavigationMode.CRUISE
-		self.next_direction = Direction.FORWARD  # Go forward by default
+		self.navigation_mode = enums.NavigationMode.CRUISE
+		self.next_direction = enums.Direction.FORWARD  # Go forward by default
 		self.last_lane_rejoin = image_timestamp
 		self.next_double_lane = False
 		self.current_trajectory = None
@@ -686,11 +501,11 @@ class TrajectoryExtractorNode (object):
 		# Switch mode and do all necessary operations according to the direction
 		rospy.loginfo(f"Switching navigation mode : {navigation_mode}")
 		self.navigation_mode = navigation_mode
-		if self.navigation_mode == NavigationMode.INTERSECTION_FORWARD:
+		if self.navigation_mode == enums.NavigationMode.INTERSECTION_FORWARD:
 			self.build_intersection_forward_trajectory(image_timestamp, intersection_distance)
-		elif self.navigation_mode == NavigationMode.INTERSECTION_RIGHT:
+		elif self.navigation_mode == enums.NavigationMode.INTERSECTION_RIGHT:
 			self.build_intersection_right_trajectory(image_timestamp, intersection_distance)
-		elif self.navigation_mode == NavigationMode.INTERSECTION_LEFT:
+		elif self.navigation_mode == enums.NavigationMode.INTERSECTION_LEFT:
 			self.build_intersection_left_trajectory(image_timestamp, intersection_distance)
 		
 		# Clear the intersection hints for next time
@@ -709,16 +524,16 @@ class TrajectoryExtractorNode (object):
 		   - navigation_mode : NavigationMode : Panic navigation mode to apply
 		   - exc             : Exception      : Exception to display, or None"""
 		self.navigation_mode = navigation_mode
-		if navigation_mode == NavigationMode.PANIC_NO_DIRECTION:
+		if navigation_mode == enums.NavigationMode.PANIC_NO_DIRECTION:
 			rospy.logerr("!!!! PANIC : NO DIRECTION CHOSEN, FORWARD NOT POSSIBLE")
 			rospy.logerr("     ------> CHOOSE A DIRECTION TO CONTINUE")
-		elif navigation_mode == NavigationMode.PANIC_UNSUPPORTED:
+		elif navigation_mode == enums.NavigationMode.PANIC_UNSUPPORTED:
 			rospy.logerr("!!!! PANIC : UNSUPPORTED OPERATION")
 			rospy.logerr("     ------> SORRY")
-		elif navigation_mode == NavigationMode.PANIC_EXCEPTION:
+		elif navigation_mode == enums.NavigationMode.PANIC_EXCEPTION:
 			rospy.logerr("!!!! PANIC : AN EXCEPTION HAPPENED IN A CRITICAL PROCEDURE")
 			rospy.logerr("     ------> SORRY")
-		elif navigation_mode == NavigationMode.PANIC_CORE_BREACH:
+		elif navigation_mode == enums.NavigationMode.PANIC_CORE_BREACH:
 			rospy.logerr("!!!! PANIC : AN UNRECOVERABLE ERROR HAPPENED")
 			rospy.logerr("     ------> SORRY")
 		if exc is not None:
@@ -878,7 +693,7 @@ class TrajectoryExtractorNode (object):
 			
 
 		# Cruise mode : Detect the current lane, and fall back to a single marking if no sufficiently correct full lane is found
-		if self.navigation_mode == NavigationMode.CRUISE:
+		if self.navigation_mode == enums.NavigationMode.CRUISE:
 			left_line_index, right_line_index, left_line_score, right_line_score = self.detect_full_lane(forward_distance, left_line_distance, right_line_distance, line_lengths, parallel_distance, parallel_angles, fallback=True)
 		# Intersection modes, AFTER the rejoin distance has been reached :
 		# The vehicle must now catch the next lane to follow, so to maximize the chances of getting it right,
@@ -1406,7 +1221,7 @@ class TrajectoryExtractorNode (object):
 			
 			# In cruise mode, update the trajectory, intersection status, and publish if there is something to publish
 			# Do NOT refactor this into an `else`, it must also be done when the vehicle just got out of intersection mode
-			if self.navigation_mode == NavigationMode.CRUISE:
+			if self.navigation_mode == enums.NavigationMode.CRUISE:
 				self.compile_trajectory(timestamp, left_line, left_line_score, right_line, right_line_score, trajectory_viz)
 
 				# For turns, it’s beneficial to have the most recent trajectory available,
