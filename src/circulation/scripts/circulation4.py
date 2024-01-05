@@ -98,8 +98,8 @@ class TrajectoryExtractorNode (object):
 		rospy.loginfo("Got camerainfo!")
 
 		# get camera_to_image and distortion_parameters
-		self.camera_to_image = np.asarray(self.camera_info_msg.P).reshape((3, 4))[:, :3]
-		self.distortion_parameters = self.camera_info_msg.D
+		camera_to_image = np.asarray(self.camera_info_msg.P).reshape((3, 4))[:, :3]
+		distortion_parameters = self.camera_info_msg.D
 
 
 		# Initialize the transformation listener
@@ -115,7 +115,11 @@ class TrajectoryExtractorNode (object):
 			rospy.loginfo_once("Waiting for transform from the camera to the vehicle frame...")
 
 
-		self.trajectory_extractor = TrajectoryExtractor(self.parameters)
+		self.trajectory_extractor = TrajectoryExtractor(
+			self.parameters,
+			camera_to_image,
+			distortion_parameters
+			)
 
 
 		# Trajectory history buffers
@@ -125,10 +129,6 @@ class TrajectoryExtractorNode (object):
 		self.current_trajectory = None                # Current trajectory, that has been last published or will be next published
 		self.current_trajectory_timestamp = None      # Timestamp the `current_trajectory` corresponds to
 		self.navigation_mode = enums.NavigationMode.CRUISE  # Current navigation mode (cruise, intersection, …)
-
-		# Bird-eye projection parameters, for convenience
-		self.birdeye_range_x = (-self.parameters["birdeye"]["x-range"], self.parameters["birdeye"]["x-range"])
-		self.birdeye_range_y = (self.parameters["birdeye"]["roi-y"], self.parameters["birdeye"]["y-range"])
 
 		# Just stats
 		self.time_buffer = []  # History to make performance statistics
@@ -178,10 +178,6 @@ class TrajectoryExtractorNode (object):
 			return
 		
 		if self.is_panic():
-			return
-		
-		if self.camera_to_image is None:
-			rospy.logwarn_once("No camera info received yet, skipping images until the first one is received")
 			return
 		
 		# Extract the image and the timestamp at which it was taken, critical for synchronisation
@@ -560,37 +556,7 @@ class TrajectoryExtractorNode (object):
 	# ════════════════════════╣ IMAGE PROCESSING ╠═════════════════════════ #
 	#                         ╚══════════════════╝                          #
 
-	def preprocess_image(self, image, target_to_camera):
-		"""Preprocess the image receive from the camera
-		   - image            : ndarray[y, x, 3] : RGB image received from the camera
-		   - target_to_camera : ndarray[4, 4]    : 3D homogeneous transform matrix from the target (road) frame to the camera frame
-		<---------------------- ndarray[v, u]    : Full grayscale bird-eye view (mostly for visualisation)
-		<---------------------- ndarray[v, u]    : Fully preprocessed bird-eye view (binarized, edge-detected)
-		<---------------------- float            : Scale factor, multiply by this to convert lengths from pixel to metric in the target frame
-		"""
-		# Convert the image to grayscale
-		grayimage = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
 
-		# Binarize the image. First a gaussian blur is applied to reduce noise,
-		img_blur = cv.GaussianBlur(grayimage, (7, 7), 1.5)
-		
-		# Project in bird-eye view
-		# then a gaussian adaptive thresholding is applied to reduce the influence of lighting changes
-		birdeye, scale_factor = fish2bird.to_birdeye(img_blur, self.camera_to_image, target_to_camera, self.distortion_parameters[0], self.birdeye_range_x, self.birdeye_range_y, self.parameters["birdeye"]["birdeye-size"], interpolate=True, flip_y=True)
-		be_binary = cv.adaptiveThreshold(birdeye, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, self.parameters["preprocess"]["threshold-window"], self.parameters["preprocess"]["threshold-bias"])
-
-		# The adaptive binarization makes the borders white, mask them out
-		mask = cv.erode(np.uint8(birdeye > 0), cv.getStructuringElement(cv.MORPH_RECT, (self.parameters["preprocess"]["threshold-window"]//2 + 2, self.parameters["preprocess"]["threshold-window"]//2 + 2)))
-		be_binary *= mask
-
-		# Apply an opening operation to eliminate a few artifacts and better separate blurry markings
-		open_kernel_size = self.parameters["preprocess"]["open-kernel-size"]
-		open_kernel = cv.getStructuringElement(cv.MORPH_RECT, (open_kernel_size, open_kernel_size))
-		be_binary = cv.morphologyEx(be_binary, cv.MORPH_OPEN, open_kernel)
-
-		# Edge detection to get the 1-pixel wide continuous curves required by the following operations
-		be_binary = cv.Canny(be_binary, 50, 100)
-		return birdeye, be_binary, scale_factor
 	
 	# ══════════════════════════ LANE DETECTION ═══════════════════════════ #
 
@@ -664,7 +630,7 @@ class TrajectoryExtractorNode (object):
 		markings, branches = trajectorybuild.find_markings(be_binary.shape, branches, scale_factor, self.parameters["environment"]["crosswalk-width"], self.parameters["markings"]["size-tolerance"])
 		for crosswalk in markings["crosswalks"]:
 			if len(crosswalk) >= 3:
-				target_bands = [self.birdeye_to_target(be_binary, band) for band in crosswalk]
+				target_bands = [self.trajectory_extractor.birdeye_to_target(be_binary, band) for band in crosswalk]
 				band_centroids = np.asarray([np.mean(band, axis=1) for band in target_bands])
 				crosswalk_centroid = np.concatenate((np.mean(band_centroids, axis=0), [0]))
 				confidence = min(1, len(target_bands) / 6)
@@ -687,7 +653,7 @@ class TrajectoryExtractorNode (object):
 		#self.check_stop_line([self.birdeye_to_target(be_binary, line) for line in transverse_lines], image_timestamp)
 		
 		# Convert all curves from pixel coordinates to metric coordinates in the local road frame 
-		target_lines = [self.birdeye_to_target(be_binary, line) for line in lines]
+		target_lines = [self.trajectory_extractor.birdeye_to_target(be_binary, line) for line in lines]
 
 		# Estimate the main angle of those lines
 		# If we are on a road, chances are, a lot of curve segments belong to lane markings
@@ -908,11 +874,11 @@ class TrajectoryExtractorNode (object):
 
 			# Visualize the line and estimate
 			if viz is not None:
-				viz_points = self.target_to_birdeye(viz, left_line).astype(int)
+				viz_points = self.trajectory_extractor.target_to_birdeye(viz, left_line).astype(int)
 				for i in range(viz_points.shape[1]):
 					cv.drawMarker(viz, viz_points[:, i], (0, 255, int(left_scores[i]*255)), cv.MARKER_CROSS, 4)  # Red
 
-				viz_points = self.target_to_birdeye(viz, left_estimate).astype(int)
+				viz_points = self.trajectory_extractor.target_to_birdeye(viz, left_estimate).astype(int)
 				for i in range(viz_points.shape[1]):
 					cv.drawMarker(viz, viz_points[:, i], (12, 255, int(left_estimate_scores[i]*255)), cv.MARKER_CROSS, 4)  # Orange
 		else:
@@ -926,11 +892,11 @@ class TrajectoryExtractorNode (object):
 
 			# Visualize the line and estimate
 			if viz is not None:
-				viz_points = self.target_to_birdeye(viz, right_line).astype(int)
+				viz_points = self.trajectory_extractor.target_to_birdeye(viz, right_line).astype(int)
 				for i in range(viz_points.shape[1]):
 					cv.drawMarker(viz, viz_points[:, i], (90, 255, int(right_scores[i]*255)), cv.MARKER_CROSS, 4)  # Cyan
 
-				viz_points = self.target_to_birdeye(viz, right_estimate).astype(int)
+				viz_points = self.trajectory_extractor.target_to_birdeye(viz, right_estimate).astype(int)
 				for i in range(viz_points.shape[1]):
 					cv.drawMarker(viz, viz_points[:, i], (125, 255, int(right_estimate_scores[i]*255)), cv.MARKER_CROSS, 4)  # Blue
 		else:
@@ -959,7 +925,7 @@ class TrajectoryExtractorNode (object):
 					parallel_distance = trajeometry.mean_parallel_distance(filtered_trajectory, local_current_trajectory)
 					if parallel_distance > self.parameters["trajectory"]["max-parallel-distance"]:
 						if viz is not None:
-							viz_points = self.target_to_birdeye(viz, filtered_trajectory).transpose().astype(int)
+							viz_points = self.trajectory_extractor.target_to_birdeye(viz, filtered_trajectory).transpose().astype(int)
 							cv.polylines(viz, [viz_points], False, (0, 255, 255), 2)  # Red
 						return
 
@@ -978,7 +944,7 @@ class TrajectoryExtractorNode (object):
 			self.drop_velocity(oldest_timestamp)
 
 			if viz is not None:
-				viz_points = self.target_to_birdeye(viz, filtered_trajectory).transpose().astype(int)
+				viz_points = self.trajectory_extractor.target_to_birdeye(viz, filtered_trajectory).transpose().astype(int)
 				cv.polylines(viz, [viz_points], False, (30, 255, 255), 2)  # Yellow
 	
 	# ════════════════ INTERSECTION TRAJECTORY ESTIMATION ═════════════════ #
@@ -1103,7 +1069,7 @@ class TrajectoryExtractorNode (object):
 		# Visualization of the per-frame trajectories
 		if viz is not None:
 			for line, line_scores in zip(local_trajectories, local_scores):
-				viz_points = self.target_to_birdeye(viz, line).astype(int)
+				viz_points = self.trajectory_extractor.target_to_birdeye(viz, line).astype(int)
 				for i in range(line.shape[1]):
 					cv.drawMarker(viz, viz_points[:, i], (150, 255, int(line_scores[i]*255)), cv.MARKER_CROSS, 4)  # Purple
 		
@@ -1117,7 +1083,7 @@ class TrajectoryExtractorNode (object):
 			self.current_trajectory_timestamp = target_timestamp
 
 			if viz is not None:
-				viz_points = self.target_to_birdeye(viz, self.current_trajectory).transpose().astype(int)
+				viz_points = self.trajectory_extractor.target_to_birdeye(viz, self.current_trajectory).transpose().astype(int)
 				cv.polylines(viz, [viz_points], False, (60, 255, 255), 2)  # Green
 		# Failure : Set it to None such that nothing is published
 		else:
@@ -1137,21 +1103,11 @@ class TrajectoryExtractorNode (object):
 		"""
 		transforms, distances = self.get_map_transforms([self.current_trajectory_timestamp], image_timestamp)
 		local_trajectory = (transforms[0] @ np.vstack((self.current_trajectory, np.zeros((1, self.current_trajectory.shape[1])), np.ones((1, self.current_trajectory.shape[1])))))[:2]
-		viz_trajectory = self.target_to_birdeye(viz, local_trajectory)
+		viz_trajectory = self.trajectory_extractor.target_to_birdeye(viz, local_trajectory)
 		cv.polylines(viz, [viz_trajectory.transpose().astype(int)], False, (60, 255, 255), 2)
 		if remaining_distance is not None:
 			cv.circle(viz, (viz.shape[1]//2, viz.shape[0]), int(remaining_distance / scale_factor), (0, 255, 255), 1)
 	
-	#                      ╔═════════════════════════╗                      #
-	# ═════════════════════╣ BIRD-EYE VIEW UTILITIES ╠═════════════════════ #
-	#                      ╚═════════════════════════╝                      #
-
-	# Those are just wrappers to the fish2bird functions, to use the global parameters
-	def target_to_birdeye(self, be_binary, target_points):
-		return fish2bird.target_to_output(target_points, self.birdeye_range_x, self.birdeye_range_y, be_binary.shape[0], flip_y=True)[0]
-
-	def birdeye_to_target(self, be_binary, image_points):
-		return fish2bird.birdeye_to_target(image_points, self.birdeye_range_x, self.birdeye_range_y, be_binary.shape, flip_y=True)[:2]
 
 	#                    ╔════════════════════════════╗                     #
 	# ═══════════════════╣ GLOBAL ACTIVITY PROCEDURES ╠════════════════════ #
@@ -1199,7 +1155,7 @@ class TrajectoryExtractorNode (object):
 
 
 		# Preprocess the image
-		birdeye, be_binary, scale_factor = self.preprocess_image(image, target_to_camera)
+		birdeye, be_binary, scale_factor = self.trajectory_extractor.preprocess_image(image, target_to_camera)
 
 		# The following is made overly complicated because of the visualization that must still be updated even though nothing else must be done
 		trajectory_viz = cv.cvtColor(cv.merge((birdeye, birdeye, birdeye)), cv.COLOR_BGR2HSV) if self.parameters["node"]["visualize"] else None
