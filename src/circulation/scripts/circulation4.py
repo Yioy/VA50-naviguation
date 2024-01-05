@@ -57,7 +57,6 @@ from trafficsigns.msg import TrafficSignStatus, TrafficSign
 import linetrack
 import trajeometry
 import fish2bird
-import fuzzylines
 import trajectorybuild
 
 
@@ -65,6 +64,7 @@ import trajectorybuild
 import trajectory_extractor.circulation_enums as enums
 from trajectory_extractor.IntersectionHint import IntersectionHint
 from trajectory_extractor.TrajectoryVisualizer import TrajectoryVisualizer
+from trajectory_extractor.TrajectoryExtractor import TrajectoryExtractor
 
 # TODO : More resilient lane detection
 # TODO : Autonomous intersection detection
@@ -87,6 +87,37 @@ class TrajectoryExtractorNode (object):
 		"""
 		self.parameters = parameters
 
+
+		
+		# get camera_info
+		self.camera_info_msg = None
+		self.camerainfo_subscriber = rospy.Subscriber(self.parameters["node"]["camerainfo-topic"], CameraInfo, self.callback_camerainfo, queue_size=1)
+		while not rospy.is_shutdown() and self.camera_info_msg is None:
+			time.sleep(0.1)
+			rospy.loginfo_once("Waiting for camerainfo...")
+		rospy.loginfo("Got camerainfo!")
+
+		# get camera_to_image and distortion_parameters
+		self.camera_to_image = np.asarray(self.camera_info_msg.P).reshape((3, 4))[:, :3]
+		self.distortion_parameters = self.camera_info_msg.D
+
+
+		# Initialize the transformation listener
+		self.tf_buffer = tf2_ros.Buffer(rospy.Duration(120))
+		self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
+		
+		# Get the transform from the camera to the local vehicle frame (base_link)
+		self.target_to_camera = None
+		self.get_transform(self.parameters["node"]["road-frame"], self.camera_info_msg.header.frame_id)
+		while not rospy.is_shutdown() and self.target_to_camera is None:
+			self.target_to_camera = self.get_transform(self.parameters["node"]["road-frame"], self.camera_info_msg.header.frame_id)
+			time.sleep(0.1)
+			rospy.loginfo_once("Waiting for transform from the camera to the vehicle frame...")
+
+
+		self.trajectory_extractor = TrajectoryExtractor(self.parameters)
+
+
 		# Trajectory history buffers
 		self.trajectory_buffer = []                   # History of trajectories estimated from individual frames
 		self.trajectory_scores = []                   # Scores associated to each trajectory in `trajectory_buffer`
@@ -95,25 +126,18 @@ class TrajectoryExtractorNode (object):
 		self.current_trajectory_timestamp = None      # Timestamp the `current_trajectory` corresponds to
 		self.navigation_mode = enums.NavigationMode.CRUISE  # Current navigation mode (cruise, intersection, …)
 
+		# Bird-eye projection parameters, for convenience
+		self.birdeye_range_x = (-self.parameters["birdeye"]["x-range"], self.parameters["birdeye"]["x-range"])
+		self.birdeye_range_y = (self.parameters["birdeye"]["roi-y"], self.parameters["birdeye"]["y-range"])
+
 		# Just stats
 		self.time_buffer = []  # History to make performance statistics
-
-		# Initialize the fuzzy systems
-		self.init_fuzzysystems()
 
 		# Initialize the visualization
 		if self.parameters["node"]["visualize"]:
 			self.visualisation = TrajectoryVisualizer(self.parameters)
 		else:
 			self.visualisation = None
-
-		# Initialize the transformation listener
-		self.tf_buffer = tf2_ros.Buffer(rospy.Duration(120))
-		self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
-
-		# Bird-eye projection parameters, for convenience
-		self.birdeye_range_x = (-self.parameters["birdeye"]["x-range"], self.parameters["birdeye"]["x-range"])
-		self.birdeye_range_y = (self.parameters["birdeye"]["roi-y"], self.parameters["birdeye"]["y-range"])
 
 		# Intersection management
 		self.next_direction = enums.Direction.FORWARD
@@ -131,10 +155,6 @@ class TrajectoryExtractorNode (object):
 		self.drop_service = rospy.ServiceProxy(self.parameters["node"]["drop-service-name"], DropVelocity, persistent=True)
 		self.transform_service_lock = Lock()
 
-		# init other attributes
-		self.camera_to_image = None
-		self.distortion_parameters = None
-
 		# Initialize the topic subscribers (last to avoid too early messages while other things are not yet initialized)
 		self.image_subscriber = rospy.Subscriber(self.parameters["node"]["image-topic"], Image, self.callback_image, queue_size=1, buff_size=2**28)
 		self.camerainfo_subscriber = rospy.Subscriber(self.parameters["node"]["camerainfo-topic"], CameraInfo, self.callback_camerainfo, queue_size=1)
@@ -144,14 +164,6 @@ class TrajectoryExtractorNode (object):
 		self.trajectory_seq = 0  # Sequential number of published trajectories
 
 		rospy.loginfo("Ready")
-
-	def init_fuzzysystems(self):
-		"""Initialize the fuzzy systems used by the lane detection"""
-		line_variables = ("forward-distance", "line-distance", "line-lengths", "parallel-distances", "parallel-angles")
-		line_centers = np.asarray([self.parameters["fuzzy-lines"]["centers"][variable] for variable in line_variables])
-		line_malus = np.asarray([self.parameters["fuzzy-lines"]["malus"][variable] for variable in line_variables], dtype=int)
-		line_output_centers = np.asarray(self.parameters["fuzzy-lines"]["centers"]["output"])
-		self.lane_system = fuzzylines.FuzzySystem(line_centers, line_malus, line_output_centers, self.parameters["fuzzy-lines"]["base-score"])
 
 	#                        ╔══════════════════════╗                       #
 	# ═══════════════════════╣ SUBSCRIBER CALLBACKS ╠══════════════════════ #
@@ -174,24 +186,25 @@ class TrajectoryExtractorNode (object):
 		
 		# Extract the image and the timestamp at which it was taken, critical for synchronisation
 		rospy.logdebug("------ Received an image")
+
 		image = np.frombuffer(message.data, dtype=np.uint8).reshape((message.height, message.width, 3))
-		self.compute_trajectory(image, message.header.stamp, message.header.frame_id)
+		self.compute_trajectory(image, message.header.stamp, self.target_to_camera)
 		#cProfile.runctx("self.compute_trajectory(image, message.header.stamp, message.header.frame_id)", globals(), locals())
 
 	def callback_camerainfo(self, message):
 		"""Callback called when a new camera info message is published
 		   - message : sensor_msgs.msg.CameraInfo : Message with metadata about the camera
 		"""
-		# disable callback after first call
-		self.camerainfo_subscriber.unregister()
 
 		# fish2bird only supports the camera model defined by Christopher Mei
 		if message.distortion_model.lower() != "mei":
 			rospy.logerr(f"Bad distortion model : {message.distortion_model}")
 			return
 		
-		self.camera_to_image = np.asarray(message.P).reshape((3, 4))[:, :3]
-		self.distortion_parameters = message.D
+		# disable callback after first call
+		self.camerainfo_subscriber.unregister()
+		
+		self.camera_info_msg = message
 		
 		rospy.loginfo("Got camerainfo!")
 	
@@ -738,7 +751,7 @@ class TrajectoryExtractorNode (object):
 		                             parallel_angles))
 		
 		# Get the best combination and its score with the fuzzy system
-		best_y, best_x, best_score = self.lane_system.fuzzy_best(lane_variables)
+		best_y, best_x, best_score = self.trajectory_extractor.lane_system.fuzzy_best(lane_variables)
 		rospy.logdebug(f"Best lane score {best_score} for combination {[best_y, best_x]}")
 		
 		# No good enough lane detected : fall back to single lines if so parameterized
@@ -786,7 +799,7 @@ class TrajectoryExtractorNode (object):
 				([parallel_distance[left_line_index, right_line_index]], [parallel_distance[left_line_index, right_line_index]]),
 				([parallel_angles[left_line_index, right_line_index]],   [parallel_angles[left_line_index, right_line_index]]),
 			))
-			line_scores = self.lane_system.fuzzy_scores(line_variables)
+			line_scores = self.trajectory_extractor.lane_system.fuzzy_scores(line_variables)
 			left_line_score = line_scores[0, 0]
 			right_line_score = line_scores[1, 0]
 
@@ -829,7 +842,7 @@ class TrajectoryExtractorNode (object):
 											line_lengths.reshape(-1, 1),
 											np.ones((forward_distance.size, 1)) * self.parameters["fuzzy-lines"]["centers"]["parallel-distances"][0],
 											np.ones((forward_distance.size, 1)) * self.parameters["fuzzy-lines"]["centers"]["parallel-angles"][0]))
-		best_line_index, best_x, best_score = self.lane_system.fuzzy_best(single_line_variables)
+		best_line_index, best_x, best_score = self.trajectory_extractor.lane_system.fuzzy_best(single_line_variables)
 
 		rospy.logdebug(f"Best single line score {best_score}")
 		if best_score < self.parameters["fuzzy-lines"]["single-line-selection-threshold"]:
@@ -1175,7 +1188,7 @@ class TrajectoryExtractorNode (object):
 		rospy.logdebug("Publishing a new trajectory")
 		self.trajectory_publisher.publish(message)
 
-	def compute_trajectory(self, image, timestamp, image_frame):
+	def compute_trajectory(self, image, timestamp, target_to_camera):
 		"""Global procedure called each time an image is received
 		   Take the image received from the camera, estimate the trajectory from it and publish it if necessary
 		   - image       : ndarray[y, x, 3] : RGB image received from the camera
@@ -1183,11 +1196,7 @@ class TrajectoryExtractorNode (object):
 		   - image_frame : str              : Name of the TF frame of the camera that has taken the picture"""
 		starttime = time.time()
 
-		# Get the transform from the camera to the local vehicle frame (base_link)
-		target_to_camera = self.get_transform(self.parameters["node"]["road-frame"], image_frame)
-		if target_to_camera is None:
-			rospy.logerr("No camera -> road transform found")
-			return
+
 
 		# Preprocess the image
 		birdeye, be_binary, scale_factor = self.preprocess_image(image, target_to_camera)
