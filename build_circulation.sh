@@ -29,7 +29,7 @@ if [[ $1 == build ]] || [[ $2 == build ]] || [[ $3 == build ]]; then
 fi
 
 if [[ $1 == cython ]] || [[ $2 == cython ]] || [[ $3 == cython ]]; then
-	cd src/circulation/scripts
+	cd src/circulation/scripts/cython
 	mkdir -p build
 	make all
 	#cythonize -3 -a -i trajeometry.pyx
@@ -39,14 +39,14 @@ if [[ $1 == cython ]] || [[ $2 == cython ]] || [[ $3 == cython ]]; then
 	#cythonize -3 -a -i fuzzylines.pyx
 	#cythonize -3 -a -i positioning.pyx
 	#cythonize -3 -a -i trajectorybuild.pyx
-	cd ../../..
+	cd ../../../..
 
-	cp src/circulation/scripts/trajutil*.so devel/lib/python3/dist-packages/
-	cp src/circulation/scripts/trajeometry*.so devel/lib/python3/dist-packages/
-	cp src/circulation/scripts/fish2bird*.so devel/lib/python3/dist-packages/
-	cp src/circulation/scripts/linetrack*.so devel/lib/python3/dist-packages/
-	cp src/circulation/scripts/fuzzylines*.so devel/lib/python3/dist-packages/
-	cp src/circulation/scripts/trajectorybuild*.so devel/lib/python3/dist-packages/
+	cp src/circulation/scripts/cython/build/trajutil*.so devel/lib/python3/dist-packages/
+	cp src/circulation/scripts/cython/build/trajeometry*.so devel/lib/python3/dist-packages/
+	cp src/circulation/scripts/cython/build/fish2bird*.so devel/lib/python3/dist-packages/
+	cp src/circulation/scripts/cython/build/linetrack*.so devel/lib/python3/dist-packages/
+	cp src/circulation/scripts/cython/build/fuzzylines*.so devel/lib/python3/dist-packages/
+	cp src/circulation/scripts/cython/build/trajectorybuild*.so devel/lib/python3/dist-packages/
 	cp src/trafficsigns/scripts/traffic_sign_detection.py devel/lib/python3/dist-packages/
 	cp src/trafficsigns/scripts/traffic_direction_detection.py devel/lib/python3/dist-packages/
 fi
