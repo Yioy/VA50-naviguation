@@ -234,11 +234,11 @@ class DistanceExtractor (object):
 		img, signs = self.traffic_sign_detector.get_traffic_sign(img)
 		traffic_signs.extend(signs)
 			
-		# Visualize the lidar data projection onto the image
-		for i, point in enumerate(lidar_coordinates_in_image.T):
-				# Filter out points that are not in the image dimension or behind the camera
-				if 0 <= point[0] < img.shape[1] and 0 <= point[1] < img.shape[0] and camera_pointcloud[2, i] >=0:
-					cv.drawMarker(img, (int(point[0]), int(point[1])), (0, 255, 0), cv.MARKER_CROSS, 4)
+		#Visualize the lidar data projection onto the image
+		# for i, point in enumerate(lidar_coordinates_in_image.T):
+		# 		# Filter out points that are not in the image dimension or behind the camera
+		# 		if 0 <= point[0] < img.shape[1] and 0 <= point[1] < img.shape[0] and camera_pointcloud[2, i] >=0:
+		# 			cv.drawMarker(img, (int(point[0]), int(point[1])), (0, 255, 0), cv.MARKER_CROSS, 4)
 
 		# If at least one traffic sign is detected
 		if len(traffic_signs) > 0:
@@ -274,7 +274,7 @@ class DistanceExtractor (object):
 					result.y = position_estimate[1]
 					result.z = position_estimate[2]
 				
-					img = cv.putText(img, f'd = {np.linalg.norm(position_estimate)} m', (sign.x, sign.y-25), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 2)
+					#img = cv.putText(img, f'd = {np.linalg.norm(position_estimate)} m', (sign.x, sign.y-25), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 2)
 				
 				sign_messages.append(result)
 			message.traffic_signs = sign_messages

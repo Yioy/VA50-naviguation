@@ -71,6 +71,7 @@ class PurePursuitController (object):
         self.no_left = False
         self.no_straight = False
         self.trueDirection = None
+        self.previousDirection = None
 
         # Conserve all the states in memory
         # self.states = States()
@@ -181,9 +182,10 @@ class PurePursuitController (object):
 
             #usually, the direction signboard is located at the opposite of the direction. SO that, if there is a stop, the car has
             #time to stop and restarts to follow the direction
-            elif sign.type == "city-signboard":
+            if sign.type == "city-signboard":
 
                 if sign.direction is None or sign.cityName != self.cityName.upper():
+                    self.trueDirection = "straight"
                     continue
                 self.trueDirection = sign.direction
             
@@ -196,6 +198,7 @@ class PurePursuitController (object):
                 self.trueDirection = "straight"
             # Set interdiction with prohibition panel and direction panel
             elif sign.type in ('leftOrRight', 'no-entry', 'no-motor-vehicules', 'no-through-road', 'no-vehicules'):
+                print("a")
                 self.no_straight = True
             elif sign.type in ("no-right-turn", "direction-straightOrLeft"):
                 self.no_right = True
@@ -210,17 +213,21 @@ class PurePursuitController (object):
                 self.trueDirection = "right"
             else:
                 print("no direction sign detected, no information whether left or right")
+                #self.trueDirection = None
         elif self.no_right:
             if self.trueDirection is None or self.no_left:
+                self.trueDirection = "straight"
+        elif self.no_left:
+            if self.trueDirection is None:
                 self.trueDirection = "straight"
         else:
             if self.trueDirection is None:
                 self.trueDirection = "straight"
         
         print(self.trueDirection)
-           
-        self.chooseDirection(self.trueDirection)
 
+        self.chooseDirection(self.trueDirection)
+        #self.previousDirection = self.trueDirection
             # Filter traffic signs where a direction is mandatory and publish on the direction topic
             # elif sign.type in ('right-only', 'keep-right'):
             #    self.direction_publisher.publish(0b0100)
@@ -250,7 +257,7 @@ class PurePursuitController (object):
                 # Calc control input
                 vi = self.speed_control()
                 di, self.target_ind = self.pure_pursuit_steer_control(self.target_ind)
-                print(f"vi={vi}, self.real_speed={self.real_speed}, self.target_speed={self.target_speed}")
+                #print(f"vi={vi}, self.real_speed={self.real_speed}, self.target_speed={self.target_speed}")
 
                 #self.speed_cap_publisher.publish(1000)
                 self.speed_publisher.publish(vi)  # Control speed
