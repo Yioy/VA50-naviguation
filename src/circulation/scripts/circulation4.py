@@ -138,6 +138,8 @@ class TrajectoryExtractorNode (object):
 
 		image = np.frombuffer(message.data, dtype=np.uint8).reshape((message.height, message.width, 3))
 		self.trajectory_extractor.compute_trajectory(image, message.header.stamp, self.target_to_camera)
+		trajectory, timestamp = self.trajectory_extractor.get_current_trajectory()
+		self.publish_trajectory(trajectory, timestamp)
 		#cProfile.runctx("self.compute_trajectory(image, message.header.stamp, message.header.frame_id)", globals(), locals())
 
 	def callback_camerainfo(self, message):
@@ -161,7 +163,7 @@ class TrajectoryExtractorNode (object):
 		"""Callback called when a direction is sent from the navigation nodes
 		   - message : std_msgs.msg.Uint8 : Message with the direction (same values as enums.Direction.FORWARD, .LEFT and .RIGHT)
 		"""
-		self.trajectory_extractor.set_next_direction(enums.NavigationMode.INTERSECTION_DOUBLE_LANE)
+		self.trajectory_extractor.set_next_direction(message.data)
 	
 	def callback_trafficsign(self, message):
 		"""Callback called when traffic signs are detected and received
@@ -170,7 +172,7 @@ class TrajectoryExtractorNode (object):
 		for trafficsign in message.traffic_signs:
 			if trafficsign.type in enums.TURN_SIGNS and trafficsign.confidence > 0.6:
 				rospy.logdebug(f"New traffic sign : {trafficsign.type}, position at {message.header.stamp} [{trafficsign.x}, {trafficsign.y}, {trafficsign.z}], confidence {trafficsign.confidence}")
-				self.add_intersection_hint(IntersectionHint("trafficsign", trafficsign.type, (trafficsign.x, trafficsign.y, trafficsign.z), message.header.stamp, trafficsign.confidence))
+				self.trajectory_extractor.add_intersection_hint(IntersectionHint("trafficsign", trafficsign.type, (trafficsign.x, trafficsign.y, trafficsign.z), message.header.stamp, trafficsign.confidence))
 
 	#               ╔═══════════════════════════════════════╗               #
 	# ══════════════╣ TRANSFORM MANAGEMENT AND MEASUREMENTS ╠══════════════ #
@@ -200,13 +202,6 @@ class TrajectoryExtractorNode (object):
 			np.concatenate((rotation_matrix, translation_vector), axis=1),
 			np.asarray((0, 0, 0, 1)).reshape((1, 4))
 		), axis=0)
-	
-
-	
-	#                         ╔══════════════════╗                          #
-	# ════════════════════════╣ IMAGE PROCESSING ╠═════════════════════════ #
-	#                         ╚══════════════════╝                          #
-
 
 
 	
@@ -215,6 +210,9 @@ class TrajectoryExtractorNode (object):
 		   - trajectory_points    : ndarray[N, 2] : Points of the trajectory as LINE VECTORS, contrary to the rest of the node
 		   - trajectory_timestamp : rospy.Time    : Timestamp at which the trajectory is valid
 		"""
+		if trajectory_points is None or trajectory_timestamp is None:
+			rospy.logwarn("No trajectory to publish")
+			return
 		# Add the current position (0, 0) to the trajectory, otherwise the first point might be too far away
 		# and the pure pursuit will miss it
 		while trajectory_points.shape[0] > 0 and abs(np.pi / 2 - np.arctan2(trajectory_points[0, 1], trajectory_points[0, 0])) > self.parameters["trajectory"]["max-output-angle"]:

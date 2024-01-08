@@ -14,7 +14,7 @@ class IntersectionHint (object):
 	
 	def merge(self, hint):
 		self.positions.extend(hint.positions)
-		self.position_timestamps.extend(hint.position_timestamp)
+		self.position_timestamps.extend(hint.position_timestamps)
 		self.confidences.extend(hint.confidences)
 	
 	def confidence(self):

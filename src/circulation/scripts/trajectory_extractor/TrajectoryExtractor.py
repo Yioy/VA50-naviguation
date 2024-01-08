@@ -118,6 +118,15 @@ class TrajectoryExtractor (object):
 			self.switch_intersection(enums.NavigationMode.INTERSECTION_RIGHT, rospy.get_rostime(), 0)
 		elif self.next_direction == enums.Direction.FORWARD:
 			self.switch_intersection(enums.NavigationMode.INTERSECTION_FORWARD, rospy.get_rostime(), 0)
+
+
+	def get_current_trajectory(self):
+		"""Get the current trajectory, that has been last published or will be next published
+		<------------------- ndarray[2, N] : The current trajectory, or None if there is none"""
+		if self.current_trajectory is None:
+			return None, None
+		else:
+			return self.current_trajectory.transpose(), self.current_trajectory_timestamp
 		
 
 	def preprocess_image(self, image, target_to_camera):
@@ -163,6 +172,10 @@ class TrajectoryExtractor (object):
 	def birdeye_to_target(self, be_binary, image_points):
 		return fish2bird.birdeye_to_target(image_points, self.birdeye_range_x, self.birdeye_range_y, be_binary.shape, flip_y=True)[:2]
 	
+
+	#                         ╔══════════════════╗                          #
+	# ════════════════════════╣ IMAGE PROCESSING ╠═════════════════════════ #
+	#                         ╚══════════════════╝                          #
 
 # ══════════════════════════ LANE DETECTION ═══════════════════════════ #
 
@@ -882,7 +895,7 @@ class TrajectoryExtractor (object):
 
 		# Publish the intersection navigation trajectory
 		# self.publish_trajectory(self.current_trajectory.transpose(), self.current_trajectory_timestamp) # todo verifier les consequences
-	
+
 	def switch_panic(self, navigation_mode, exc=None):
 		"""Switch into some panic mode, in case something goes unrecoverably wrong
 		   - navigation_mode : NavigationMode : Panic navigation mode to apply
@@ -927,7 +940,6 @@ class TrajectoryExtractor (object):
 		
 		if self.is_panic():
 			return
-
 
 		# Preprocess the image
 		birdeye, be_binary, scale_factor = self.preprocess_image(image, target_to_camera)
