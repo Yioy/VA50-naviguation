@@ -105,45 +105,15 @@ class TrajectoryExtractorNode (object):
 			flip_x=False,
 			flip_y=True)
 
-
-		
-		# get camera_info
-		self.camera_info_msg = None
-		self.camerainfo_subscriber = rospy.Subscriber(self.parameters["node"]["camerainfo-topic"], CameraInfo, self.callback_camerainfo, queue_size=1)
-		while not rospy.is_shutdown() and self.camera_info_msg is None:
-			time.sleep(0.1)
-			rospy.loginfo_once("Waiting for camerainfo...")
-		rospy.loginfo("Got camerainfo!")
-
-		# Initialize the transformation listener
-		self.tf_buffer = tf2_ros.Buffer(rospy.Duration(120))
-		self.tf_listener = tf2_ros.TransformListener(self.tf_buffer)
-		
-		# Get the transform from the camera to the local vehicle frame (base_link)
-		self.target_to_camera = None
-		self.get_transform(self.parameters["node"]["road-frame"], self.camera_info_msg.header.frame_id)
-		while not rospy.is_shutdown() and self.target_to_camera is None:
-			self.target_to_camera = self.get_transform(self.parameters["node"]["road-frame"], self.camera_info_msg.header.frame_id)
-			time.sleep(0.1)
-			rospy.loginfo_once("Waiting for transform from the camera to the vehicle frame...")
-
-
-		# get camera_to_image and distortion_parameters
-		camera_to_image = np.asarray(self.camera_info_msg.P).reshape((3, 4))[:, :3]
-		distortion_parameters = self.camera_info_msg.D
-
 		# Initialize the trajectory extractor
 		self.trajectory_extractor = TrajectoryExtractor(
 			self.parameters,
 			multi_cam_birdview_init_config,
-			camera_to_image,
-			distortion_parameters
 			)
 
 
 		# Initialize the topic subscribers (last to avoid too early messages while other things are not yet initialized)
 		self.image_subscriber = rospy.Subscriber(self.parameters["node"]["image-topic"], Image, self.callback_image, queue_size=1, buff_size=2**28)
-		self.camerainfo_subscriber = rospy.Subscriber(self.parameters["node"]["camerainfo-topic"], CameraInfo, self.callback_camerainfo, queue_size=1)
 		self.direction_subscriber = rospy.Subscriber(self.parameters["node"]["direction-topic"], UInt8, self.callback_direction)
 		self.trafficsign_subscriber = rospy.Subscriber(self.parameters["node"]["traffic-sign-topic"], TrafficSignStatus, self.callback_trafficsign)
 		self.trajectory_publisher = rospy.Publisher(self.parameters["node"]["trajectory-topic"], Trajectory, queue_size=10)
@@ -164,27 +134,10 @@ class TrajectoryExtractorNode (object):
 		rospy.logdebug("------ Received an image")
 
 		image = np.frombuffer(message.data, dtype=np.uint8).reshape((message.height, message.width, 3))
-		self.trajectory_extractor.compute_trajectory(image, message.header.stamp, self.target_to_camera)
+		self.trajectory_extractor.compute_trajectory(image, message.header.stamp)
 		trajectory, timestamp = self.trajectory_extractor.get_current_trajectory()
 		self.publish_trajectory(trajectory, timestamp)
 		#cProfile.runctx("self.compute_trajectory(image, message.header.stamp, message.header.frame_id)", globals(), locals())
-
-	def callback_camerainfo(self, message):
-		"""Callback called when a new camera info message is published
-		   - message : sensor_msgs.msg.CameraInfo : Message with metadata about the camera
-		"""
-
-		# fish2bird only supports the camera model defined by Christopher Mei
-		if message.distortion_model.lower() != "mei":
-			rospy.logerr(f"Bad distortion model : {message.distortion_model}")
-			return
-		
-		# disable callback after first call
-		self.camerainfo_subscriber.unregister()
-		
-		self.camera_info_msg = message
-		
-		rospy.loginfo("Got camerainfo!")
 	
 	def callback_direction(self, message):
 		"""Callback called when a direction is sent from the navigation nodes
@@ -200,37 +153,6 @@ class TrajectoryExtractorNode (object):
 			if trafficsign.type in enums.TURN_SIGNS and trafficsign.confidence > 0.6:
 				rospy.logdebug(f"New traffic sign : {trafficsign.type}, position at {message.header.stamp} [{trafficsign.x}, {trafficsign.y}, {trafficsign.z}], confidence {trafficsign.confidence}")
 				self.trajectory_extractor.add_intersection_hint(IntersectionHint("trafficsign", trafficsign.type, (trafficsign.x, trafficsign.y, trafficsign.z), message.header.stamp, trafficsign.confidence))
-
-	#               ╔═══════════════════════════════════════╗               #
-	# ══════════════╣ TRANSFORM MANAGEMENT AND MEASUREMENTS ╠══════════════ #
-	#               ╚═══════════════════════════════════════╝               #
-
-	def get_transform(self, source_frame, target_frame):
-		"""Get the latest transform matrix from `source_frame` to `target_frame`
-		   - source_frame : str           : Name of the source frame
-		   - target_frame : str           : Name of the target frame
-		<---------------- : ndarray[4, 4] : 3D homogeneous transform matrix to convert from `source_frame` to `target_frame`,
-		                                    or None if no TF for those frames was published
-		"""
-		try:
-			transform = self.tf_buffer.lookup_transform(target_frame, source_frame, rospy.Time(0))
-		except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
-			return None
-
-		# Build the matrix elements from the translation vector and the rotation quaternion
-		rotation_message = transform.transform.rotation
-		rotation_quaternion = np.asarray((rotation_message.w, rotation_message.x, rotation_message.y, rotation_message.z))
-		rotation_matrix = quaternions.quat2mat(rotation_quaternion)
-		translation_message = transform.transform.translation
-		translation_vector = np.asarray((translation_message.x, translation_message.y, translation_message.z)).reshape(3, 1)
-
-		# Build the complete transform matrix
-		return np.concatenate((
-			np.concatenate((rotation_matrix, translation_vector), axis=1),
-			np.asarray((0, 0, 0, 1)).reshape((1, 4))
-		), axis=0)
-
-
 	
 	def publish_trajectory(self, trajectory_points, trajectory_timestamp):
 		"""Publish a trajectory on the output topic

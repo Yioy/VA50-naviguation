@@ -32,8 +32,6 @@ class TrajectoryExtractor (object):
 	def __init__(self,
 			  parameters,
 			  multi_cam_birdview_init_config,
-			  camera_to_image,
-			  distortion_parameters
 			  ):
 		"""Initialize the node and everything that it needs
 		   - parameters   : dict<str: …>        : Node parameters, from the parameter file
@@ -41,9 +39,6 @@ class TrajectoryExtractor (object):
 		self.parameters = parameters
 
 		self.multi_cam_bird_view = MultiCamBirdView(multi_cam_birdview_init_config)
-
-		self.camera_to_image = camera_to_image
-		self.distortion_parameters = distortion_parameters
 
 		# Initialize the transform service handler
 		self.transform_service_handler = TransformServiceHandler(
@@ -133,10 +128,9 @@ class TrajectoryExtractor (object):
 			return self.current_trajectory.transpose(), self.current_trajectory_timestamp
 		
 
-	def preprocess_image(self, image, target_to_camera):
+	def preprocess_image(self, image):
 		"""Preprocess the image receive from the camera
 		   - image            : ndarray[y, x, 3] : RGB image received from the camera
-		   - target_to_camera : ndarray[4, 4]    : 3D homogeneous transform matrix from the target (road) frame to the camera frame
 		<---------------------- ndarray[v, u]    : Full grayscale bird-eye view (mostly for visualisation)
 		<---------------------- ndarray[v, u]    : Fully preprocessed bird-eye view (binarized, edge-detected)
 		<---------------------- float            : Scale factor, multiply by this to convert lengths from pixel to metric in the target frame
@@ -932,7 +926,7 @@ class TrajectoryExtractor (object):
 	#                    ╚════════════════════════════╝                     #
 
 
-	def compute_trajectory(self, image, timestamp, target_to_camera):
+	def compute_trajectory(self, image, timestamp):
 		"""Global procedure called each time an image is received
 		   Take the image received from the camera, estimate the trajectory from it and publish it if necessary
 		   - image       : ndarray[y, x, 3] : RGB image received from the camera
@@ -949,7 +943,7 @@ class TrajectoryExtractor (object):
 			return
 
 		# Preprocess the image
-		birdeye, be_binary, scale_factor = self.preprocess_image(image, target_to_camera)
+		birdeye, be_binary, scale_factor = self.preprocess_image(image)
 
 		# The following is made overly complicated because of the visualization that must still be updated even though nothing else must be done
 		trajectory_viz = cv.cvtColor(cv.merge((birdeye, birdeye, birdeye)), cv.COLOR_BGR2HSV) if self.parameters["node"]["visualize"] else None
