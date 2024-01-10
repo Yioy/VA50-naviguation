@@ -49,9 +49,8 @@ environment:
 
 # Bird-eye view parameters
 birdeye:
-  x-range: 15                                              # The bird-eye view encompasses [-x-range, +x-range] meters on the X axis (left-right)
-  y-range: 21.8                                            # The bird-eye view encompasses [+roi-y  , +y-range] meters on the Y axis (forward)
-  roi-y: 3                                                 # Closest distance forward for meaningful data from the camera
+  x-range: [-15, 15]                                              # The bird-eye view encompasses [-x-range, +x-range] meters on the X axis (left-right)
+  y-range: [3, 21.8]                                            # The bird-eye view encompasses [+roi-y  , +y-range] meters on the Y axis (forward)                                               # Closest distance forward for meaningful data from the camera
   birdeye-size: 500                                        # Height of the bird-eye view in pixels. The width is deduced such that the y-range to x-range proportions are kept
 
 # Image preprocessing parameters

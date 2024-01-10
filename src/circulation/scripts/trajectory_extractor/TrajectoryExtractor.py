@@ -50,8 +50,8 @@ class TrajectoryExtractor (object):
 		self.init_fuzzysystems()
 
 		# Bird-eye projection parameters, for convenience
-		self.birdeye_range_x = (-self.parameters["birdeye"]["x-range"], self.parameters["birdeye"]["x-range"])
-		self.birdeye_range_y = (self.parameters["birdeye"]["roi-y"], self.parameters["birdeye"]["y-range"])
+		self.birdeye_range_x = self.parameters["birdeye"]["x-range"]
+		self.birdeye_range_y = self.parameters["birdeye"]["y-range"]
 
 		# Trajectory history buffers
 		self.trajectory_buffer = []                   # History of trajectories estimated from individual frames
@@ -283,7 +283,7 @@ class TrajectoryExtractor (object):
 
 		# Build the fuzzy logic base variables for each line
 		(forward_distance, left_line_distance, right_line_distance, line_lengths, parallel_distance, parallel_angles
-			) = trajectorybuild.line_parameters(target_lines, self.parameters["environment"]["lane-width"], main_angle, (self.parameters["birdeye"]["roi-y"] + self.parameters["fuzzy-lines"]["local-area-y"]) / 2, self.parameters["fuzzy-lines"]["vertical-angle-tolerance"])
+			) = trajectorybuild.line_parameters(target_lines, self.parameters["environment"]["lane-width"], main_angle, (self.parameters["birdeye"]["x-range"][0] + self.parameters["fuzzy-lines"]["local-area-y"]) / 2, self.parameters["fuzzy-lines"]["vertical-angle-tolerance"])
 
 		if forward_distance.shape[0] == 0:
 			rospy.logwarn("No full line candidate found")
@@ -539,7 +539,7 @@ class TrajectoryExtractor (object):
 			if self.current_trajectory is not None and not self.navigation_mode.is_intersection():
 				transforms, distances = self.transform_service_handler.get_map_transforms([self.current_trajectory_timestamp], timestamp)
 				local_current_trajectory = (transforms[0] @ np.vstack((self.current_trajectory, np.zeros((1, self.current_trajectory.shape[1])), np.ones((1, self.current_trajectory.shape[1])))))[:2]
-				local_current_trajectory = local_current_trajectory[:, local_current_trajectory[1] > self.parameters["birdeye"]["roi-y"]]
+				local_current_trajectory = local_current_trajectory[:, local_current_trajectory[1] > self.parameters["birdeye"]["x-range"][0]]
 				if local_current_trajectory.shape[1] > 4:
 					parallel_distance = trajeometry.mean_parallel_distance(filtered_trajectory, local_current_trajectory)
 					if parallel_distance > self.parameters["trajectory"]["max-parallel-distance"]:
