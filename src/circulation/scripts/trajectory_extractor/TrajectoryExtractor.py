@@ -149,7 +149,10 @@ class TrajectoryExtractor (object):
 		
 		# Project in bird-eye view
 		# then a gaussian adaptive thresholding is applied to reduce the influence of lighting changes
-		birdeye, scale_factor = fish2bird.to_birdeye(img_blur, self.camera_to_image, target_to_camera, self.distortion_parameters[0], self.birdeye_range_x, self.birdeye_range_y, self.parameters["birdeye"]["birdeye-size"], interpolate=True, flip_y=True)
+		
+		birdeye, scale_factor = self.multi_cam_bird_view.compute_bird_view([img_blur])
+
+		# birdeye, scale_factor = fish2bird.to_birdeye(img_blur, self.camera_to_image, target_to_camera, self.distortion_parameters[0], self.birdeye_range_x, self.birdeye_range_y, self.parameters["birdeye"]["birdeye-size"], interpolate=True, flip_y=True)
 		be_binary = cv.adaptiveThreshold(birdeye, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, self.parameters["preprocess"]["threshold-window"], self.parameters["preprocess"]["threshold-bias"])
 
 		# The adaptive binarization makes the borders white, mask them out

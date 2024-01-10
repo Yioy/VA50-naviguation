@@ -277,36 +277,36 @@ class Fish2Bird:
 		return output_image, self.scale_factor
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 	
-	img = cv.imread('image.png')
+	# img = cv.imread('image.png')
 
-	img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
+	# img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 	
-	# plt.imshow(img, cmap='gray')
+	# # plt.imshow(img, cmap='gray')
+	# # plt.show()
+
+	# K = np.array([  [1124.66943359375, 0.0, 505.781982421875],
+	# [0.0, 1124.6165771484375, 387.8110046386719],
+	# [0.0, 0.0, 1.0]])
+
+	# T_cam_to_work_plane = np.array([[ 0.99991969 , 0.01149682 ,-0.00533206 , 0.05419943],
+	# [ 0.00510958 , 0.01929436 , 0.99980079 , 1.96159697],
+	# [ 0.0115974  ,-0.99974774  ,0.01923406  ,1.55057154],
+	# [ 0.          ,0.          ,0.          ,1.        ]])
+
+	# xi = 0.8803200125694275
+
+	# print(img.shape)
+
+	# bv = Fish2Bird(img.shape, K, T_cam_to_work_plane, xi, [-25, 25], [0, 50], 500)
+
+	# # Convert the image to a bird's eye view
+	# output_image, scale_factor = bv.to_birdeye(img)
+
+	# print(bv.get_output_shape())
+
+	# # Show the result
+	# output_image = cv.cvtColor(output_image, cv.COLOR_BGR2RGB)
+	# plt.imshow(output_image)
 	# plt.show()
-
-	K = np.array([  [1124.66943359375, 0.0, 505.781982421875],
-	[0.0, 1124.6165771484375, 387.8110046386719],
-	[0.0, 0.0, 1.0]])
-
-	T_cam_to_work_plane = np.array([[ 0.99991969 , 0.01149682 ,-0.00533206 , 0.05419943],
-	[ 0.00510958 , 0.01929436 , 0.99980079 , 1.96159697],
-	[ 0.0115974  ,-0.99974774  ,0.01923406  ,1.55057154],
-	[ 0.          ,0.          ,0.          ,1.        ]])
-
-	xi = 0.8803200125694275
-
-	print(img.shape)
-
-	bv = Fish2Bird(img.shape, K, T_cam_to_work_plane, xi, [-25, 25], [0, 50], 500)
-
-	# Convert the image to a bird's eye view
-	output_image, scale_factor = bv.to_birdeye(img)
-
-	print(bv.get_output_shape())
-
-	# Show the result
-	output_image = cv.cvtColor(output_image, cv.COLOR_BGR2RGB)
-	plt.imshow(output_image)
-	plt.show()
