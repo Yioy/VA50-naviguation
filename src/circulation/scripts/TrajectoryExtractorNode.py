@@ -47,6 +47,8 @@ import rospy
 import tf2_ros
 from std_msgs.msg import UInt8, Float64MultiArray, MultiArrayDimension, Header
 from sensor_msgs.msg import Image, CameraInfo
+import message_filters
+from cv_bridge import CvBridge
 
 from circulation.msg import Trajectory
 from trafficsigns.msg import TrafficSignStatus, TrafficSign
@@ -113,11 +115,20 @@ class TrajectoryExtractorNode (object):
 
 
 		# Initialize the topic subscribers (last to avoid too early messages while other things are not yet initialized)
-		self.image_subscriber = rospy.Subscriber(self.parameters["node"]["image-topic"], Image, self.callback_image, queue_size=1, buff_size=2**28)
 		self.direction_subscriber = rospy.Subscriber(self.parameters["node"]["direction-topic"], UInt8, self.callback_direction)
 		self.trafficsign_subscriber = rospy.Subscriber(self.parameters["node"]["traffic-sign-topic"], TrafficSignStatus, self.callback_trafficsign)
 		self.trajectory_publisher = rospy.Publisher(self.parameters["node"]["trajectory-topic"], Trajectory, queue_size=10)
 		self.trajectory_seq = 0  # Sequential number of published trajectories
+
+		self.bridge = CvBridge()
+
+		if not self.parameters["birdeye"]["multicam"]:
+					self.image_subscriber = rospy.Subscriber(self.parameters["node"]["image-topic"], Image, self.single_camera_callback, queue_size=1, buff_size=2**28)
+		else:
+			self.camera_subscribers = [message_filters.Subscriber(topic, Image) for topic in image_topics]
+			self.time_sync = message_filters.ApproximateTimeSynchronizer(self.camera_subscribers, 10, 0.1, allow_headerless=False)
+			self.time_sync.registerCallback(self.multi_camera_callback)
+
 
 		rospy.loginfo("Ready")
 
@@ -125,7 +136,24 @@ class TrajectoryExtractorNode (object):
 	# ═══════════════════════╣ SUBSCRIBER CALLBACKS ╠══════════════════════ #
 	#                        ╚══════════════════════╝                       #
 
-	def callback_image(self, message):
+	def multi_camera_callback(self, *args):
+		"""Callback for camera topics
+		:param args: list of camera images
+		"""
+
+		# Convert camera images to cv images
+		images = []
+		try:
+			images = [self.bridge.imgmsg_to_cv2(image, desired_encoding="mono8") for image in args]
+		except Exception as e:
+			rospy.logerr(f"Error converting image: {e}")
+			return
+		# Process the images
+		self.trajectory_extractor.compute_trajectory(images, args[0].header.stamp)
+		trajectory, timestamp = self.trajectory_extractor.get_current_trajectory()
+		self.publish_trajectory(trajectory, timestamp)
+
+	def single_camera_callback(self, message):
 		"""Callback called when an image is published from the camera
 		   - message : sensor_msgs.msg.Image : Message from the camera
 		"""
@@ -133,8 +161,8 @@ class TrajectoryExtractorNode (object):
 		# Extract the image and the timestamp at which it was taken, critical for synchronisation
 		rospy.logdebug("------ Received an image")
 
-		image = np.frombuffer(message.data, dtype=np.uint8).reshape((message.height, message.width, 3))
-		self.trajectory_extractor.compute_trajectory(image, message.header.stamp)
+		image = self.bridge.imgmsg_to_cv2(message, desired_encoding="mono8")
+		self.trajectory_extractor.compute_trajectory([image], message.header.stamp)
 		trajectory, timestamp = self.trajectory_extractor.get_current_trajectory()
 		self.publish_trajectory(trajectory, timestamp)
 		#cProfile.runctx("self.compute_trajectory(image, message.header.stamp, message.header.frame_id)", globals(), locals())

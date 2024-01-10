@@ -128,23 +128,21 @@ class TrajectoryExtractor (object):
 			return self.current_trajectory.transpose(), self.current_trajectory_timestamp
 		
 
-	def preprocess_image(self, image):
+	def preprocess_images(self, images):
 		"""Preprocess the image receive from the camera
-		   - image            : ndarray[y, x, 3] : RGB image received from the camera
+		   - images            : ndarray[y, x, 3] : Array of GRAY images received from the cameras
 		<---------------------- ndarray[v, u]    : Full grayscale bird-eye view (mostly for visualisation)
 		<---------------------- ndarray[v, u]    : Fully preprocessed bird-eye view (binarized, edge-detected)
 		<---------------------- float            : Scale factor, multiply by this to convert lengths from pixel to metric in the target frame
 		"""
-		# Convert the image to grayscale
-		grayimage = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
 
 		# Binarize the image. First a gaussian blur is applied to reduce noise,
-		img_blur = cv.GaussianBlur(grayimage, (7, 7), 1.5)
+		img_blurs = [cv.GaussianBlur(image, (7, 7), 1.5) for image in images]
 		
 		# Project in bird-eye view
 		# then a gaussian adaptive thresholding is applied to reduce the influence of lighting changes
 		
-		birdeye, scale_factor = self.multi_cam_bird_view.compute_bird_view([img_blur])
+		birdeye, scale_factor = self.multi_cam_bird_view.compute_bird_view(img_blurs)
 
 		# birdeye, scale_factor = fish2bird.to_birdeye(img_blur, self.camera_to_image, target_to_camera, self.distortion_parameters[0], self.birdeye_range_x, self.birdeye_range_y, self.parameters["birdeye"]["birdeye-size"], interpolate=True, flip_y=True)
 		be_binary = cv.adaptiveThreshold(birdeye, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, self.parameters["preprocess"]["threshold-window"], self.parameters["preprocess"]["threshold-bias"])
@@ -926,7 +924,7 @@ class TrajectoryExtractor (object):
 	#                    ╚════════════════════════════╝                     #
 
 
-	def compute_trajectory(self, image, timestamp):
+	def compute_trajectory(self, images, timestamp):
 		"""Global procedure called each time an image is received
 		   Take the image received from the camera, estimate the trajectory from it and publish it if necessary
 		   - image       : ndarray[y, x, 3] : RGB image received from the camera
@@ -943,7 +941,7 @@ class TrajectoryExtractor (object):
 			return
 
 		# Preprocess the image
-		birdeye, be_binary, scale_factor = self.preprocess_image(image)
+		birdeye, be_binary, scale_factor = self.preprocess_images(images)
 
 		# The following is made overly complicated because of the visualization that must still be updated even though nothing else must be done
 		trajectory_viz = cv.cvtColor(cv.merge((birdeye, birdeye, birdeye)), cv.COLOR_BGR2HSV) if self.parameters["node"]["visualize"] else None
