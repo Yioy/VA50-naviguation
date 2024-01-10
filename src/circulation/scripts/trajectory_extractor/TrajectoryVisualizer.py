@@ -33,18 +33,16 @@ class TrajectoryVisualizer (object):
 			for rectangle in crosswalk:
 				cv.fillPoly(self.line_viz, [rectangle.astype(int).transpose()], color)
 
-		self.update()
 
 	def update_trajectory_construction(self, viz):
 		"""Update the right visualization with the given image"""
 		self.trajectory_viz = viz
-		self.update()
 	
 	def print_message(self, message):
 		self.message = message
 		self.message_time = time.time()
 
-	def update(self):
+	def show(self):
 		"""Update the visualization window"""
 		if self.line_viz is None or self.trajectory_viz is None:
 			return

@@ -129,6 +129,9 @@ class TrajectoryExtractorNode (object):
 			self.time_sync = message_filters.ApproximateTimeSynchronizer(self.camera_subscribers, 10, 0.1, allow_headerless=False)
 			self.time_sync.registerCallback(self.multi_camera_callback)
 
+		
+		timer_viz = rospy.Timer(rospy.Duration(0.2), self.visualize)
+
 
 		rospy.loginfo("Ready")
 
@@ -136,11 +139,15 @@ class TrajectoryExtractorNode (object):
 	# ═══════════════════════╣ SUBSCRIBER CALLBACKS ╠══════════════════════ #
 	#                        ╚══════════════════════╝                       #
 
+	def visualize(self, event):
+		self.trajectory_extractor.visualisation.show()
+
 	def multi_camera_callback(self, *args):
 		"""Callback for camera topics
 		:param args: list of camera images
 		"""
 
+		rospy.logdebug("------ Received images")
 		# Convert camera images to cv images
 		images = []
 		try:
@@ -160,7 +167,6 @@ class TrajectoryExtractorNode (object):
 		
 		# Extract the image and the timestamp at which it was taken, critical for synchronisation
 		rospy.logdebug("------ Received an image")
-
 		image = self.bridge.imgmsg_to_cv2(message, desired_encoding="mono8")
 		self.trajectory_extractor.compute_trajectory([image], message.header.stamp)
 		trajectory, timestamp = self.trajectory_extractor.get_current_trajectory()
