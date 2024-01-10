@@ -20,6 +20,7 @@ import trajectory_extractor.circulation_enums as enums
 from trajectory_extractor.IntersectionHint import IntersectionHint
 from trajectory_extractor.TrajectoryVisualizer import TrajectoryVisualizer
 from trajectory_extractor.TransformServiceHandler import TransformServiceHandler
+from trajectory_extractor.MultiCamBirdView import MultiCamBirdView
 
 class TrajectoryExtractor (object):
 	"""Main class for the ROS node that manages the trajectory"""
@@ -30,6 +31,7 @@ class TrajectoryExtractor (object):
 
 	def __init__(self,
 			  parameters,
+			  multi_cam_birdview_init_config,
 			  camera_to_image,
 			  distortion_parameters
 			  ):
@@ -37,6 +39,8 @@ class TrajectoryExtractor (object):
 		   - parameters   : dict<str: …>        : Node parameters, from the parameter file
 		"""
 		self.parameters = parameters
+
+		self.multi_cam_bird_view = MultiCamBirdView(multi_cam_birdview_init_config)
 
 		self.camera_to_image = camera_to_image
 		self.distortion_parameters = distortion_parameters

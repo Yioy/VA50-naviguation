@@ -57,6 +57,7 @@ import trajectory_extractor.circulation_enums as enums
 from trajectory_extractor.IntersectionHint import IntersectionHint
 from trajectory_extractor.TrajectoryVisualizer import TrajectoryVisualizer
 from trajectory_extractor.TrajectoryExtractor import TrajectoryExtractor
+from trajectory_extractor.MultiCamBirdViewRosInitializer import MultiCamBirdViewRosInitializer
 
 # TODO : More resilient lane detection
 # TODO : Autonomous intersection detection
@@ -78,6 +79,31 @@ class TrajectoryExtractorNode (object):
 		   - parameters   : dict<str: …>        : Node parameters, from the parameter file
 		"""
 		self.parameters = parameters
+
+
+		# initialize multicam
+		image_topics = []
+		camera_info_topics = []
+		if self.parameters["birdeye"]["multicam"]:
+			image_topics = [self.parameters["node"]["image-topic"], self.parameters["node"]["image-topic-left"], self.parameters["node"]["image-topic-right"]]
+			camera_info_topics = [self.parameters["node"]["camerainfo-topic"], self.parameters["node"]["camerainfo-topic-left"], self.parameters["node"]["camerainfo-topic-right"]]
+		else:
+			image_topics = [self.parameters["node"]["image-topic"]]
+			camera_info_topics = [self.parameters["node"]["camerainfo-topic"]]
+
+		x_range = (self.parameters["birdeye"]["x-range"][0], self.parameters["birdeye"]["x-range"][1])
+		y_range = (self.parameters["birdeye"]["y-range"][0], self.parameters["birdeye"]["y-range"][1])
+
+
+		ros_multi_cam_birdview_initializer = MultiCamBirdViewRosInitializer()
+		multi_cam_birdview_init_config =ros_multi_cam_birdview_initializer.create_init_config(
+			camera_info_topics,
+			self.parameters["node"]["road-frame"],
+			x_range,
+			y_range,
+			self.parameters["birdeye"]["birdeye-size"],
+			flip_x=False,
+			flip_y=True)
 
 
 		
@@ -109,6 +135,7 @@ class TrajectoryExtractorNode (object):
 		# Initialize the trajectory extractor
 		self.trajectory_extractor = TrajectoryExtractor(
 			self.parameters,
+			multi_cam_birdview_init_config,
 			camera_to_image,
 			distortion_parameters
 			)
