@@ -15,18 +15,11 @@ import trajeometry
 import linetrack
 import trajectorybuild
 
-# from trajectory_extractor.circulation_enums import NavigationMode, Direction
-# from trajectory_extractor.IntersectionHint import IntersectionHint
-# from trajectory_extractor.TrajectoryVisualizer import TrajectoryVisualizer
-# from trajectory_extractor.TransformServiceHandler import TransformServiceHandler
-# from trajectory_extractor.MultiCamBirdView import MultiCamBirdView
-
-
-from circulation_enums import NavigationMode, Direction
-from IntersectionHint import IntersectionHint
-from TrajectoryVisualizer import TrajectoryVisualizer
-from TransformServiceHandler import TransformServiceHandler
-from MultiCamBirdView import MultiCamBirdView
+from trajectory_extractor.circulation_enums import NavigationMode, Direction
+from trajectory_extractor.IntersectionHint import IntersectionHint
+from trajectory_extractor.TrajectoryVisualizer import TrajectoryVisualizer
+from trajectory_extractor.TransformServiceHandler import TransformServiceHandler
+from trajectory_extractor.MultiCamBirdView import MultiCamBirdView
 
 class TrajectoryExtractor (object):
 	"""Main class for the ROS node that manages the trajectory"""
@@ -966,7 +959,7 @@ class TrajectoryExtractor (object):
 
 		endtime = time.time()
 		self.time_buffer.append(endtime - starttime)
-		rospy.logdebug(f"Image handled in {endtime - starttime :.3f} seconds (mean {np.mean(self.time_buffer):.3f}) seconds")
+		rospy.loginfo_throttle(5.0, f"Images are being handled in average in {np.mean(self.time_buffer):.3f}) seconds")
 
 	#                           ╔═══════════════╗                           #
 	# ══════════════════════════╣ VISUALISATION ╠══════════════════════════ #

@@ -3,6 +3,8 @@ from trajectory_extractor.fish2bird_python import Fish2Bird
 import numpy as np
 import cv2 as cv
 
+import time
+
 class MultiCamBirdViewInitConfig:
     def __init__(self,
                  in_img_height, in_img_width, Ks, Ds, transforms,
@@ -48,14 +50,18 @@ class MultiCamBirdView:
 
         # Get the bird view images
         bird_views = []
+        t = time.time()
         scale = None
         for i in range(len(images)):
             bv, scale = self.bird_views[i].to_birdeye(images[i])
             bird_views.append(bv)
+        # print("bird view time: ", (time.time() - t)*1000, "ms")
 
         # Stitch the bird view images together
+        t = time.time()
         masked_bird_views = self.mask_images(bird_views)
         stitched_image = self.stitch_images(masked_bird_views)
+        # print("masking + stitching time: ", (time.time() - t)*1000, "ms")
 
         return stitched_image, scale
     

@@ -34,10 +34,8 @@ To do that, this modules needs three main parameters :
                      camera_to_target @ camera_point = target_points, target_points[2] == 0
  """
 
-import cv2 as cv
 import numpy as np
-import matplotlib.pyplot as plt
-import time
+
 
 
 class Fish2Bird:
@@ -176,7 +174,8 @@ class Fish2Bird:
 			output_y = output_size_y - output_y
 		output_points = np.asarray((output_x, output_y))
 		return output_points, 1/scale_factor
-	
+
+
 	def _postprocess_gray(self, output_image):
 		"""In-place bilinear filtering for bird-eye view images"""
 		for x in range(0, output_image.shape[1]):
@@ -265,48 +264,14 @@ class Fish2Bird:
 		# To make it work for all image formats
 		self.output_shape = (self.output_size_y, output_size_x) + self.input_image_shape[2:]
 
+		self.output_pixels_filtered = self.output_pixels[:, self.output_filter]
+		self.image_points_filtered = self.image_points[:, self.output_filter]
 
 	def to_birdeye(self, image):
 		output_image = np.zeros(self.output_shape, dtype=image.dtype)
-		output_image[self.output_pixels[1, self.output_filter], self.output_pixels[0, self.output_filter]] = image[self.image_points[1, self.output_filter], self.image_points[0, self.output_filter]]
-		
+		output_image[self.output_pixels_filtered[1], self.output_pixels_filtered[0]] = image[self.image_points_filtered[1], self.image_points_filtered[0]]
 		if(len(self.output_shape) == 2):
 			self._postprocess_gray(output_image)
 		else:
 			self._postprocess(output_image)
 		return output_image, self.scale_factor
-
-
-# if __name__ == "__main__":
-	
-	# img = cv.imread('image.png')
-
-	# img = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-	
-	# # plt.imshow(img, cmap='gray')
-	# # plt.show()
-
-	# K = np.array([  [1124.66943359375, 0.0, 505.781982421875],
-	# [0.0, 1124.6165771484375, 387.8110046386719],
-	# [0.0, 0.0, 1.0]])
-
-	# T_cam_to_work_plane = np.array([[ 0.99991969 , 0.01149682 ,-0.00533206 , 0.05419943],
-	# [ 0.00510958 , 0.01929436 , 0.99980079 , 1.96159697],
-	# [ 0.0115974  ,-0.99974774  ,0.01923406  ,1.55057154],
-	# [ 0.          ,0.          ,0.          ,1.        ]])
-
-	# xi = 0.8803200125694275
-
-	# print(img.shape)
-
-	# bv = Fish2Bird(img.shape, K, T_cam_to_work_plane, xi, [-25, 25], [0, 50], 500)
-
-	# # Convert the image to a bird's eye view
-	# output_image, scale_factor = bv.to_birdeye(img)
-
-	# print(bv.get_output_shape())
-
-	# # Show the result
-	# output_image = cv.cvtColor(output_image, cv.COLOR_BGR2RGB)
-	# plt.imshow(output_image)
-	# plt.show()
