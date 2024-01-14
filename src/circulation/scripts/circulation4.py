@@ -18,13 +18,13 @@
 Main module of the ROS node that builds the vehicle’s trajectory
 
 NOTES :
-    - There is no static reference frame allowed here, so our reference frame is the vehicle (base_link)
+	- There is no static reference frame allowed here, so our reference frame is the vehicle (base_link)
 	  As such, it is very important to keep track of the time at which each measurement is taken, whatever it is,
 	  so that we know how to pull it back to the local frame at the relevant moment
 	- All discrete curves in this node and its submodules are using COLUMN VECTORS (numpy shape [2, N])
 
 TROUBLESHOOTING :
-    - If the visualization window often stays ridiculously small, uncomment the marked lines in the method `TrajectoryVisualizer.update`
+	- If the visualization window often stays ridiculously small, uncomment the marked lines in the method `TrajectoryVisualizer.update`
 """
 
 # ═══════════════════════════ BUILT-IN IMPORTS ════════════════════════════ #
@@ -68,25 +68,25 @@ import trajectorybuild
 
 
 INTERSECTION_SIGNS = ( 
-    'yield', 
-    'stop', 
-    'right-only', 
-    'left-only', 
-    'ahead-only', 
-    'straight-right-only', 
-    'straight-left-only', 
-    'keep-right', 
-    'keep-left',
+	'yield', 
+	'stop', 
+	'right-only', 
+	'left-only', 
+	'ahead-only', 
+	'straight-right-only', 
+	'straight-left-only', 
+	'keep-right', 
+	'keep-left',
 )
 
 TURN_SIGNS = (
 	'right-only', 
-    'left-only', 
-    'ahead-only', 
-    'straight-right-only', 
-    'straight-left-only', 
-    'keep-right', 
-    'keep-left',
+	'left-only', 
+	'ahead-only', 
+	'straight-right-only', 
+	'straight-left-only', 
+	'keep-right', 
+	'keep-left',
 )
 
 
@@ -429,7 +429,7 @@ class TrajectoryExtractorNode (object):
 		   - source_frame : str           : Name of the source frame
 		   - target_frame : str           : Name of the target frame
 		<---------------- : ndarray[4, 4] : 3D homogeneous transform matrix to convert from `source_frame` to `target_frame`,
-		                                    or None if no TF for those frames was published
+											or None if no TF for those frames was published
 		"""
 		try:
 			transform = self.tf_buffer.lookup_transform(target_frame, source_frame, rospy.Time(0))
@@ -454,9 +454,9 @@ class TrajectoryExtractorNode (object):
 		   - start_times : list<rospy.Time> : Timestamps to get the transforms from
 		   - end_time    : rospy.Time       : Target timestamp, to get the transforms to
 		<----------------- ndarray[N, 4, 4] : 3D homogeneous transform matrices to transform points in the vehicle frame
-		                                      at `start_times[i]` to the vehicle frame at `end_time`
+											  at `start_times[i]` to the vehicle frame at `end_time`
 		<----------------- list<rospy.Time> : Unbiased start times. This is an artifact from the time when the simulator gave incoherent timestamps,
-		                                      same as `start_times` on the latest versions
+											  same as `start_times` on the latest versions
 		<----------------- rospy.Time       : Unbiased end time, same as end_time on the latest versions of the simulator
 		"""
 		# Build the request to the transform service, see srv/TransformBatch.srv and msg/TimeBatch.msg for info
@@ -531,6 +531,8 @@ class TrajectoryExtractorNode (object):
 		existing_positions = np.asarray([transform @ np.concatenate((position, [1])).reshape(-1, 1) for transform, position in zip(transforms, existing_hint.positions)])[:2]
 		existing_centroid = np.mean(existing_positions, axis=1)
 		hint_position = np.asarray(hint.positions[-1])
+		print(hint_position)
+		print(existing_centroid)
 		return np.linalg.norm(existing_centroid - hint_position) < self.parameters["intersection"]["intersection-hint-match-threshold"][hint.category]
 
 	def add_intersection_hint(self, hint):
@@ -559,7 +561,7 @@ class TrajectoryExtractorNode (object):
 		   Check the distance remaining until that distance is reached
 		   - image_timestamp : rospy.Time : Timestamp to measure the distance at
 		<--------------------- float      : Signed distance until the rejoin distance
-		                                    (negative if the vehicle is already farther than `self.rejoin_distance`)"""
+											(negative if the vehicle is already farther than `self.rejoin_distance`)"""
 		transforms, distances = self.get_map_transforms([self.current_trajectory_timestamp], image_timestamp)
 		if self.rejoin_distance is not None:
 			return self.rejoin_distance - distances[0]
@@ -618,6 +620,9 @@ class TrajectoryExtractorNode (object):
 		if all([hint.category == "trafficsign" for hint in hints]):
 			return None, None
 
+		#print("CONFIDEEENENENENENENENCES\n")
+		#print(hints)
+		#print(list(itertools.chain([hint.confidences for hint in hints])))
 		confidences = np.asarray(list(itertools.chain([hint.confidences for hint in hints])))
 		confidence = 1 - np.sqrt(np.sum((1 - confidences)**2)) / confidences.size
 		if confidence < self.parameters["intersection"]["min-confidence"]:
@@ -695,6 +700,7 @@ class TrajectoryExtractorNode (object):
 		
 		# Clear the intersection hints for next time
 		self.intersection_hints.clear()
+		print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
 		# Clear the trajectory buffers, the old trajectories won’t be relevant anymore after the intersection
 		self.trajectory_buffer.clear()
@@ -776,7 +782,7 @@ class TrajectoryExtractorNode (object):
 		for line in lines:
 			# Filter out the points that are not in the "local area" of estimation
 			local_filter = ((-self.parameters["fuzzy-lines"]["local-area-x"] < line[0]) & (line[0] < self.parameters["fuzzy-lines"]["local-area-x"]) &
-			                (0 < line[1]) & (line[1] < self.parameters["fuzzy-lines"]["local-area-y"]))
+							(0 < line[1]) & (line[1] < self.parameters["fuzzy-lines"]["local-area-y"]))
 			# Less than a segment remaining
 			if local_filter.sum() < 2:
 				continue
@@ -833,17 +839,27 @@ class TrajectoryExtractorNode (object):
 			rospy.logwarn("No lines found")
 			return None, None, None, None
 		
+		#print("\n")
 		markings, branches = trajectorybuild.find_markings(be_binary.shape, branches, scale_factor, self.parameters["environment"]["crosswalk-width"], self.parameters["markings"]["size-tolerance"])
+		#print(len(markings["crosswalks"]))
 		for crosswalk in markings["crosswalks"]:
 			if len(crosswalk) >= 3:
 				target_bands = [self.birdeye_to_target(be_binary, band) for band in crosswalk]
 				band_centroids = np.asarray([np.mean(band, axis=1) for band in target_bands])
 				crosswalk_centroid = np.concatenate((np.mean(band_centroids, axis=0), [0]))
 				confidence = min(1, len(target_bands) / 6)
+				#print(f"Crosswalk confidence : {confidence}")
+				#print(f"Crosswalk centroid : {crosswalk_centroid}")
+				# print(f"image_timestamp : {image_timestamp}")
+				# print(f"target_bands : {target_bands}")
+				# print(f"band_centroids : {band_centroids}")
+				# print(be_binary.shape)
+				# print(len(branches))
+				# print(scale_factor)
 				self.add_intersection_hint(IntersectionHint("marking", "crosswalk", crosswalk_centroid, image_timestamp, confidence))
 
 		filtered_lines = linetrack.filter_lines(branches, **parameters)
-
+		
 		# Flip the lines so that they start at the bottom of the image,
 		lines = []
 		transverse_lines = []
@@ -917,10 +933,10 @@ class TrajectoryExtractorNode (object):
 		RD_columns, RD_rows = np.meshgrid(right_line_distance, right_line_distance)
 		LL_columns, LL_rows = np.meshgrid(line_lengths, line_lengths)
 		lane_variables = np.asarray(((FD_columns + FD_rows) / 2,
-		                             np.minimum(np.maximum(LD_columns, RD_rows), np.maximum(RD_columns, LD_rows)),
-		                             (LL_columns + LL_rows) / 2,
-		                             parallel_distance,
-		                             parallel_angles))
+									 np.minimum(np.maximum(LD_columns, RD_rows), np.maximum(RD_columns, LD_rows)),
+									 (LL_columns + LL_rows) / 2,
+									 parallel_distance,
+									 parallel_angles))
 		
 		# Get the best combination and its score with the fuzzy system
 		best_y, best_x, best_score = self.lane_system.fuzzy_best(lane_variables)
@@ -1035,7 +1051,7 @@ class TrajectoryExtractorNode (object):
 		<------------------- list<ndarray[2, M]>    : The input curves converted, cut and extended as needed
 		<------------------- list<ndarray[M]>       : Scores for each point of each local curve
 		<------------------- rospy.Time             : Unbiased target timestamp. This is an artifact of the time when the simulator gave incoherent timestamps,
-		                                              on the latest version it is same as target_timestamp"""
+													  on the latest version it is same as target_timestamp"""
 		transforms, distances = self.get_map_transforms(np.asarray(timestamps), target_timestamp)
 		extended_lines = []
 		point_scores = []

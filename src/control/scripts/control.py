@@ -179,17 +179,17 @@ class PurePursuitController (object):
                 nb_speed_values_to_stop = int((distance / self.real_speed) * RATE)
                 self.speeds_to_stop = np.linspace(start = self.real_speed, stop = 0, num = nb_speed_values_to_stop)
                 self.current_stop_index = 0
-
+            #print(sign.type)
             #usually, the direction signboard is located at the opposite of the direction. SO that, if there is a stop, the car has
             #time to stop and restarts to follow the direction
             if sign.type == "city-signboard":
 
                 if sign.direction is None or sign.cityName != self.cityName.upper():
-                    self.trueDirection = "straight"
+                    print("no")
                     continue
                 self.trueDirection = sign.direction
-            
-            # Direction detected according to direction panels
+                print(sign.direction)
+            # Direction detected according to direction panels       
             elif sign.type ==  "direction-turnRight":
                 self.trueDirection = "right"
             elif sign.type == "direction-turnLeft":
@@ -197,7 +197,7 @@ class PurePursuitController (object):
             elif sign.type == "direction-straight":
                 self.trueDirection = "straight"
             # Set interdiction with prohibition panel and direction panel
-            elif sign.type in ('leftOrRight', 'no-entry', 'no-motor-vehicules', 'no-through-road', 'no-vehicules'):
+            elif sign.type in ('direction-leftOrRight', 'no-entry', 'no-motor-vehicules', 'no-through-road', 'no-vehicules'):
                 print("a")
                 self.no_straight = True
             elif sign.type in ("no-right-turn", "direction-straightOrLeft"):
@@ -206,24 +206,21 @@ class PurePursuitController (object):
                 self.no_left = True
 
         # Direction according to interdiction. The priority is set to straight ahead
-        if self.no_straight:
-            if self.no_right:
-                self.trueDirection = "left"
-            elif self.no_left:
-                self.trueDirection = "right"
+        if self.trueDirection is None:
+            if self.no_straight:
+                if self.no_right:
+                    self.trueDirection = "left"
+                elif self.no_left:
+                    self.trueDirection = "right"
+                else:
+                    print("no direction sign detected, no information whether left or right")
+                    #self.trueDirection = None
+            elif self.no_right:
+                if self.trueDirection is None or self.no_left:
+                    self.trueDirection = "straight"
             else:
-                print("no direction sign detected, no information whether left or right")
-                #self.trueDirection = None
-        elif self.no_right:
-            if self.trueDirection is None or self.no_left:
-                self.trueDirection = "straight"
-        elif self.no_left:
-            if self.trueDirection is None:
-                self.trueDirection = "straight"
-        else:
-            if self.trueDirection is None:
-                self.trueDirection = "straight"
-        
+                    self.trueDirection = "straight"
+        print(self.no_straight)
         print(self.trueDirection)
 
         self.chooseDirection(self.trueDirection)
