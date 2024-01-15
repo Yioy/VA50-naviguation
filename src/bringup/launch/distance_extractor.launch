@@ -1,18 +1,12 @@
 <launch>
 
     <arg name="config_file" default="$(find bringup)/config/circulation4-2.yml"/>
-    <arg name="no_lights" default="true"/>
-    <arg name="no_signs" default="true"/>
-    <arg name="no_directions" default="true"/>
 
     <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
 
     <param name="config_file" value="$(arg config_file)" />
-    <param name="no_lights" value="$(arg no_lights)" />
-    <param name="no_signs" value="$(arg no_signs)" />
-    <param name="no_directions" value="$(arg no_directions)" />
 
-    <param name="yolo_weights_path" value="$(find trafficsigns)/models/yolov4-tiny_training.cfg" />
+    <param name="yolo_path" value="$(find trafficsigns)/models/best.pt" />
   
     <!-- Node for circulation -->
     <node pkg="trafficsigns" type="distance_extractor.py" name="trafficsigns_node" output="screen"/>

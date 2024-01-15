@@ -14,4 +14,4 @@
 
 from collections import namedtuple
 
-TrafficSign = namedtuple("TrafficSign", "category type label x y width height confidence")
+TrafficSign = namedtuple("TrafficSign", "type cityName direct x y width height confidence")

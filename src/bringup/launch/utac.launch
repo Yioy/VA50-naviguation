@@ -6,11 +6,6 @@
   <arg name="launch_circulation" default="false" doc="Wether or not to launch the circulation node" />
   <arg name="launch_trafficsigns" default="false" doc="Wether or not to launch the trafficsigns node" />
 
-  <!-- Arguments for distance_extractor -->
-  <arg name="lights" default="false"/>
-  <arg name="signs" default="false"/>
-  <arg name="directions" default="false"/>
-
   <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${node}]: ${message}"/>
 
   <!-- Nodes for Real version -->
@@ -32,9 +27,6 @@
   <group if="$(arg launch_trafficsigns)">
     <include file="$(find bringup)/launch/distance_extractor.launch">
       <arg name="config_file" value="$(find bringup)/config/circulation$(arg version).yml" />
-      <arg name="no_lights" value="$(eval arg('lights') == false)" />
-      <arg name="no_signs" value="$(eval arg('signs') == false)" />
-      <arg name="no_directions" value="$(eval arg('directions') == false)" />
     </include>
   </group>
 

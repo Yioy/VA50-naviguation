@@ -24,6 +24,7 @@ import numpy as np
 import rospy
 from std_msgs.msg import Float32, String, UInt8
 from geometry_msgs.msg import TwistStamped
+import matplotlib as plt
 
 from circulation.msg import Trajectory
 from transformtrack.srv import TransformBatch, TransformBatchRequest
@@ -33,7 +34,7 @@ from trafficsigns.msg import TrafficSignStatus, TrafficSign
 RATE = 10 # Hz
 
 class PurePursuitController (object):
-    def __init__(self, parameters):
+    def __init__(self, parameters, cityName):
 
         self.parameters = parameters
 
@@ -43,6 +44,7 @@ class PurePursuitController (object):
         self.dt = self.parameters["control"]["dt"]  # [s] time tick
         self.WB = self.parameters["control"]["WB"]  # [m] wheel base of vehicle
         self.target_speed = self.parameters["control"]["target-speed"] / 3.6  # [m/s]
+        self.cityName = cityName
 
         self.velocity_topic = self.parameters["node"]["velocity-topic"]
         self.trajectory_topic = self.parameters["node"]["trajectory-topic"]
@@ -65,6 +67,11 @@ class PurePursuitController (object):
         self.speeds_to_stop = None
         self.current_stop_index = None
         self.is_trajectory_ready = False
+        self.no_right = False
+        self.no_left = False
+        self.no_straight = False
+        self.trueDirection = None
+        self.previousDirection = None
 
         # Conserve all the states in memory
         # self.states = States()
@@ -159,20 +166,65 @@ class PurePursuitController (object):
 
         for sign in data.traffic_signs:
             # Filter out traffic signs where a stop is not needed (we chosed to stop the car only for Yields and Stops)
-            if sign.type in ('stop', 'yield', 'no-entry', 'light-red', 'light-orange'):
+            if sign.type in ('stop', 'yield', 'right-priority', 'intersection-with-priority'):
                 position = np.c_[[sign.x, sign.y, sign.z, 1]]
                 transforms, distances = self.get_map_transforms([data.header.stamp], rospy.get_rostime())
                 current_position = transforms[0] @ position
-                distance = max(0, current_position[1, 0] - (5 if sign.type in ("light-red", "light-orange") else 2))
+                distance = max(0, current_position[1, 0] - 2)
                 if distance > self.parameters["control"]["brake-distance"]:
                     return
 
                 self.is_stop_need = True
-                self.stop_type = 'light' if sign.type in ('light-red', 'light-orange') else 'sign'
+                self.stop_type = 'sign'
                 nb_speed_values_to_stop = int((distance / self.real_speed) * RATE)
                 self.speeds_to_stop = np.linspace(start = self.real_speed, stop = 0, num = nb_speed_values_to_stop)
                 self.current_stop_index = 0
+            #print(sign.type)
+            #usually, the direction signboard is located at the opposite of the direction. SO that, if there is a stop, the car has
+            #time to stop and restarts to follow the direction
+            if sign.type == "city-signboard":
 
+                if sign.direction is None or sign.cityName != self.cityName.upper():
+                    print("no")
+                    continue
+                self.trueDirection = sign.direction
+                print(sign.direction)
+            # Direction detected according to direction panels       
+            elif sign.type ==  "direction-turnRight":
+                self.trueDirection = "right"
+            elif sign.type == "direction-turnLeft":
+                self.trueDirection = "left"
+            elif sign.type == "direction-straight":
+                self.trueDirection = "straight"
+            # Set interdiction with prohibition panel and direction panel
+            elif sign.type in ('direction-leftOrRight', 'no-entry', 'no-motor-vehicules', 'no-through-road', 'no-vehicules'):
+                print("a")
+                self.no_straight = True
+            elif sign.type in ("no-right-turn", "direction-straightOrLeft"):
+                self.no_right = True
+            elif sign.type in ("no-left-turn", "direction-straightOrRight"):
+                self.no_left = True
+
+        # Direction according to interdiction. The priority is set to straight ahead
+        if self.trueDirection is None:
+            if self.no_straight:
+                if self.no_right:
+                    self.trueDirection = "left"
+                elif self.no_left:
+                    self.trueDirection = "right"
+                else:
+                    print("no direction sign detected, no information whether left or right")
+                    #self.trueDirection = None
+            elif self.no_right:
+                if self.trueDirection is None or self.no_left:
+                    self.trueDirection = "straight"
+            else:
+                    self.trueDirection = "straight"
+        print(self.no_straight)
+        print(self.trueDirection)
+
+        self.chooseDirection(self.trueDirection)
+        #self.previousDirection = self.trueDirection
             # Filter traffic signs where a direction is mandatory and publish on the direction topic
             # elif sign.type in ('right-only', 'keep-right'):
             #    self.direction_publisher.publish(0b0100)
@@ -180,8 +232,7 @@ class PurePursuitController (object):
             #    self.direction_publisher.publish(0b0010)
             # elif sign.type == 'ahead-only':
             #    self.direction_publisher.publish(0b0001)
-            elif sign.type == 'light-green' and self.is_stop_need and self.stop_type == 'light':
-                self.is_stop_need = False
+            #chooseDirection
 
 
     def plot_arrow(self, x, y, yaw, length=1.0, width=0.5, fc="r", ec="self.k"):
@@ -203,7 +254,7 @@ class PurePursuitController (object):
                 # Calc control input
                 vi = self.speed_control()
                 di, self.target_ind = self.pure_pursuit_steer_control(self.target_ind)
-                print(f"vi={vi}, self.real_speed={self.real_speed}, self.target_speed={self.target_speed}")
+                #print(f"vi={vi}, self.real_speed={self.real_speed}, self.target_speed={self.target_speed}")
 
                 #self.speed_cap_publisher.publish(1000)
                 self.speed_publisher.publish(vi)  # Control speed
@@ -228,6 +279,15 @@ class PurePursuitController (object):
                 # plt.pause(0.001)
 
                 # rospy.loginfo("Published control inputs")
+
+    def chooseDirection(self, direction):
+        if direction == 'straight':
+            self.direction_publisher.publish(0b0001)
+        elif direction == 'left':
+            self.direction_publisher.publish(0b0010)
+        elif direction == 'right':
+            self.direction_publisher.publish(0b0100)
+
 
 
     def speed_control(self):
@@ -368,9 +428,9 @@ if __name__ == "__main__":
     else:
         with open(sys.argv[1], "r") as parameterfile:
             parameters = yaml.load(parameterfile, yaml.Loader)
-
+        cityName = sys.argv[2]
         rospy.init_node("pure_pursuit_control")
-        node = PurePursuitController(parameters)
+        node = PurePursuitController(parameters, cityName)
         while not rospy.is_shutdown():
             rate = rospy.Rate(RATE)
             node.publish_control_inputs()
