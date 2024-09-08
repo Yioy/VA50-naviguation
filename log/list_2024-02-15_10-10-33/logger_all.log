@@ -1,0 +1,577 @@
+[7.077s] colcon DEBUG Command line arguments: ['/usr/bin/colcon', 'list', '-p', '--base-paths', '/home/sebastien/ProjetVA50/VA50-navigation']
+[7.077s] colcon DEBUG Parsed command line arguments: Namespace(allow_overriding=[], base_paths=['/home/sebastien/ProjetVA50/VA50-navigation'], build_base='build', ignore_user_meta=False, log_base=None, log_level=None, main=<bound method ListVerb.main of <colcon_package_information.verb.list.ListVerb object at 0x7fcc6000ec40>>, metas=['./colcon.meta'], names_only=False, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=None, packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, paths=None, paths_only=True, topological_graph=False, topological_graph_density=False, topological_graph_dot=False, topological_graph_dot_cluster=False, topological_graph_dot_include_skipped=False, topological_graph_legend=False, topological_order=False, verb_extension=<colcon_package_information.verb.list.ListVerb object at 0x7fcc6000ec40>, verb_name='list', verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7fcc5ff683a0>)
+[7.276s] colcon.colcon_core.package_discovery Level 1 discover_packages(colcon_meta) check parameters
+[7.277s] colcon.colcon_core.package_discovery Level 1 discover_packages(recursive) check parameters
+[7.277s] colcon.colcon_core.package_discovery Level 1 discover_packages(ignore) check parameters
+[7.277s] colcon.colcon_core.package_discovery Level 1 discover_packages(path) check parameters
+[7.277s] colcon.colcon_core.package_discovery Level 1 discover_packages(recursive) discover
+[7.277s] colcon.colcon_core.package_discovery INFO Crawling recursively for packages in '/home/sebastien/ProjetVA50/VA50-navigation'
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extensions ['ignore', 'ignore_ament_install']
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extension 'ignore'
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extension 'ignore_ament_install'
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extensions ['colcon_pkg']
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extension 'colcon_pkg'
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extensions ['colcon_meta']
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extension 'colcon_meta'
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extensions ['ros']
+[7.277s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extension 'ros'
+[7.292s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extensions ['cmake', 'python']
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extension 'cmake'
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extension 'python'
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extensions ['python_setup_py']
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation) by extension 'python_setup_py'
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extensions ['ignore', 'ignore_ament_install']
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extension 'ignore'
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extension 'ignore_ament_install'
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extensions ['colcon_pkg']
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extension 'colcon_pkg'
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extensions ['colcon_meta']
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extension 'colcon_meta'
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extensions ['ros']
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) by extension 'ros'
+[7.293s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/build) ignored
+[7.295s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/devel) by extensions ['ignore', 'ignore_ament_install']
+[7.295s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/devel) by extension 'ignore'
+[7.295s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/devel) by extension 'ignore_ament_install'
+[7.295s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/devel) ignored
+[7.295s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/log) by extensions ['ignore', 'ignore_ament_install']
+[7.295s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/log) by extension 'ignore'
+[7.295s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/log) ignored
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extensions ['ignore', 'ignore_ament_install']
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extension 'ignore'
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extension 'ignore_ament_install'
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extensions ['colcon_pkg']
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extension 'colcon_pkg'
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extensions ['colcon_meta']
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extension 'colcon_meta'
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extensions ['ros']
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extension 'ros'
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extensions ['cmake', 'python']
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extension 'cmake'
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extension 'python'
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extensions ['python_setup_py']
+[7.296s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs) by extension 'python_setup_py'
+[7.297s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extensions ['ignore', 'ignore_ament_install']
+[7.297s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extension 'ignore'
+[7.297s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extension 'ignore_ament_install'
+[7.297s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extensions ['colcon_pkg']
+[7.297s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extension 'colcon_pkg'
+[7.297s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extensions ['colcon_meta']
+[7.297s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extension 'colcon_meta'
+[7.297s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extensions ['ros']
+[7.298s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extension 'ros'
+[7.298s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extensions ['cmake', 'python']
+[7.298s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extension 'cmake'
+[7.298s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extension 'python'
+[7.298s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extensions ['python_setup_py']
+[7.298s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/bringup) by extension 'python_setup_py'
+[7.298s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extensions ['ignore', 'ignore_ament_install']
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extension 'ignore'
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extension 'ignore_ament_install'
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extensions ['colcon_pkg']
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extension 'colcon_pkg'
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extensions ['colcon_meta']
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extension 'colcon_meta'
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extensions ['ros']
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extension 'ros'
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extensions ['cmake', 'python']
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extension 'cmake'
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extension 'python'
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extensions ['python_setup_py']
+[7.299s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/catkin_tools_prebuild) by extension 'python_setup_py'
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extensions ['ignore', 'ignore_ament_install']
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extension 'ignore'
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extension 'ignore_ament_install'
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extensions ['colcon_pkg']
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extension 'colcon_pkg'
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extensions ['colcon_meta']
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extension 'colcon_meta'
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extensions ['ros']
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extension 'ros'
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extensions ['cmake', 'python']
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extension 'cmake'
+[7.300s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extension 'python'
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extensions ['python_setup_py']
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/circulation) by extension 'python_setup_py'
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extensions ['ignore', 'ignore_ament_install']
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extension 'ignore'
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extension 'ignore_ament_install'
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extensions ['colcon_pkg']
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extension 'colcon_pkg'
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extensions ['colcon_meta']
+[7.301s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extension 'colcon_meta'
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extensions ['ros']
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extension 'ros'
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extensions ['cmake', 'python']
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extension 'cmake'
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extension 'python'
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extensions ['python_setup_py']
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/control) by extension 'python_setup_py'
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extensions ['ignore', 'ignore_ament_install']
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extension 'ignore'
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extension 'ignore_ament_install'
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extensions ['colcon_pkg']
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extension 'colcon_pkg'
+[7.302s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extensions ['colcon_meta']
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extension 'colcon_meta'
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extensions ['ros']
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extension 'ros'
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extensions ['cmake', 'python']
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extension 'cmake'
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extension 'python'
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extensions ['python_setup_py']
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/dev_tools) by extension 'python_setup_py'
+[7.303s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extensions ['ignore', 'ignore_ament_install']
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extension 'ignore'
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extension 'ignore_ament_install'
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extensions ['colcon_pkg']
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extension 'colcon_pkg'
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extensions ['colcon_meta']
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extension 'colcon_meta'
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extensions ['ros']
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extension 'ros'
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extensions ['cmake', 'python']
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extension 'cmake'
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extension 'python'
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extensions ['python_setup_py']
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/direction) by extension 'python_setup_py'
+[7.304s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extensions ['ignore', 'ignore_ament_install']
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extension 'ignore'
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extension 'ignore_ament_install'
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extensions ['colcon_pkg']
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extension 'colcon_pkg'
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extensions ['colcon_meta']
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extension 'colcon_meta'
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extensions ['ros']
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extension 'ros'
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extensions ['cmake', 'python']
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extension 'cmake'
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extension 'python'
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extensions ['python_setup_py']
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/geometry2) by extension 'python_setup_py'
+[7.305s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extensions ['ignore', 'ignore_ament_install']
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extension 'ignore'
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extension 'ignore_ament_install'
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extensions ['colcon_pkg']
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extension 'colcon_pkg'
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extensions ['colcon_meta']
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extension 'colcon_meta'
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extensions ['ros']
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extension 'ros'
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extensions ['cmake', 'python']
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extension 'cmake'
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extension 'python'
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extensions ['python_setup_py']
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/test_tf2) by extension 'python_setup_py'
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extensions ['ignore', 'ignore_ament_install']
+[7.306s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extension 'ignore'
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extension 'ignore_ament_install'
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extensions ['colcon_pkg']
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extension 'colcon_pkg'
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extensions ['colcon_meta']
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extension 'colcon_meta'
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extensions ['ros']
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extension 'ros'
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extensions ['cmake', 'python']
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extension 'cmake'
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extension 'python'
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extensions ['python_setup_py']
+[7.307s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2) by extension 'python_setup_py'
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extensions ['ignore', 'ignore_ament_install']
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extension 'ignore'
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extension 'ignore_ament_install'
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extensions ['colcon_pkg']
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extension 'colcon_pkg'
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extensions ['colcon_meta']
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extension 'colcon_meta'
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extensions ['ros']
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extension 'ros'
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extensions ['cmake', 'python']
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extension 'cmake'
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extension 'python'
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extensions ['python_setup_py']
+[7.308s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_bullet) by extension 'python_setup_py'
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extensions ['ignore', 'ignore_ament_install']
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extension 'ignore'
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extension 'ignore_ament_install'
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extensions ['colcon_pkg']
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extension 'colcon_pkg'
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extensions ['colcon_meta']
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extension 'colcon_meta'
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extensions ['ros']
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extension 'ros'
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extensions ['cmake', 'python']
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extension 'cmake'
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extension 'python'
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extensions ['python_setup_py']
+[7.309s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_eigen) by extension 'python_setup_py'
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extensions ['ignore', 'ignore_ament_install']
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extension 'ignore'
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extension 'ignore_ament_install'
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extensions ['colcon_pkg']
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extension 'colcon_pkg'
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extensions ['colcon_meta']
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extension 'colcon_meta'
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extensions ['ros']
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extension 'ros'
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extensions ['cmake', 'python']
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extension 'cmake'
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extension 'python'
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extensions ['python_setup_py']
+[7.310s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_geometry_msgs) by extension 'python_setup_py'
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extensions ['ignore', 'ignore_ament_install']
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extension 'ignore'
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extension 'ignore_ament_install'
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extensions ['colcon_pkg']
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extension 'colcon_pkg'
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extensions ['colcon_meta']
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extension 'colcon_meta'
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extensions ['ros']
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extension 'ros'
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extensions ['cmake', 'python']
+[7.311s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extension 'cmake'
+[7.312s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extension 'python'
+[7.312s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extensions ['python_setup_py']
+[7.312s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_kdl) by extension 'python_setup_py'
+[7.313s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extensions ['ignore', 'ignore_ament_install']
+[7.314s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extension 'ignore'
+[7.314s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extension 'ignore_ament_install'
+[7.315s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extensions ['colcon_pkg']
+[7.315s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extension 'colcon_pkg'
+[7.315s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extensions ['colcon_meta']
+[7.315s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extension 'colcon_meta'
+[7.315s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extensions ['ros']
+[7.315s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extension 'ros'
+[7.315s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extensions ['cmake', 'python']
+[7.316s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extension 'cmake'
+[7.316s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extension 'python'
+[7.316s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extensions ['python_setup_py']
+[7.316s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_msgs) by extension 'python_setup_py'
+[7.316s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extensions ['ignore', 'ignore_ament_install']
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extension 'ignore'
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extension 'ignore_ament_install'
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extensions ['colcon_pkg']
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extension 'colcon_pkg'
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extensions ['colcon_meta']
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extension 'colcon_meta'
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extensions ['ros']
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extension 'ros'
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extensions ['cmake', 'python']
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extension 'cmake'
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extension 'python'
+[7.317s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extensions ['python_setup_py']
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_py) by extension 'python_setup_py'
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extensions ['ignore', 'ignore_ament_install']
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extension 'ignore'
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extension 'ignore_ament_install'
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extensions ['colcon_pkg']
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extension 'colcon_pkg'
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extensions ['colcon_meta']
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extension 'colcon_meta'
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extensions ['ros']
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extension 'ros'
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extensions ['cmake', 'python']
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extension 'cmake'
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extension 'python'
+[7.318s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extensions ['python_setup_py']
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_ros) by extension 'python_setup_py'
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extensions ['ignore', 'ignore_ament_install']
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extension 'ignore'
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extension 'ignore_ament_install'
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extensions ['colcon_pkg']
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extension 'colcon_pkg'
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extensions ['colcon_meta']
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extension 'colcon_meta'
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extensions ['ros']
+[7.319s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extension 'ros'
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extensions ['cmake', 'python']
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extension 'cmake'
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extension 'python'
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extensions ['python_setup_py']
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_sensor_msgs) by extension 'python_setup_py'
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extensions ['ignore', 'ignore_ament_install']
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extension 'ignore'
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extension 'ignore_ament_install'
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extensions ['colcon_pkg']
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extension 'colcon_pkg'
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extensions ['colcon_meta']
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extension 'colcon_meta'
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extensions ['ros']
+[7.320s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extension 'ros'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extensions ['cmake', 'python']
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extension 'cmake'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extension 'python'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extensions ['python_setup_py']
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/tf2_tools) by extension 'python_setup_py'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extensions ['ignore', 'ignore_ament_install']
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extension 'ignore'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extension 'ignore_ament_install'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extensions ['colcon_pkg']
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extension 'colcon_pkg'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extensions ['colcon_meta']
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extension 'colcon_meta'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extensions ['ros']
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extension 'ros'
+[7.321s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extensions ['cmake', 'python']
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extension 'cmake'
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extension 'python'
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extensions ['python_setup_py']
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/trafficsigns) by extension 'python_setup_py'
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extensions ['ignore', 'ignore_ament_install']
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extension 'ignore'
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extension 'ignore_ament_install'
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extensions ['colcon_pkg']
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extension 'colcon_pkg'
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extensions ['colcon_meta']
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extension 'colcon_meta'
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extensions ['ros']
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extension 'ros'
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extensions ['cmake', 'python']
+[7.322s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extension 'cmake'
+[7.323s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extension 'python'
+[7.323s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extensions ['python_setup_py']
+[7.323s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/transformtrack) by extension 'python_setup_py'
+[7.323s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extensions ['ignore', 'ignore_ament_install']
+[7.323s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extension 'ignore'
+[7.323s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extension 'ignore_ament_install'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extensions ['colcon_pkg']
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extension 'colcon_pkg'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extensions ['colcon_meta']
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extension 'colcon_meta'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extensions ['ros']
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extension 'ros'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extensions ['cmake', 'python']
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extension 'cmake'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extension 'python'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extensions ['python_setup_py']
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/logs/visualization) by extension 'python_setup_py'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extensions ['ignore', 'ignore_ament_install']
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extension 'ignore'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extension 'ignore_ament_install'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extensions ['colcon_pkg']
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extension 'colcon_pkg'
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extensions ['colcon_meta']
+[7.324s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extension 'colcon_meta'
+[7.325s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extensions ['ros']
+[7.325s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extension 'ros'
+[7.325s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extensions ['cmake', 'python']
+[7.325s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extension 'cmake'
+[7.351s] colcon.colcon_cmake.package_identification.cmake WARNING Ignoring '/home/sebastien/ProjetVA50/VA50-navigation/src/CMakeLists.txt' since it seems to be a toplevel CMake file generated by 'catkin_make'
+[7.351s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extension 'python'
+[7.351s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extensions ['python_setup_py']
+[7.351s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src) by extension 'python_setup_py'
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extensions ['ignore', 'ignore_ament_install']
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extension 'ignore'
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extension 'ignore_ament_install'
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extensions ['colcon_pkg']
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extension 'colcon_pkg'
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extensions ['colcon_meta']
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extension 'colcon_meta'
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extensions ['ros']
+[7.352s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/bringup) by extension 'ros'
+[7.356s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/bringup' with type 'ros.catkin' and name 'bringup'
+[7.356s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extensions ['ignore', 'ignore_ament_install']
+[7.356s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extension 'ignore'
+[7.356s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extension 'ignore_ament_install'
+[7.356s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extensions ['colcon_pkg']
+[7.356s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extension 'colcon_pkg'
+[7.357s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extensions ['colcon_meta']
+[7.357s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extension 'colcon_meta'
+[7.357s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extensions ['ros']
+[7.357s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/circulation) by extension 'ros'
+[7.358s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/circulation' with type 'ros.catkin' and name 'circulation'
+[7.358s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extensions ['ignore', 'ignore_ament_install']
+[7.358s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extension 'ignore'
+[7.358s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extension 'ignore_ament_install'
+[7.358s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extensions ['colcon_pkg']
+[7.358s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extension 'colcon_pkg'
+[7.358s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extensions ['colcon_meta']
+[7.358s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extension 'colcon_meta'
+[7.359s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extensions ['ros']
+[7.359s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/control) by extension 'ros'
+[7.360s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/control' with type 'ros.catkin' and name 'control'
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extensions ['ignore', 'ignore_ament_install']
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extension 'ignore'
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extension 'ignore_ament_install'
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extensions ['colcon_pkg']
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extension 'colcon_pkg'
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extensions ['colcon_meta']
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extension 'colcon_meta'
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extensions ['ros']
+[7.360s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools) by extension 'ros'
+[7.361s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/dev_tools' with type 'ros.catkin' and name 'dev_tools'
+[7.361s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extensions ['ignore', 'ignore_ament_install']
+[7.361s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extension 'ignore'
+[7.361s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extension 'ignore_ament_install'
+[7.362s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extensions ['colcon_pkg']
+[7.362s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extension 'colcon_pkg'
+[7.362s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extensions ['colcon_meta']
+[7.362s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extension 'colcon_meta'
+[7.362s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extensions ['ros']
+[7.362s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/direction) by extension 'ros'
+[7.365s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/direction' with type 'ros.catkin' and name 'direction'
+[7.365s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extensions ['ignore', 'ignore_ament_install']
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extension 'ignore'
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extension 'ignore_ament_install'
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extensions ['colcon_pkg']
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extension 'colcon_pkg'
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extensions ['colcon_meta']
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extension 'colcon_meta'
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extensions ['ros']
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extension 'ros'
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extensions ['cmake', 'python']
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extension 'cmake'
+[7.366s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extension 'python'
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extensions ['python_setup_py']
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2) by extension 'python_setup_py'
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extensions ['ignore', 'ignore_ament_install']
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extension 'ignore'
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extension 'ignore_ament_install'
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extensions ['colcon_pkg']
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extension 'colcon_pkg'
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extensions ['colcon_meta']
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extension 'colcon_meta'
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extensions ['ros']
+[7.367s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2) by extension 'ros'
+[7.368s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/geometry2' with type 'ros.catkin' and name 'geometry2'
+[7.368s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extensions ['ignore', 'ignore_ament_install']
+[7.368s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extension 'ignore'
+[7.369s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extension 'ignore_ament_install'
+[7.369s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extensions ['colcon_pkg']
+[7.369s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extension 'colcon_pkg'
+[7.369s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extensions ['colcon_meta']
+[7.369s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extension 'colcon_meta'
+[7.369s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extensions ['ros']
+[7.369s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2) by extension 'ros'
+[7.371s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/test_tf2' with type 'ros.catkin' and name 'test_tf2'
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extensions ['ignore', 'ignore_ament_install']
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extension 'ignore'
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extension 'ignore_ament_install'
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extensions ['colcon_pkg']
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extension 'colcon_pkg'
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extensions ['colcon_meta']
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extension 'colcon_meta'
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extensions ['ros']
+[7.371s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2) by extension 'ros'
+[7.373s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2' with type 'ros.catkin' and name 'tf2'
+[7.373s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extensions ['ignore', 'ignore_ament_install']
+[7.373s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extension 'ignore'
+[7.373s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extension 'ignore_ament_install'
+[7.374s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extensions ['colcon_pkg']
+[7.374s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extension 'colcon_pkg'
+[7.374s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extensions ['colcon_meta']
+[7.374s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extension 'colcon_meta'
+[7.374s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extensions ['ros']
+[7.374s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet) by extension 'ros'
+[7.374s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_bullet' with type 'ros.catkin' and name 'tf2_bullet'
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extensions ['ignore', 'ignore_ament_install']
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extension 'ignore'
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extension 'ignore_ament_install'
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extensions ['colcon_pkg']
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extension 'colcon_pkg'
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extensions ['colcon_meta']
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extension 'colcon_meta'
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extensions ['ros']
+[7.375s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen) by extension 'ros'
+[7.376s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_eigen' with type 'ros.catkin' and name 'tf2_eigen'
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extensions ['ignore', 'ignore_ament_install']
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extension 'ignore'
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extension 'ignore_ament_install'
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extensions ['colcon_pkg']
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extension 'colcon_pkg'
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extensions ['colcon_meta']
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extension 'colcon_meta'
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extensions ['ros']
+[7.376s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs) by extension 'ros'
+[7.377s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_geometry_msgs' with type 'ros.catkin' and name 'tf2_geometry_msgs'
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extensions ['ignore', 'ignore_ament_install']
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extension 'ignore'
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extension 'ignore_ament_install'
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extensions ['colcon_pkg']
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extension 'colcon_pkg'
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extensions ['colcon_meta']
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extension 'colcon_meta'
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extensions ['ros']
+[7.378s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl) by extension 'ros'
+[7.379s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_kdl' with type 'ros.catkin' and name 'tf2_kdl'
+[7.380s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extensions ['ignore', 'ignore_ament_install']
+[7.380s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extension 'ignore'
+[7.380s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extension 'ignore_ament_install'
+[7.380s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extensions ['colcon_pkg']
+[7.380s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extension 'colcon_pkg'
+[7.380s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extensions ['colcon_meta']
+[7.380s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extension 'colcon_meta'
+[7.380s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extensions ['ros']
+[7.381s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs) by extension 'ros'
+[7.381s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_msgs' with type 'ros.catkin' and name 'tf2_msgs'
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extensions ['ignore', 'ignore_ament_install']
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extension 'ignore'
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extension 'ignore_ament_install'
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extensions ['colcon_pkg']
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extension 'colcon_pkg'
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extensions ['colcon_meta']
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extension 'colcon_meta'
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extensions ['ros']
+[7.382s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py) by extension 'ros'
+[7.393s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_py' with type 'ros.catkin' and name 'tf2_py'
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extensions ['ignore', 'ignore_ament_install']
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extension 'ignore'
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extension 'ignore_ament_install'
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extensions ['colcon_pkg']
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extension 'colcon_pkg'
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extensions ['colcon_meta']
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extension 'colcon_meta'
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extensions ['ros']
+[7.394s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros) by extension 'ros'
+[7.397s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_ros' with type 'ros.catkin' and name 'tf2_ros'
+[7.397s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extensions ['ignore', 'ignore_ament_install']
+[7.397s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extension 'ignore'
+[7.398s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extension 'ignore_ament_install'
+[7.398s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extensions ['colcon_pkg']
+[7.398s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extension 'colcon_pkg'
+[7.398s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extensions ['colcon_meta']
+[7.398s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extension 'colcon_meta'
+[7.398s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extensions ['ros']
+[7.398s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs) by extension 'ros'
+[7.399s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_sensor_msgs' with type 'ros.catkin' and name 'tf2_sensor_msgs'
+[7.399s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extensions ['ignore', 'ignore_ament_install']
+[7.399s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extension 'ignore'
+[7.399s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extension 'ignore_ament_install'
+[7.399s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extensions ['colcon_pkg']
+[7.399s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extension 'colcon_pkg'
+[7.400s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extensions ['colcon_meta']
+[7.400s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extension 'colcon_meta'
+[7.400s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extensions ['ros']
+[7.400s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools) by extension 'ros'
+[7.401s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/geometry2/tf2_tools' with type 'ros.catkin' and name 'tf2_tools'
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extensions ['ignore', 'ignore_ament_install']
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extension 'ignore'
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extension 'ignore_ament_install'
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extensions ['colcon_pkg']
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extension 'colcon_pkg'
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extensions ['colcon_meta']
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extension 'colcon_meta'
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extensions ['ros']
+[7.401s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns) by extension 'ros'
+[7.403s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/trafficsigns' with type 'ros.catkin' and name 'trafficsigns'
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extensions ['ignore', 'ignore_ament_install']
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extension 'ignore'
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extension 'ignore_ament_install'
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extensions ['colcon_pkg']
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extension 'colcon_pkg'
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extensions ['colcon_meta']
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extension 'colcon_meta'
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extensions ['ros']
+[7.403s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack) by extension 'ros'
+[7.404s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/transformtrack' with type 'ros.catkin' and name 'transformtrack'
+[7.404s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extensions ['ignore', 'ignore_ament_install']
+[7.404s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extension 'ignore'
+[7.405s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extension 'ignore_ament_install'
+[7.405s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extensions ['colcon_pkg']
+[7.405s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extension 'colcon_pkg'
+[7.405s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extensions ['colcon_meta']
+[7.405s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extension 'colcon_meta'
+[7.405s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extensions ['ros']
+[7.405s] colcon.colcon_core.package_identification Level 1 _identify(/home/sebastien/ProjetVA50/VA50-navigation/src/visualization) by extension 'ros'
+[7.406s] colcon.colcon_core.package_identification DEBUG Package '/home/sebastien/ProjetVA50/VA50-navigation/src/visualization' with type 'ros.catkin' and name 'visualization'
+[7.406s] colcon.colcon_core.package_discovery Level 1 discover_packages(recursive) using defaults

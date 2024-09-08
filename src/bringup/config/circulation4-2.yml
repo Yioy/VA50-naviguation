@@ -142,4 +142,4 @@ visualization:
 
 distance_extractor:
   traffic-sign-detector-model: best.pt
-  traffic-sign-cities-name: cities.csv
+  traffic-sign-direction-model: Direction_DeepLeNet-5.h

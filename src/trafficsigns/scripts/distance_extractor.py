@@ -51,7 +51,7 @@ class DistanceExtractor (object):
 		self.traffic_sign_topic = self.parameters["node"]["traffic-sign-topic"]
 		self.visualization_topic = self.parameters["node"]["trafficsigns-viz-topic"]
 		self.traffic_sign_detector_model = self.parameters["distance_extractor"]["traffic-sign-detector-model"]
-		self.traffic_sign_cities_name = self.parameters["distance_extractor"]["traffic-sign-cities-name"]
+		self.traffic_sign_detection_model = self.parameters["distance_extractor"]["traffic-sign-direction-model"]
 
 		# Initialize the topic publisher
 		self.traffic_sign_publisher = rospy.Publisher(self.traffic_sign_topic, TrafficSignStatus, queue_size=10)
@@ -63,7 +63,7 @@ class DistanceExtractor (object):
 
 		# Initialize the traffic sign detector
 		self.traffic_sign_detector = None
-		self.traffic_sign_detector = TrafficSignDetector(self.traffic_sign_detector_model, self.traffic_sign_cities_name)
+		self.traffic_sign_detector = TrafficSignDetector(self.traffic_sign_detector_model, self.traffic_sign_detection_model)
 
 		# At first everything is null, no image can be produce if one of those is still null
 		self.image_frame = None

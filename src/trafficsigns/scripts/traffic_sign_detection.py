@@ -8,6 +8,7 @@ import numpy as np
 from Levenshtein import distance as levenshtein_distance
 from ultralytics import YOLO
 import rospkg
+import keras
 
 reader = easyocr.Reader(['fr', 'en'])  
 model_path = "best.pt"
@@ -43,16 +44,16 @@ sign_info = {
 citiesName = []
 
 class TrafficSignDetector(object):
-    def __init__(self, model_name, cities_file_name):
+    def __init__(self, model_name, modelDirection_name):
 
         rospack = rospkg.RosPack()
         model_path = rospack.get_path('trafficsigns') + '/models/' + model_name
-        cities_name_path = rospack.get_path('trafficsigns') + '/models/' + cities_file_name
+        modelDirection_path = rospack.get_path('trafficsigns') + '/models/' + modelDirection_name
 
         self.model = YOLO(model_path)
+        self.direction_model = keras.models.load_model(modelDirection_path)
         self.confidence_threshold = 0.4
         self.font = cv.FONT_HERSHEY_SIMPLEX
-        readAllCities(cities_name_path)
 
     def get_traffic_sign(self, image):
         #image = cv.imread(file_path)
@@ -156,54 +157,13 @@ class TrafficSignDetector(object):
                 # # Apply morphological closing
                 # closed_image = cv.morphologyEx(gray_cropped, cv.MORPH_CLOSE, kernel)
 
-                # image_with_border = cv.copyMakeBorder(gray_cropped, 5, 5, 5, 5, cv.BORDER_CONSTANT, value=0)
-                newImage = edge_connection(gray_cropped)
-                # Find contours in the binary image
-                contours, _ = cv.findContours(newImage, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-
-                # plt.imshow(cv.cvtColor(newImage, cv.COLOR_BGR2RGB))
-                # plt.show()
-                # Initialize the arrowhead direction
-                direction = None
-
-                if contours:
-                    # Initialize variables to keep track of the largest closed contour and its area
-                    largest_contour = max(contours, key=cv.contourArea)
-
-                    # Simplify the contour
-                    approx = cv.approxPolyDP(largest_contour, 0.01 * cv.arcLength(largest_contour, True), True)
-
-                    # plt.imshow(cv.cvtColor(cropped_region, cv.COLOR_BGR2RGB))
-                    # plt.show()
-                    # plt.imshow(cv.cvtColor(approx, cv.COLOR_BGR2RGB))
-                    # plt.show()
-                    # Check if the contour could be an arrowhead (5 sides)
-                    if len(approx) >= 5:
-                        # Calculate the centroid of the arrowhead
-                        M = cv.moments(approx)
-                        if M["m00"] != 0:
-                            cx = int(M["m10"] / M["m00"])
-                            cy = int(M["m01"] / M["m00"])
-                            centroid = np.array([cx, cy])
-
-                            # Find the furthest point from the centroid
-                            furthest_distance = 0
-                            tip_index = None
-                            for i, point in enumerate(approx):
-                                distance = np.linalg.norm(point[0] - centroid)
-                                if distance > furthest_distance:
-                                    furthest_distance = distance
-                                    tip_index = i
-
-                            if tip_index is not None:
-                                # Get the tip of the arrowhead
-                                tip = approx[tip_index][0]
-
-                                # Determine the direction of the arrowhead
-                                direction = 'right' if tip[0] > centroid[0] else 'left'
-
-                        # Draw the contour and the box on the original image
-                        cv.drawContours(annotated_image, [approx + [x-w, y-h]], -1, (0, 255, 0), 2)
+                #prediction
+                self.direction_model.predict(gray_cropped)
+                direction = np.argmax(self.direction_model.predict(gray_cropped))
+                if direction == 0:
+                    direction = "left"
+                elif direction == 1:
+                    direction = "right"
 
                 # Use EasyOCR to recognize text in the cropped region
                 results = reader.readtext(cropped_region)
@@ -317,18 +277,6 @@ def determine_action(traffic_sign):
     category, action = sign_info.get(type, ("other", "Panneau de circulation inconnu, procédez avec prudence"))
     sign = TrafficSign(category=category, type=type, label=action, x=traffic_sign.x, y=traffic_sign.y, width=traffic_sign.width, height=traffic_sign.height, confidence=traffic_sign.confidence)
     return sign
-
-def readAllCities(csv_path):
-    # Open the CSV file and read its contents
-    with open(csv_path, 'r') as file:
-        # Create a CSV reader object
-        csv_reader = csv.reader(file)
-
-        # Iterate through the rows in the CSV file
-        for row in csv_reader:
-            # Each 'row' variable contains a list of values from a single row
-            #print(row[0])
-            citiesName.append(row[0].upper())
 
 # detect the most probable city in the list of all cities in France
 def detectCity(cityNameDetected):
